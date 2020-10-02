@@ -4,7 +4,6 @@
 
 image: openjdk:8-jdk
 
-tags: alpine-docker
 
 variables:
 
@@ -60,6 +59,8 @@ before_script:
 lintDebug:
   interruptible: true
   stage: build
+  tags:
+    - alpine-docker
   script:
     - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
 
@@ -67,6 +68,8 @@ lintDebug:
 assembleDebug:
   interruptible: true
   stage: build
+  tags:
+    - alpine-docker
   script:
     - ./gradlew assembleDebug
   artifacts:
@@ -77,5 +80,7 @@ assembleDebug:
 debugTests:
   interruptible: true
   stage: test
+  tags:
+    - alpine-docker
   script:
     - ./gradlew -Pci --console=plain :app:testDebug
