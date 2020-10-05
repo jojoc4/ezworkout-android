@@ -4,6 +4,20 @@
 
 image: openjdk:8-jdk
 
+stages:
+  - quality
+  - build
+  - test
+
+sonar:
+  stage: quality
+  image: 
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  script:
+    - sonar-scanner -Dsonar.projectKey=ezworkout-app
+  tags:
+    - ubuntu-docker
 
 variables:
 
