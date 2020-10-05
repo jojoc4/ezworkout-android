@@ -17,7 +17,7 @@ sonar:
   script:
     - sonar-scanner -Dsonar.projectKey=ezworkout-app
   tags:
-    - ubuntu-docker
+    - alpine-docker
 
 variables:
 
