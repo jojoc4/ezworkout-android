@@ -9,5 +9,5 @@ import androidx.room.Query
 interface ExerciseDao
 {
     @Query("SELECT * FROM Exercise ORDER BY id ASC")
-    fun fetchAllExercise(): LiveData<List<Exercise>>
+    fun fetchAll(): LiveData<List<Exercise>>
 }
