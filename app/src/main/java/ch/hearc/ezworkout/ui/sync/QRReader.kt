@@ -34,7 +34,6 @@ class QRReader : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
                 val sharedPref = this?.getSharedPreferences("ch.hearc.ezworkout.settingsFile", Context.MODE_PRIVATE)
 
                 val parts = it.text.split(";")
