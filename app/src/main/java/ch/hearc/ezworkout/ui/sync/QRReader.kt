@@ -1,6 +1,7 @@
 package ch.hearc.ezworkout.ui.sync
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -34,6 +35,17 @@ class QRReader : AppCompatActivity() {
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
                 Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+                val sharedPref = this?.getSharedPreferences("ch.hearc.ezworkout.settingsFile", Context.MODE_PRIVATE)
+
+                val parts = it.text.split(";")
+
+                with(sharedPref?.edit()) {
+                    this?.putBoolean("connected", true)
+                    this?.putString("endpoint", parts[1])
+                    this?.putString("api", parts[2])
+                    this?.apply()
+                }
+                this.finish()
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
