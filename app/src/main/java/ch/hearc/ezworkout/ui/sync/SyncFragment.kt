@@ -90,7 +90,7 @@ class SyncFragment : Fragment() {
     private fun conStateUpdate(){
         val connected = sharedPref?.getBoolean("connected", false)
         val endpoint = sharedPref?.getString("endpoint", "")
-        val api = sharedPref?.getString("api", "")
+        //val api = sharedPref?.getString("api", "")
 
         var text: String = if(connected!!){
             "Vous êtes connecté à " + endpoint
