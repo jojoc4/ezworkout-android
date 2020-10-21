@@ -11,6 +11,10 @@ import ch.hearc.ezworkout.R
 import com.budiyev.android.codescanner.*
 import com.google.zxing.BarcodeFormat
 
+/**
+ * activity used to read the connection qrCode
+ * @author Jonatan Baumgartner
+ */
 class QRReader : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
     private var mPermissionGranted = false
@@ -38,6 +42,7 @@ class QRReader : AppCompatActivity() {
 
                 val parts = it.text.split(";")
 
+                //save readed settings to shared preferences
                 with(sharedPref?.edit()) {
                     this?.putBoolean("connected", true)
                     this?.putString("endpoint", parts[1])
