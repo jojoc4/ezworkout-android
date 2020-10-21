@@ -4,6 +4,6 @@ Le but de l’application est de planifier, d’organiser, puis de suivre des en
 
 Elle se décompose en 3 parties :
 
-    la planification d'entraînements
-    historique des entraînements
-    Analyses des performances
+ * la planification d'entraînements
+ * historique des entraînements
+ * Analyses des performances
