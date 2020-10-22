@@ -22,4 +22,10 @@
         android:name="ch.hearc.ezworkout.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_sync"
+        android:name="ch.hearc.ezworkout.ui.sync.SyncFragment"
+        android:label="@string/title_sync"
+        tools:layout="@layout/fragment_sync" />
 </navigation>
