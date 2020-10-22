@@ -28,6 +28,12 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
+        android:id="@+id/navigation_sync"
+        android:name="ch.hearc.ezworkout.ui.sync.SyncFragment"
+        android:label="@string/title_sync"
+        tools:layout="@layout/fragment_sync" />
+
+    <fragment
         android:id="@+id/navigation_exercises"
         android:name="ch.hearc.ezworkout.ui.exercices.ExercisesFragment"
         android:label="Exercices"
