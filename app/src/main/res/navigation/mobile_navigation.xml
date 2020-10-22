@@ -17,9 +17,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="ch.hearc.ezworkout.ui.dashboard.DashboardFragment"
+        android:name="ch.hearc.ezworkout.ui.activities.trainings.ATrainings"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/a_trainings_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"
