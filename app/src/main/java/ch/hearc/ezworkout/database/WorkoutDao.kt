@@ -6,8 +6,11 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface ExerciseDao
+interface WorkoutDao
 {
+
+    //******************************EXERCISES**********************************************\\
+
     @Query("SELECT * FROM Exercise ORDER BY id ASC")
-    fun fetchAll(): LiveData<List<Exercise>>
+    fun fetchAllExercises(): LiveData<List<Exercise>>
 }
