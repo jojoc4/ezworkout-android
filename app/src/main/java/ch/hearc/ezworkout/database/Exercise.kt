@@ -13,5 +13,5 @@ data class Exercise(
     val repetitionMin: Int,
     val repetitionMax: Int,
     val breakTimeSeries: Int,
-    val breakTimeExercise: Int,
+    val breakTimeExercise: Int
 )
