@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
+import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
 
 /**
@@ -45,7 +46,7 @@ class SyncFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_sync, container, false)
 
         //vars initialisation
-        sharedPref = activity?.getSharedPreferences("ch.hearc.ezworkout.settingsFile", Context.MODE_PRIVATE)!!
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
 
         btnScanner = root.findViewById(R.id.scanner)
         btnSignOff = root.findViewById(R.id.signoff)
