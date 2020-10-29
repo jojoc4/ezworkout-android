@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
 import com.budiyev.android.codescanner.*
 import com.google.zxing.BarcodeFormat
@@ -38,7 +39,7 @@ class QRReader : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                val sharedPref = this?.getSharedPreferences("ch.hearc.ezworkout.settingsFile", Context.MODE_PRIVATE)
+                val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
                 val parts = it.text.split(";")
 
