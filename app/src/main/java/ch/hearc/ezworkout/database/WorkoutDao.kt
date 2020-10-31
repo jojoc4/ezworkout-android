@@ -17,9 +17,5 @@ interface WorkoutDao
 
     //******************************LOGBOOKPAGES-TRAININGPLAN**********************************************\\
 
-    @Transaction
-    @Query("SELECT * FROM TrainingPlan")
-    fun logBookPagesWithtrainingPlan(): List<logBookPagesWithtrainingPlan>
-
 
 }
