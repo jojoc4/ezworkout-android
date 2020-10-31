@@ -7,8 +7,7 @@ import androidx.room.PrimaryKey
 data class Serie_eff(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val name: String,
     val rep: Int,
     val weight: Float,
-    val pauseTime: Int
+    val pause: Int
 )

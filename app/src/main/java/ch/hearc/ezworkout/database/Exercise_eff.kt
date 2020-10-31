@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class Exercise_eff(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val pauseTime: Int,
+    val pause: Int,
     val skipped: Boolean,
     val rating: Int
 )

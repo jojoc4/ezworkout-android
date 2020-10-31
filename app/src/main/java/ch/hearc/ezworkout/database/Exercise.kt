@@ -10,8 +10,8 @@ data class Exercise(
     val name: String,
     val comment: String,
     val numberOfSeries: Int,
-    val repetitionMin: Int,
-    val repetitionMax: Int,
-    val breakTimeSeries: Int,
-    val breakTimeExercise: Int
+    val repMin: Int,
+    val repMax: Int,
+    val pauseSerie: Int,
+    val pauseExercise: Int
 )
