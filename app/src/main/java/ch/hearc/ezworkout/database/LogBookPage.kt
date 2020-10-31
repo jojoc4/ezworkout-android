@@ -7,4 +7,5 @@ import androidx.room.PrimaryKey
 data class LogBookPage(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    val trainingPlanId: Int
 )
