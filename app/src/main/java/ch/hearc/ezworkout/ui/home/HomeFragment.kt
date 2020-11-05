@@ -33,18 +33,5 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        view.findViewById<Button>(R.id.button1).setOnClickListener {
-            val buttonText = view.findViewById<Button>(R.id.button1).text
-            val action = HomeFragmentDirections.actionNavigationHomeToNavigationExercises(buttonText.toString())
-            findNavController().navigate(action)
-        }
-
-        view.findViewById<Button>(R.id.button2).setOnClickListener {
-            val buttonText = view.findViewById<Button>(R.id.button2).text
-            val action = HomeFragmentDirections.actionNavigationHomeToNavigationExercises(buttonText.toString())
-            findNavController().navigate(action)
-        }
-
     }
 }

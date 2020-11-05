@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.exercices
+package ch.hearc.ezworkout.ui.activities.exercices
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import ch.hearc.ezworkout.R
 
-import ch.hearc.ezworkout.ui.exercices.dummy.DummyContent.DummyItem
+import ch.hearc.ezworkout.ui.activities.exercices.dummy.DummyContent.DummyItem
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
