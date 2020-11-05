@@ -1,6 +1,7 @@
-package ch.hearc.ezworkout.ui.activities.trainings
+package ch.hearc.ezworkout.ui.exercices
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,20 +9,21 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ListView
+import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.training.TrainingContent
+import ch.hearc.ezworkout.ui.exercices.dummy.DummyContent
+import androidx.navigation.fragment.navArgs
+import kotlinx.android.synthetic.main.fragment_exercices_list.*
 
 /**
- * A fragment representing a list of trainings.
+ * A fragment representing a list of Items.
  */
-class TrainingPlanFragment : Fragment() {
+class ExercisesFragment : Fragment() {
 
     private var columnCount = 1
 
-    override fun onCreate( savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
@@ -33,7 +35,7 @@ class TrainingPlanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_training_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_exercices_list, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -42,26 +44,11 @@ class TrainingPlanFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyTrainingPlanRecyclerViewAdapter(TrainingContent.ITEMS)
+                adapter = MyExercisesRecyclerViewAdapter(DummyContent.ITEMS)
             }
         }
-
         return view
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        // TODO : addOnItemTouchListener
-       // view.findViewById<RecyclerView>(R.id.list).addOnItemTouchListener()
-    }
-
-    //{ parent:AdapterView<*>, view:View, position:Int, id:Long ->
-    //    val element = parent.getItemAtPosition(position) // The item that was clicked
-    //    val action = TrainingPlanFragmentDirections.actionNavigationTrainingPlanToNavigationExercises(element.toString())
-    //    findNavController().navigate(action)}
-
 
     companion object {
 
@@ -71,10 +58,23 @@ class TrainingPlanFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            TrainingPlanFragment().apply {
+            ExercisesFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
+    }
+
+    val args: ExercisesFragmentArgs by navArgs()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val text = args.test
+
+        this.columnCount = text[4].toInt()
+
+        Log.d(text, "button")
+
     }
 }
