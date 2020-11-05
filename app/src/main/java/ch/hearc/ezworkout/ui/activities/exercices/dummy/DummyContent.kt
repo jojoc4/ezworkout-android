@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.exercices.dummy
+package ch.hearc.ezworkout.ui.activities.exercices.dummy
 
 import java.util.ArrayList
 import java.util.HashMap

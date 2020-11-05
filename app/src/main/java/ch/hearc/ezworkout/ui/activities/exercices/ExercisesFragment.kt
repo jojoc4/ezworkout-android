@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.exercices
+package ch.hearc.ezworkout.ui.activities.exercices
 
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.exercices.dummy.DummyContent
+import ch.hearc.ezworkout.ui.activities.exercices.dummy.DummyContent
 import androidx.navigation.fragment.navArgs
-import kotlinx.android.synthetic.main.fragment_exercices_list.*
 
 /**
  * A fragment representing a list of Items.
