@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import ch.hearc.ezworkout.R
 
 class HomeFragment : Fragment() {
@@ -27,5 +29,22 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<Button>(R.id.button1).setOnClickListener {
+            val buttonText = view.findViewById<Button>(R.id.button1).text
+            val action = HomeFragmentDirections.actionNavigationHomeToNavigationExercises(buttonText.toString())
+            findNavController().navigate(action)
+        }
+
+        view.findViewById<Button>(R.id.button2).setOnClickListener {
+            val buttonText = view.findViewById<Button>(R.id.button2).text
+            val action = HomeFragmentDirections.actionNavigationHomeToNavigationExercises(buttonText.toString())
+            findNavController().navigate(action)
+        }
+
     }
 }
