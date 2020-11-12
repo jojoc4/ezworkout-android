@@ -1,9 +1,7 @@
 package ch.hearc.ezworkout.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 
 @Dao
 interface WorkoutDao
@@ -15,7 +13,9 @@ interface WorkoutDao
     fun fetchAllExercises(): LiveData<List<Exercise>>
 
 
-    //******************************LOGBOOKPAGES-TRAININGPLAN**********************************************\\
+    //******************************TRAININGPLAN**********************************************\\
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addTrainingPlan(trainingPlan: TrainingPlan)
 
 }
