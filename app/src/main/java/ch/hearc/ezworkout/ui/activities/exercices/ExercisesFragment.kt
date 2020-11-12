@@ -62,12 +62,10 @@ class ExercisesFragment : Fragment() {
             }
     }
 
-    val args: ExercisesFragmentArgs by navArgs()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val text = args.test
+        val text = "args.test"
 
         this.columnCount = text[4].toInt()
 
