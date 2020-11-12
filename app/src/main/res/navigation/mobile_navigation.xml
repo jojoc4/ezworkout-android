@@ -9,17 +9,38 @@
         android:id="@+id/navigation_home"
         android:name="ch.hearc.ezworkout.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_exercises"
+            app:destination="@id/navigation_exercises" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="ch.hearc.ezworkout.ui.dashboard.DashboardFragment"
+        android:name="ch.hearc.ezworkout.ui.activities.trainings.ATrainings"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/a_trainings_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="ch.hearc.ezworkout.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_sync"
+        android:name="ch.hearc.ezworkout.ui.sync.SyncFragment"
+        android:label="@string/title_sync"
+        tools:layout="@layout/fragment_sync" />
+
+    <fragment
+        android:id="@+id/navigation_exercises"
+        android:name="ch.hearc.ezworkout.ui.activities.exercices.ExercisesFragment"
+        android:label="Exercices"
+        tools:layout="@layout/fragment_exercices" >
+        <argument
+            android:name="test"
+            app:argType="string"
+            android:defaultValue="test" />
+    </fragment>
 </navigation>

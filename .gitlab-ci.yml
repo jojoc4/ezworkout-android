@@ -11,6 +11,8 @@ stages:
 
 sonar:
   stage: quality
+  only:
+    - master
   image: 
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
@@ -43,6 +45,8 @@ variables:
 lintDebug:
   interruptible: true
   stage: build
+  only:
+    - master
   # Packages installation before running script
   before_script:
     - apt-get --quiet update --yes
@@ -83,6 +87,8 @@ lintDebug:
 assembleDebug:
   interruptible: true
   stage: build
+  only:
+    - master
   # Packages installation before running script
   before_script:
     - apt-get --quiet update --yes

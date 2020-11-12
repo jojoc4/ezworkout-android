@@ -1,0 +1,26 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Connexion au serveur">
+
+        <SwitchPreferenceCompat
+            app:key="connected"
+            app:summaryOff="Vous n'êtes pas connecté"
+            app:summaryOn="Vous êtes connecté"
+            app:title="Se connecter à un serveur"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:dependency="connected"
+            app:key="endpoint"
+            app:title="emplacement"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:dependency="connected"
+            app:key="api"
+            app:title="clé api"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
