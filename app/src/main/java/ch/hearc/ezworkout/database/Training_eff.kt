@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Training_eff")
 data class Training_eff(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Long,
     val date: Long,
-    val skipped:Boolean
+    val skipped:Boolean,
+    val trainingId: Long
 )
