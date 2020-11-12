@@ -15,7 +15,8 @@ interface WorkoutDao
 
     //******************************TRAININGPLAN**********************************************\\
 
+    /*
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addTrainingPlan(trainingPlan: TrainingPlan)
-
+    */
 }
