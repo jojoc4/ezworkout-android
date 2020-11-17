@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import ch.hearc.ezworkout.MainActivity
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.ui.activities.exercices.ExercicesActivity
+import ch.hearc.ezworkout.ui.settings.SettingsActivity
+import ch.hearc.ezworkout.ui.sync.QRReader
 
 
 class ATrainings : Fragment() {
@@ -41,6 +43,12 @@ class ATrainings : Fragment() {
             val bundle = Bundle()
             bundle.putString("training_id", "1")
             intent.putExtras(bundle)
+            startActivity(intent)
+        }
+
+        val btnSettings: Button = root.findViewById(R.id.settings)
+        btnSettings.setOnClickListener{
+            val intent = Intent(activity, SettingsActivity::class.java)
             startActivity(intent)
         }
 
