@@ -13,9 +13,12 @@ class ExercicesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // To recover the info in the target "SecondActivity" class
-        val training_id = intent.getStringExtra("training_id") // String?
+        val training_id: String? = intent.getStringExtra("training_id") // String?
 
-        Log.d("SATLUT", training_id!!)
+        if (training_id == null)
+            Log.d("SATLUT", "PAS DE TRAINING ID!!!")
+        else
+            Log.d("SATLUT", training_id)
 
         setContentView(R.layout.activity_exercices)
         setSupportActionBar(findViewById(R.id.toolbar))
