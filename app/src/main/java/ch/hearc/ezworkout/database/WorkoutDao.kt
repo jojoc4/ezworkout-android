@@ -18,5 +18,8 @@ interface WorkoutDao
     /*
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addTrainingPlan(trainingPlan: TrainingPlan)
-    */
+*/
+    @Transaction
+    @Query("SELECT * FROM TrainingPlan")
+    fun getTrainingPlanWithTrainings(): List<TrainingPlanWithTraining>
 }
