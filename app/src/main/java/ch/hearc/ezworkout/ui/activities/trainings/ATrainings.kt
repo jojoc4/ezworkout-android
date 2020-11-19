@@ -55,10 +55,14 @@ class ATrainings : Fragment() {
             val intent = Intent(activity, ExercicesActivity::class.java)
             val bundle = Bundle()
             // TODO PRINT
-            //bundle.putString("training_id", viewModel.selected.value?.label)
-            //intent.putExtras(bundle)
+            Log.d(
+                "INTENT : ",
+                viewModel.selected.value?.label.toString()
+            )
+            bundle.putString("training_id", viewModel.selected.value?.label)
+            intent.putExtras(bundle)
 
-            //startActivity(intent)
+            startActivity(intent)
         }
 
         return root

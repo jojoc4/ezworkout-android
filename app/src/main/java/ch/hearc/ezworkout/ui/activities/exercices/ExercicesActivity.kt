@@ -16,9 +16,9 @@ class ExercicesActivity : AppCompatActivity() {
         val training_id: String? = intent.getStringExtra("training_id") // String?
 
         if (training_id == null)
-            Log.d("SATLUT", "PAS DE TRAINING ID!!!")
+            Log.d("SALUT", "PAS DE TRAINING ID!!!")
         else
-            Log.d("SATLUT", training_id)
+            Log.d("SALUT", training_id)
 
         setContentView(R.layout.activity_exercices)
         setSupportActionBar(findViewById(R.id.toolbar))
