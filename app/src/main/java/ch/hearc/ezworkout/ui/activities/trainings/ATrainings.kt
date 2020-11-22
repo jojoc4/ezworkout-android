@@ -10,7 +10,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.exercices.ExercicesActivity
+import ch.hearc.ezworkout.ui.activities.exercises.ExercicesActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
 import ch.hearc.ezworkout.ui.sync.QRReader
 
