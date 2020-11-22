@@ -10,7 +10,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.exercises.ExercicesActivity
+import ch.hearc.ezworkout.ui.activities.exercises.ExercisesActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
 import ch.hearc.ezworkout.ui.sync.QRReader
 
@@ -45,10 +45,10 @@ class ATrainings : Fragment() {
         }
         */
 
-        val buttonStart: Button = root.findViewById(R.id.start)
-        buttonStart.setOnClickListener {
+        val btnStart: Button = root.findViewById(R.id.start)
+        btnStart.setOnClickListener {
             // Create a new activity and pass the bundle to it
-            val intent = Intent(activity, ExercicesActivity::class.java)
+            val intent = Intent(activity, ExercisesActivity::class.java)
             val bundle = Bundle()
             // TODO PRINT
             Log.d(

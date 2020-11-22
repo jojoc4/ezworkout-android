@@ -7,7 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import ch.hearc.ezworkout.R
 
-class ExercicesActivity : AppCompatActivity() {
+class ExercisesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +20,6 @@ class ExercicesActivity : AppCompatActivity() {
         else
             Log.d("SALUT", training_id)
 
-        setContentView(R.layout.activity_exercices)
+        setContentView(R.layout.activity_exercises)
     }
 }
