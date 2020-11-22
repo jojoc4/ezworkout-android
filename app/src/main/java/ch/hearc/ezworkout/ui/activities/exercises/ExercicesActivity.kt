@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.exercices
+package ch.hearc.ezworkout.ui.activities.exercises
 
 import android.os.Bundle
 import android.util.Log
@@ -13,16 +13,13 @@ class ExercicesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // To recover the info in the target "SecondActivity" class
-        val training_id = intent.getStringExtra("training_id") // String?
+        val training_id: String? = intent.getStringExtra("training_id") // String?
 
-        Log.d("SATLUT", training_id!!)
+        if (training_id == null)
+            Log.d("SALUT", "PAS DE TRAINING ID!!!")
+        else
+            Log.d("SALUT", training_id)
 
         setContentView(R.layout.activity_exercices)
-        setSupportActionBar(findViewById(R.id.toolbar))
-
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 }
