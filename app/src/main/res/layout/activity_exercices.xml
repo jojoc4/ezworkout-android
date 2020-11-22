@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/exercises_fragment"
-        class="ch.hearc.ezworkout.ui.activities.exercises.ExerciseFragment"
+        class="ch.hearc.ezworkout.ui.activities.exercises.Exercises"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

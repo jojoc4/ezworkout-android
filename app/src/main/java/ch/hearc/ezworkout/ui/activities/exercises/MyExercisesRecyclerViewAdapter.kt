@@ -10,7 +10,7 @@ import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.ui.activities.exercise.ExerciseContent.ExerciseItem
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem].
+ * [RecyclerView.Adapter] that can display a [Exercise].
  * TODO: Replace the implementation with code for your data type.
  */
 class MyExercisesRecyclerViewAdapter(
@@ -19,7 +19,7 @@ class MyExercisesRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_exercices, parent, false)
+            .inflate(R.layout.fragment_exercise, parent, false)
         return ViewHolder(view)
     }
 

@@ -25,7 +25,7 @@ object ExerciseContent {
 
     init {
         // Add some sample items.
-        addItem(createExerciseItem(1, "Développé couché"))
+        addItem(createExerciseItem(1, "Developpe couche"))
         addItem(createExerciseItem(2, "Biceps curl"))
     }
 
