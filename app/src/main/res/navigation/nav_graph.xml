@@ -3,26 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/exercises">
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="ch.hearc.ezworkout.ui.activities.exercises.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
+        android:id="@+id/exercises"
+        android:name="ch.hearc.ezworkout.ui.activities.exercises.Exercises"
+        android:label="exercises_fragment"
+        tools:layout="@layout/exercises_fragment" />
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="ch.hearc.ezworkout.ui.activities.exercises.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id="@+id/trainingPlanFragment"
+        android:name="ch.hearc.ezworkout.ui.activities.trainings.TrainingPlanFragment"
+        android:label="fragment_training_list"
+        tools:layout="@layout/fragment_training_list" >
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_trainingPlanFragment_to_exercises"
+            app:destination="@id/exercises" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 </navigation>

@@ -70,10 +70,7 @@ class TrainingPlanFragment : Fragment() {
          */
     }
 
-    //{ parent:AdapterView<*>, view:View, position:Int, id:Long ->
-    //    val element = parent.getItemAtPosition(position) // The item that was clicked
-    //    val action = TrainingPlanFragmentDirections.actionNavigationTrainingPlanToNavigationExercises(element.toString())
-    //    findNavController().navigate(action)}
+
 
 
     companion object {
