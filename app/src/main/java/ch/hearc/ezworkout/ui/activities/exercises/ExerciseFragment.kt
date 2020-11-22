@@ -1,31 +1,27 @@
-package ch.hearc.ezworkout.ui.activities.trainings
+package ch.hearc.ezworkout.ui.activities.exercises
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ListView
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.training.TrainingContent
+import ch.hearc.ezworkout.ui.activities.exercise.ExerciseContent
 
 /**
- * A fragment representing a list of trainings.
+ * A fragment representing a list of exercises.
  */
-class TrainingPlanFragment : Fragment() {
+class ExerciseFragment : Fragment() {
 
     private var columnCount = 1
 
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
-    private val model: ATrainingsViewModel by activityViewModels()
+    private val model: ExercisesViewModel by activityViewModels()
 
     override fun onCreate( savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +35,7 @@ class TrainingPlanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_training_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_exercise_list, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -48,7 +44,7 @@ class TrainingPlanFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyTrainingPlanRecyclerViewAdapter(TrainingContent.ITEMS, model)
+                adapter = MyExercisesRecyclerViewAdapter(ExerciseContent.ITEMS, model)
             }
         }
 
@@ -59,7 +55,7 @@ class TrainingPlanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // TODO : addOnItemTouchListener
-       // view.findViewById<RecyclerView>(R.id.list).addOnItemTouchListener()
+        // view.findViewById<RecyclerView>(R.id.list).addOnItemTouchListener()
         /*
         view.findViewById<RecyclerView>(R.id.list).setOnClickListener { view ->
             Log.d(
@@ -70,11 +66,6 @@ class TrainingPlanFragment : Fragment() {
          */
     }
 
-    //{ parent:AdapterView<*>, view:View, position:Int, id:Long ->
-    //    val element = parent.getItemAtPosition(position) // The item that was clicked
-    //    val action = TrainingPlanFragmentDirections.actionNavigationTrainingPlanToNavigationExercises(element.toString())
-    //    findNavController().navigate(action)}
-
 
     companion object {
 
@@ -84,7 +75,7 @@ class TrainingPlanFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            TrainingPlanFragment().apply {
+            ExerciseFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }

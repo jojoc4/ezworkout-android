@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.exercices
+package ch.hearc.ezworkout.ui.activities.exercises
 
 import android.os.Bundle
 import android.util.Log
@@ -21,11 +21,5 @@ class ExercicesActivity : AppCompatActivity() {
             Log.d("SALUT", training_id)
 
         setContentView(R.layout.activity_exercices)
-        setSupportActionBar(findViewById(R.id.toolbar))
-
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 }
