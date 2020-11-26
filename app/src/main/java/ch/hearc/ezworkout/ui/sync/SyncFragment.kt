@@ -1,7 +1,6 @@
 package ch.hearc.ezworkout.ui.sync
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -14,7 +13,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
@@ -58,6 +56,7 @@ class SyncFragment : Fragment() {
 
         //add lisners to buttons
         btnSync.setOnClickListener{
+            Thread(this.context?.let { it1 -> activity?.let { it2 -> SynchronizeThread(it1, it2) } }).start()
             val toast = Toast.makeText(activity, "synchronisation", Toast.LENGTH_SHORT)
             toast.show()
         }
