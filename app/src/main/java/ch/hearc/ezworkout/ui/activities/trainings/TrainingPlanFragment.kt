@@ -58,6 +58,12 @@ class TrainingPlanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        model.selected.value = TrainingContent.TrainingItem("1", "Hello")
+
+        Log.d(
+            "TrainingPlanFragment : ",
+            model.selected.value?.label.toString()
+        )
         // TODO : addOnItemTouchListener
        // view.findViewById<RecyclerView>(R.id.list).addOnItemTouchListener()
         /*

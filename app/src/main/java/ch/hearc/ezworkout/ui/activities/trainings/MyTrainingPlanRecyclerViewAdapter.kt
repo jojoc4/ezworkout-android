@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.ui.activities.training.TrainingContent
 
 import ch.hearc.ezworkout.ui.activities.training.TrainingContent.TrainingItem
 
@@ -22,6 +23,14 @@ class MyTrainingPlanRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_training, parent, false)
+
+        model.selected.value = TrainingContent.TrainingItem("2", "Bonjour")
+
+        Log.d(
+            "RecyclerView: ",
+            model.selected.value?.label.toString()
+        )
+
         return ViewHolder(view)
     }
 

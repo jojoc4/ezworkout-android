@@ -52,8 +52,11 @@ class ATrainings : Fragment() {
             val bundle = Bundle()
             // TODO PRINT
             Log.d(
-                "INTENT : ",
-                viewModel.selected.value?.label.toString()
+                "viewModel : ", (viewModel != null).toString()
+            )
+            Log.d(
+                "Value : ",
+                (viewModel.selected.value != null).toString()
             )
             bundle.putString("training_id", viewModel.selected.value?.label)
             intent.putExtras(bundle)
@@ -72,7 +75,8 @@ class ATrainings : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ATrainingsViewModel::class.java)
+        viewModel = ViewModelProviders.of(requireActivity()).get(ATrainingsViewModel::class.java)
+        // requireActivity()
 
 
         // TODO: Use the ViewModel
