@@ -1,5 +1,6 @@
 package ch.hearc.ezworkout.ui.activities.exercises
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.ui.settings.SettingsActivity
 
 class Exercises : Fragment() {
 
@@ -43,6 +45,12 @@ class Exercises : Fragment() {
         val buttonStart: Button = root.findViewById(R.id.start)
         buttonStart.setOnClickListener {
             // TODO
+        }
+
+        val btnSettings: Button = root.findViewById(R.id.settings)
+        btnSettings.setOnClickListener {
+            val intent = Intent(activity, SettingsActivity::class.java)
+            startActivity(intent)
         }
 
         return root
