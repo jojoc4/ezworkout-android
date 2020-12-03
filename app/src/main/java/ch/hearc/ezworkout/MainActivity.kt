@@ -1,16 +1,24 @@
 package ch.hearc.ezworkout
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.api.RetrofitInstance
+import ch.hearc.ezworkout.networking.repository.Repository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private val myString = "JE SUIS UNE VARIABLE DE MAIN_ACTIVITY"
+    private lateinit var viewModel: MainViewModel
 
     fun getMyString(): String {
         return myString
@@ -35,6 +43,18 @@ class MainActivity : AppCompatActivity() {
 
         //test database
 
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+        viewModel.getPost()
+
+
+        viewModel.myResponse.observe(this, Observer { response ->
+            Log.d("Response",response.userId.toString())
+            Log.d("Response",response.id.toString())
+            Log.d("Response",response.title)
+            Log.d("Response",response.body)
+        })
 
 
     }
