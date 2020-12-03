@@ -3,6 +3,7 @@
     package="ch.hearc.ezworkout">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
