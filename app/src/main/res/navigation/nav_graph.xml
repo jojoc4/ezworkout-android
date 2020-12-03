@@ -6,14 +6,14 @@
     app:startDestination="@id/exercises">
     <fragment
         android:id="@+id/exercises"
-        android:name="ch.hearc.ezworkout.ui.activities.exercises.Exercises"
+        android:name="ch.hearc.ezworkout.ui.activities.training.TrainingFragment"
         android:label="exercises_fragment"
-        tools:layout="@layout/exercises_fragment" />
+        tools:layout="@layout/a_t_training_fragment" />
     <fragment
         android:id="@+id/trainingPlanFragment"
-        android:name="ch.hearc.ezworkout.ui.activities.trainings.TrainingPlanFragment"
+        android:name="ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingPlanListFragment"
         android:label="fragment_training_list"
-        tools:layout="@layout/fragment_training_list" >
+        tools:layout="@layout/a_tp_training_plan_list_fragment" >
         <action
             android:id="@+id/action_trainingPlanFragment_to_exercises"
             app:destination="@id/exercises" />

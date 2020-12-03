@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.trainings
+package ch.hearc.ezworkout.ui.activities.trainingPlan
 
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
@@ -6,30 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.training.TrainingContent
 
-import ch.hearc.ezworkout.ui.activities.training.TrainingContent.TrainingItem
+import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent.TrainingItem
 
 /**
  * [RecyclerView.Adapter] that can display a [Training].
  * TODO: Replace the implementation with code for your data type.
  */
-class MyTrainingPlanRecyclerViewAdapter(
-    private val values: List<TrainingItem>, private val model: ATrainingsViewModel
-) : RecyclerView.Adapter<MyTrainingPlanRecyclerViewAdapter.ViewHolder>() {
+class TrainingPlanRecyclerViewAdapter(
+    private val values: List<TrainingItem>, private val model: TrainingPlanViewModel
+) : RecyclerView.Adapter<TrainingPlanRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_training, parent, false)
+            .inflate(R.layout.a_list_item, parent, false)
 
-        model.selected.value = TrainingContent.TrainingItem("2", "Bonjour")
-
-        Log.d(
-            "RecyclerView: ",
-            model.selected.value?.label.toString()
-        )
+        model.selected.value = TrainingItem("2", "Bonjour")
 
         return ViewHolder(view)
     }

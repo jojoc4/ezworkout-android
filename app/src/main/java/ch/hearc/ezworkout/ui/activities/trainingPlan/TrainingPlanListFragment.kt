@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.trainings
+package ch.hearc.ezworkout.ui.activities.trainingPlan
 
 import android.os.Bundle
 import android.util.Log
@@ -9,23 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ListView
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.training.TrainingContent
 
 /**
  * A fragment representing a list of trainings.
  */
-class TrainingPlanFragment : Fragment() {
+class TrainingPlanListFragment : Fragment() {
 
     private var columnCount = 1
 
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
-    private val model: ATrainingsViewModel by activityViewModels()
+    private val model: TrainingPlanViewModel by activityViewModels()
 
     override fun onCreate( savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +35,7 @@ class TrainingPlanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_training_list, container, false)
+        val view = inflater.inflate(R.layout.a_tp_training_plan_list_fragment, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -48,7 +44,7 @@ class TrainingPlanFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyTrainingPlanRecyclerViewAdapter(TrainingContent.ITEMS, model)
+                adapter = TrainingPlanRecyclerViewAdapter(TrainingContent.ITEMS, model)
             }
         }
 
@@ -87,7 +83,7 @@ class TrainingPlanFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            TrainingPlanFragment().apply {
+            TrainingPlanListFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
