@@ -63,7 +63,7 @@ class SyncFragment : Fragment() {
         }
 
         btnSignOff.setOnClickListener {
-            with(sharedPref?.edit()) {
+            with(sharedPref.edit()) {
                 this?.putBoolean("connected", false)
                 this?.putString("endpoint", "")
                 this?.putString("api", "")
@@ -89,11 +89,11 @@ class SyncFragment : Fragment() {
      * adapt output to context by showing the write text and setting the visibility of items
      */
     private fun conStateUpdate(){
-        val connected = sharedPref?.getBoolean("connected", false)
-        val endpoint = sharedPref?.getString("endpoint", "")
+        val connected = sharedPref.getBoolean("connected", false)
+        val endpoint = sharedPref.getString("endpoint", "")
         //val api = sharedPref?.getString("api", "")
 
-        var text: String = if(connected!!){
+        var text: String = if(connected){
             "Vous êtes connecté à " + endpoint
 
         }else{
@@ -101,7 +101,7 @@ class SyncFragment : Fragment() {
         }
         textView.text = text
 
-        if(connected!!){
+        if(connected){
             btnScanner.visibility = INVISIBLE
             btnSync.visibility = VISIBLE
             btnSignOff.visibility = VISIBLE
