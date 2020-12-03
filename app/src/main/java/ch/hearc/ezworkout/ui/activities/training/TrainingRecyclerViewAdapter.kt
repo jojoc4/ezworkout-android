@@ -8,6 +8,7 @@ import android.widget.TextView
 import ch.hearc.ezworkout.R
 
 import ch.hearc.ezworkout.ui.activities.training.ExerciseContent.ExerciseItem
+import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
 
 /**
  * [RecyclerView.Adapter] that can display a [Exercise].
@@ -20,6 +21,9 @@ class TrainingRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.a_list_item, parent, false)
+
+        model.selected.value = ExerciseItem("2", "Bonjour")
+
         return ViewHolder(view)
     }
 

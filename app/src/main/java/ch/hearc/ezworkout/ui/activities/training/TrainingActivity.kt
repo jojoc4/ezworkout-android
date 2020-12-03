@@ -17,6 +17,6 @@ class TrainingActivity : AppCompatActivity() {
             Log.d("SALUT", training_id)
 
         setContentView(R.layout.a_t_training_activity)
-        setTitle("Training")
+        setTitle(training_id)
     }
 }

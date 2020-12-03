@@ -15,8 +15,7 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
+        <activity android:name=".ui.activities.exercise.ExerciseActivity"></activity>
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -27,8 +26,7 @@
 
         <activity
             android:name=".ui.activities.training.TrainingActivity"
-            android:label="@string/title_activity_training">
-        </activity>
+            android:label="@string/title_activity_training"></activity>
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
