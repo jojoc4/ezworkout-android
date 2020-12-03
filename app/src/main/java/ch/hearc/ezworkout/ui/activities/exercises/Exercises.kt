@@ -1,8 +1,7 @@
-package ch.hearc.ezworkout.ui.activities.trainings
+package ch.hearc.ezworkout.ui.activities.exercises
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +9,15 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.exercises.ExercisesActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
-import ch.hearc.ezworkout.ui.sync.QRReader
 
-class ATrainings : Fragment() {
+class Exercises : Fragment() {
 
     companion object {
-        fun newInstance() = ATrainings()
+        fun newInstance() = Exercises()
     }
 
-    private lateinit var viewModel: ATrainingsViewModel
+    private lateinit var viewModel: ExercisesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +30,7 @@ class ATrainings : Fragment() {
         Log.d("Var from activity", mainMyString)
         */
 
-        val root = inflater.inflate(R.layout.a_trainings_fragment, container, false)
+        val root = inflater.inflate(R.layout.exercises_fragment, container, false)
 
         /*
         val trainingPlanFragment: TrainingPlanFragment = root.findViewById(R.id.training_plan_fragment)
@@ -45,27 +42,13 @@ class ATrainings : Fragment() {
         }
         */
 
-        val btnStart: Button = root.findViewById(R.id.start)
-        btnStart.setOnClickListener {
-            // Create a new activity and pass the bundle to it
-            val intent = Intent(activity, ExercisesActivity::class.java)
-            val bundle = Bundle()
-            // TODO PRINT
-            Log.d(
-                "viewModel : ", (viewModel != null).toString()
-            )
-            Log.d(
-                "Value : ",
-                (viewModel.selected.value != null).toString()
-            )
-            bundle.putString("training_id", viewModel.selected.value?.label)
-            intent.putExtras(bundle)
-
-            startActivity(intent)
+        val buttonStart: Button = root.findViewById(R.id.start)
+        buttonStart.setOnClickListener {
+            // TODO
         }
 
         val btnSettings: Button = root.findViewById(R.id.settings)
-        btnSettings.setOnClickListener{
+        btnSettings.setOnClickListener {
             val intent = Intent(activity, SettingsActivity::class.java)
             startActivity(intent)
         }
@@ -75,8 +58,7 @@ class ATrainings : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity()).get(ATrainingsViewModel::class.java)
-        // requireActivity()
+        viewModel = ViewModelProviders.of(this).get(ExercisesViewModel::class.java)
 
 
         // TODO: Use the ViewModel
