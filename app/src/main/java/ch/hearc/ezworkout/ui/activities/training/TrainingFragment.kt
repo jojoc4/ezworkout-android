@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.exercises
+package ch.hearc.ezworkout.ui.activities.training
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,13 +11,13 @@ import androidx.lifecycle.ViewModelProviders
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
 
-class Exercises : Fragment() {
+class TrainingFragment : Fragment() {
 
     companion object {
-        fun newInstance() = Exercises()
+        fun newInstance() = TrainingFragment()
     }
 
-    private lateinit var viewModel: ExercisesViewModel
+    private lateinit var viewModel: TrainingViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +30,7 @@ class Exercises : Fragment() {
         Log.d("Var from activity", mainMyString)
         */
 
-        val root = inflater.inflate(R.layout.exercises_fragment, container, false)
+        val root = inflater.inflate(R.layout.a_t_training_fragment, container, false)
 
         /*
         val trainingPlanFragment: TrainingPlanFragment = root.findViewById(R.id.training_plan_fragment)
@@ -52,13 +52,14 @@ class Exercises : Fragment() {
             val intent = Intent(activity, SettingsActivity::class.java)
             startActivity(intent)
         }
+        getActivity()?.setTitle("Exercises")
 
         return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ExercisesViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(TrainingViewModel::class.java)
 
 
         // TODO: Use the ViewModel

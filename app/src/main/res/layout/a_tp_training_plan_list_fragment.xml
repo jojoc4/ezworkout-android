@@ -9,5 +9,5 @@
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.activities.exercises.ExerciseFragment"
-    tools:listitem="@layout/fragment_label_list_item" />
+    tools:context=".ui.activities.trainingPlan.TrainingPlanListFragment"
+    tools:listitem="@layout/a_list_item" />

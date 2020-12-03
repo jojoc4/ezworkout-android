@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_trainings"
-        android:name="ch.hearc.ezworkout.ui.activities.trainings.ATrainings"
+        android:name="ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingPlanFragment"
         android:label="@string/title_trainigs"
-        tools:layout="@layout/a_trainings_fragment" />
+        tools:layout="@layout/a_tp_training_plan_fragment" />
 
     <!--<fragment
         android:id="@+id/navigation_history"

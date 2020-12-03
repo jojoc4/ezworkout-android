@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.trainings
+package ch.hearc.ezworkout.ui.activities.trainingPlan
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,17 +10,16 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.exercises.ExercisesActivity
+import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
-import ch.hearc.ezworkout.ui.sync.QRReader
 
-class ATrainings : Fragment() {
+class TrainingPlanFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ATrainings()
+        fun newInstance() = TrainingPlanFragment()
     }
 
-    private lateinit var viewModel: ATrainingsViewModel
+    private lateinit var viewModel: TrainingPlanViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +32,7 @@ class ATrainings : Fragment() {
         Log.d("Var from activity", mainMyString)
         */
 
-        val root = inflater.inflate(R.layout.a_trainings_fragment, container, false)
+        val root = inflater.inflate(R.layout.a_tp_training_plan_fragment, container, false)
 
         /*
         val trainingPlanFragment: TrainingPlanFragment = root.findViewById(R.id.training_plan_fragment)
@@ -48,7 +47,7 @@ class ATrainings : Fragment() {
         val btnStart: Button = root.findViewById(R.id.start)
         btnStart.setOnClickListener {
             // Create a new activity and pass the bundle to it
-            val intent = Intent(activity, ExercisesActivity::class.java)
+            val intent = Intent(activity, TrainingActivity::class.java)
             val bundle = Bundle()
             // TODO PRINT
             Log.d(
@@ -75,7 +74,7 @@ class ATrainings : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity()).get(ATrainingsViewModel::class.java)
+        viewModel = ViewModelProviders.of(requireActivity()).get(TrainingPlanViewModel::class.java)
         // requireActivity()
 
 
