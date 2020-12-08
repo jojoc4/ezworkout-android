@@ -48,19 +48,12 @@ class SyncFragment : Fragment() {
         //vars initialisation
         sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
 
-        btnScanner = root.findViewById(R.id.scanner)
         btnSignOff = root.findViewById(R.id.signoff)
-        btnSync = root.findViewById(R.id.sync)
         textView = root.findViewById(R.id.text_sync)
 
-        //adapt output to context
-       conStateUpdate()
+        val endpoint = sharedPref.getString("endpoint", "")
 
-        //add lisners to buttons
-        btnSync.setOnClickListener{
-            val toast = Toast.makeText(activity, "synchronisation", Toast.LENGTH_SHORT)
-            toast.show()
-        }
+        textView.text = "Vous êtes connecté à " + endpoint
 
         btnSignOff.setOnClickListener {
             with(sharedPref.edit()) {
@@ -69,47 +62,11 @@ class SyncFragment : Fragment() {
                 this?.putString("api", "")
                 this?.apply()
             }
-            conStateUpdate()
-        }
-
-        btnScanner.setOnClickListener{
-            val intent = Intent(activity, QRReader::class.java)
+            val intent = Intent(activity, ConnectActivity::class.java)
             startActivity(intent)
         }
 
         return root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        conStateUpdate()
-    }
-
-    /**
-     * adapt output to context by showing the write text and setting the visibility of items
-     */
-    private fun conStateUpdate(){
-        val connected = sharedPref.getBoolean("connected", false)
-        val endpoint = sharedPref.getString("endpoint", "")
-        //val api = sharedPref?.getString("api", "")
-
-        var text: String = if(connected){
-            "Vous êtes connecté à " + endpoint
-
-        }else{
-            "vous n'êtes pas connecté"
-        }
-        textView.text = text
-
-        if(connected){
-            btnScanner.visibility = INVISIBLE
-            btnSync.visibility = VISIBLE
-            btnSignOff.visibility = VISIBLE
-        }else{
-            btnScanner.visibility = VISIBLE
-            btnSync.visibility = INVISIBLE
-            btnSignOff.visibility = INVISIBLE
-        }
     }
 
 
