@@ -27,9 +27,7 @@ class SyncFragment : Fragment() {
 
     private lateinit var syncViewModel: SyncViewModel
 
-    private lateinit var btnScanner: Button
     private lateinit var btnSignOff: Button
-    private lateinit var btnSync: Button
     private lateinit var textView: TextView
 
     private lateinit var sharedPref: SharedPreferences

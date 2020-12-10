@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">EZWorkout</string>
     <string name="title_training_plan">Entraînements</string>
-    <string name="title_sync">Synchronisation</string>
+    <string name="title_sync">Mon compte</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_exercices">ExercicesActivity</string>
     <!-- Strings used for fragments for navigation -->
