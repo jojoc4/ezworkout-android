@@ -46,14 +46,12 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getPost()
+        viewModel.getUser()
 
 
         viewModel.myResponse.observe(this, Observer { response ->
-            Log.d("Response",response.userId.toString())
-            Log.d("Response",response.id.toString())
-            Log.d("Response",response.title)
-            Log.d("Response",response.body)
+            Log.d("--------Response-----------",response.id.toString())
+            response.email?.let { Log.d("--------Response2-----------", it) }
         })
 
 
