@@ -9,6 +9,6 @@ interface SimpleApi {
     @GET("posts/1")
     suspend fun getPost(): Post
 
-    @GET("test")
+    @GET("user")
     suspend fun getUser(@Header("Authorization") token: String): User
 }
