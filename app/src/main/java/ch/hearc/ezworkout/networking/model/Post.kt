@@ -1,6 +1,5 @@
 package ch.hearc.ezworkout.networking.model
 
-import com.google.gson.annotations.SerializedName
 
 data class Post(
     val userId: Int,
