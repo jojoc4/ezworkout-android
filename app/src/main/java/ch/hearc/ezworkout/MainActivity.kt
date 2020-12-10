@@ -46,12 +46,15 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getUser()
+        viewModel.getExercises()
 
 
-        viewModel.myResponse.observe(this, Observer { response ->
-            Log.d("--------Response-----------",response.id.toString())
-            response.email?.let { Log.d("--------Response2-----------", it) }
+        viewModel.exerciseResponse.observe(this, Observer { response ->
+            for (exercise in response)
+            {
+                Log.d("--------Response-----------",exercise.id.toString())
+                exercise.name?.let { Log.d("--------Response2-----------", it) }
+            }
         })
 
 

@@ -1,5 +1,6 @@
 package ch.hearc.ezworkout.networking.api
 
+import ch.hearc.ezworkout.networking.model.Exercise
 import ch.hearc.ezworkout.networking.model.Post
 import ch.hearc.ezworkout.networking.model.User
 import retrofit2.http.GET
@@ -11,4 +12,7 @@ interface SimpleApi {
 
     @GET("user")
     suspend fun getUser(@Header("Authorization") token: String): User
+
+    @GET("exercise")
+    suspend fun getExercises(@Header("Authorization") token: String): List<Exercise>
 }
