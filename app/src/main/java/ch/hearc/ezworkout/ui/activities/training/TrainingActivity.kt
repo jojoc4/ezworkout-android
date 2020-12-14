@@ -1,18 +1,14 @@
-package ch.hearc.ezworkout.ui.activities.exercises
+package ch.hearc.ezworkout.ui.activities.training
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import ch.hearc.ezworkout.R
 
-class ExercicesActivity : AppCompatActivity() {
-
+class TrainingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // To recover the info in the target "SecondActivity" class
         val training_id: String? = intent.getStringExtra("training_id") // String?
 
         if (training_id == null)
@@ -20,6 +16,7 @@ class ExercicesActivity : AppCompatActivity() {
         else
             Log.d("SALUT", training_id)
 
-        setContentView(R.layout.activity_exercices)
+        setContentView(R.layout.a_t_training_activity)
+        setTitle(training_id)
     }
 }

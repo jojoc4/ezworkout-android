@@ -9,7 +9,7 @@
     <item
         android:id="@+id/navigation_trainings"
         android:icon="@drawable/ic_trainigs_black_24dp"
-        android:title="@string/title_trainigs" />
+        android:title="@string/title_training_plan" />
 
     <item
         android:id="@+id/navigation_history"
@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/navigation_sync"
-        android:icon="@drawable/ic_sync_black_24dp"
+        android:icon="@drawable/ic_account_24"
         android:title="@string/title_sync" />
 
 

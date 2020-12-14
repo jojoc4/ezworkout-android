@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.exercises
+package ch.hearc.ezworkout.ui.activities.training
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,19 +7,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import ch.hearc.ezworkout.R
 
-import ch.hearc.ezworkout.ui.activities.exercise.ExerciseContent.ExerciseItem
+import ch.hearc.ezworkout.ui.activities.training.ExerciseContent.ExerciseItem
+import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
 
 /**
  * [RecyclerView.Adapter] that can display a [Exercise].
  * TODO: Replace the implementation with code for your data type.
  */
-class MyExercisesRecyclerViewAdapter(
-    private val values: List<ExerciseItem>, private val model: ExercisesViewModel
-) : RecyclerView.Adapter<MyExercisesRecyclerViewAdapter.ViewHolder>() {
+class TrainingRecyclerViewAdapter(
+    private val values: List<ExerciseItem>, private val model: TrainingViewModel
+) : RecyclerView.Adapter<TrainingRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_exercise, parent, false)
+            .inflate(R.layout.a_list_item, parent, false)
+
+        model.selected.value = ExerciseItem("2", "Bonjour")
+
         return ViewHolder(view)
     }
 

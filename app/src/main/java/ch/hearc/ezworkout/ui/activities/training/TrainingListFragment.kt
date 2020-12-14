@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.exercises
+package ch.hearc.ezworkout.ui.activities.training
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,18 +10,17 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.exercise.ExerciseContent
 
 /**
  * A fragment representing a list of exercises.
  */
-class ExerciseFragment : Fragment() {
+class TrainingListFragment : Fragment() {
 
     private var columnCount = 1
 
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
-    private val model: ExercisesViewModel by activityViewModels()
+    private val model: TrainingViewModel by activityViewModels()
 
     override fun onCreate( savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,7 @@ class ExerciseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_exercise_list, container, false)
+        val view = inflater.inflate(R.layout.a_t_training_list_fragment, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -44,7 +43,7 @@ class ExerciseFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyExercisesRecyclerViewAdapter(ExerciseContent.ITEMS, model)
+                adapter = TrainingRecyclerViewAdapter(ExerciseContent.ITEMS, model)
             }
         }
 
@@ -75,7 +74,7 @@ class ExerciseFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            ExerciseFragment().apply {
+            TrainingListFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
