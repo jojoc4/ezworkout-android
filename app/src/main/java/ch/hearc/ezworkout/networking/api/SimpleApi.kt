@@ -36,4 +36,7 @@ interface SimpleApi {
 
     @POST("exerciseEff")
     suspend fun addExerciseEff(@Header("Authorization") token: String, @Query("training_eff") TEid: Int, @Query("pause") pause: Int, @Query("skipped") skipped: Int, @Query("exercise") exercise: Int, @Query("rating") rating: Int): ExerciseEff
+
+    @POST("seriesEff")
+    suspend fun addSeriesEff(@Header("Authorization") token: String, @Query("exercise_eff") EEid: Int, @Query("pause") pause: Int, @Query("rep") rep: Int, @Query("weight") weight: Int): SeriesEff
 }

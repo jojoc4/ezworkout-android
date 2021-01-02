@@ -51,4 +51,8 @@ class Repository(private val sharedPref: SharedPreferences) {
     suspend fun addExerciseEff(exerciseEff: ExerciseEff) : ExerciseEff {
         return  RetrofitInstance.api.addExerciseEff(token, exerciseEff.trainingEffId, exerciseEff.pause, exerciseEff.skipped, exerciseEff.exerciseId, exerciseEff.rating)
     }
+
+    suspend fun addSeriesEff(seriesEff: SeriesEff) : SeriesEff {
+        return  RetrofitInstance.api.addSeriesEff(token, seriesEff.exerciseEffId, seriesEff.pause, seriesEff.rep, seriesEff.weight)
+    }
 }

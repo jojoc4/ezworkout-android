@@ -97,4 +97,12 @@ class MainViewModel (private val repository: Repository): ViewModel()
             newExerciseEffResponse.value = response
         }
     }
+
+    val newSeriesEffResponse: MutableLiveData<SeriesEff> = MutableLiveData()
+    fun addSeriesEff(seriesEff: SeriesEff) {
+        viewModelScope.launch {
+            val response = repository.addSeriesEff(seriesEff)
+            newSeriesEffResponse.value = response
+        }
+    }
 }

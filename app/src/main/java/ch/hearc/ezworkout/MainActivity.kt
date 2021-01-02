@@ -14,6 +14,7 @@ import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.ExerciseEff
 import ch.hearc.ezworkout.networking.model.LogbookPage
+import ch.hearc.ezworkout.networking.model.SeriesEff
 import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -54,15 +55,14 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        var new = ExerciseEff()
-        new.trainingEffId = 5
+        var new = SeriesEff()
+        new.exerciseEffId = 13
         new.pause = 60
-        new.skipped = 0
-        new.exerciseId = 1
-        new.rating = 5
+        new.rep = 3
+        new.weight = 10
 
-        viewModel.addExerciseEff(new)
-        viewModel.newExerciseEffResponse.observe(this, { response ->
+        viewModel.addSeriesEff(new)
+        viewModel.newSeriesEffResponse.observe(this, { response ->
             Log.d("--------id-----------",response.id.toString())
         })
     }
