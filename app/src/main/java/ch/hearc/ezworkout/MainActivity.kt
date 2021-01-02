@@ -9,9 +9,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
-import ch.hearc.ezworkout.networking.api.RetrofitInstance
 import ch.hearc.ezworkout.networking.repository.Repository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -43,17 +43,23 @@ class MainActivity : AppCompatActivity() {
 
         //test database
 
-        val repository = Repository()
+        val repository = Repository(PreferenceManager.getDefaultSharedPreferences(this))
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getExercises()
 
+        viewModel.getUser()
+        viewModel.myResponse.observe(this, Observer { response ->
+            Log.d("--------id-----------",response.id.toString())
+            response.name?.let { Log.d("--------name-----------", it) }
 
-        viewModel.exerciseResponse.observe(this, Observer { response ->
-            for (exercise in response)
+        })
+
+        viewModel.getTrainingPlan()
+        viewModel.trainingPlanResponse.observe(this, Observer { response ->
+            for (tp in response)
             {
-                Log.d("--------Response-----------",exercise.id.toString())
-                exercise.name?.let { Log.d("--------Response2-----------", it) }
+                Log.d("--------id-----------",tp.id.toString())
+                tp.name?.let { Log.d("--------name-----------", it) }
             }
         })
 
