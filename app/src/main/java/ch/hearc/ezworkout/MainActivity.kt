@@ -42,13 +42,10 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         //test database
-
-        val repository = Repository(PreferenceManager.getDefaultSharedPreferences(this))
-        val viewModelFactory = MainViewModelFactory(repository)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this,MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))).get(MainViewModel::class.java)
 
         viewModel.getUser()
-        viewModel.myResponse.observe(this, Observer { response ->
+        viewModel.userResponse.observe(this, Observer { response ->
             Log.d("--------id-----------",response.id.toString())
             response.name?.let { Log.d("--------name-----------", it) }
 
