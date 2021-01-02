@@ -43,4 +43,8 @@ class Repository(private val sharedPref: SharedPreferences) {
     suspend fun addLogbookPage(LogbookPage: LogbookPage) : LogbookPage {
         return  RetrofitInstance.api.addLogbookPage(token, Integer(LogbookPage.trainingPlanId))
     }
+
+    suspend fun addTrainingEff(trainingEff: TrainingEff) : TrainingEff {
+        return  RetrofitInstance.api.addTrainingEff(token, trainingEff.logbookPageId, trainingEff.date.toString(), trainingEff.skipped, trainingEff.trainingId)
+    }
 }

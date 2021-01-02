@@ -30,4 +30,7 @@ interface SimpleApi {
 
     @POST("logbookPage")
     suspend fun addLogbookPage(@Header("Authorization") token: String, @Query("trainigPlan") TPid: Integer): LogbookPage
+
+    @POST("trainingEff")
+    suspend fun addTrainingEff(@Header("Authorization") token: String, @Query("logbookPage") LBPid: Int, @Query("date") date: String, @Query("skipped") skipped: Int, @Query("training") Tid: Int): TrainingEff
 }
