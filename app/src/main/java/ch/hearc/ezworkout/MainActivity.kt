@@ -57,6 +57,14 @@ class MainActivity : AppCompatActivity() {
             {
                 Log.d("--------id-----------",tp.id.toString())
                 tp.name?.let { Log.d("--------name-----------", it) }
+                viewModel.getTraining(Integer(tp.id))
+                viewModel.trainingResponse.observe(this,{ response ->
+                    for(t in response)
+                    {
+                        Log.d("\t--------id-----------",t.id.toString())
+                        t.name?.let { Log.d("\t--------name-----------", it) }
+                    }
+                })
             }
         })
 

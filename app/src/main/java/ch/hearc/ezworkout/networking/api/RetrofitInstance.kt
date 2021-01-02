@@ -1,7 +1,6 @@
 package ch.hearc.ezworkout.networking.api
 
 import ch.hearc.ezworkout.networking.utils.Constants.Companion.BASE_URL
-import ch.hearc.ezworkout.networking.utils.Constants.Companion.BASE_URL2
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
