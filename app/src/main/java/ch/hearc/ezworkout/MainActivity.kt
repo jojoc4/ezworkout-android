@@ -63,6 +63,14 @@ class MainActivity : AppCompatActivity() {
                     {
                         Log.d("\t--------id-----------",t.id.toString())
                         t.name?.let { Log.d("\t--------name-----------", it) }
+                        viewModel.getExercise(Integer(t.id))
+                        viewModel.exerciseResponse.observe(this,{ response ->
+                            for(e in response)
+                            {
+                                Log.d("\t\t--------id-----------",e.id.toString())
+                                e.name?.let { Log.d("\t\t--------name-----------", it) }
+                            }
+                        })
                     }
                 })
             }

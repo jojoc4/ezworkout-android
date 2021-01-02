@@ -1,5 +1,6 @@
 package ch.hearc.ezworkout.networking.api
 
+import ch.hearc.ezworkout.networking.model.Exercise
 import ch.hearc.ezworkout.networking.model.Training
 import ch.hearc.ezworkout.networking.model.TrainingPlan
 import ch.hearc.ezworkout.networking.model.User
@@ -16,4 +17,7 @@ interface SimpleApi {
 
     @GET("training/fromTP/{id}")
     suspend fun getTraining(@Header("Authorization") token: String, @Path("id") TPid: Integer): List<Training>
+
+    @GET("exercise/fromT/{id}")
+    suspend fun getExercise(@Header("Authorization") token: String, @Path("id") Tid: Integer): List<Exercise>
 }
