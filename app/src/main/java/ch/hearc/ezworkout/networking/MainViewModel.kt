@@ -26,11 +26,27 @@ class MainViewModel (private val repository: Repository): ViewModel()
         }
     }
 
+    val oneTrainingPlanResponse: MutableLiveData<TrainingPlan> = MutableLiveData()
+    fun getTrainingPlan(id: Int) {
+        viewModelScope.launch {
+            val response = repository.getTrainingPlan(id)
+            oneTrainingPlanResponse.value = response
+        }
+    }
+
     val trainingResponse: MutableLiveData<List<Training>> = MutableLiveData()
     fun getTraining(TPid: Integer) {
         viewModelScope.launch {
             val response = repository.getTraining(TPid)
             trainingResponse.value = response
+        }
+    }
+
+    val oneTrainingResponse: MutableLiveData<Training> = MutableLiveData()
+    fun getTraining(id: Int) {
+        viewModelScope.launch {
+            val response = repository.getTraining(id)
+            oneTrainingResponse.value = response
         }
     }
 
@@ -42,11 +58,27 @@ class MainViewModel (private val repository: Repository): ViewModel()
         }
     }
 
+    val oneExerciseResponse: MutableLiveData<Exercise> = MutableLiveData()
+    fun getExercise(id: Int) {
+        viewModelScope.launch {
+            val response = repository.getExercise(id)
+            oneExerciseResponse.value = response
+        }
+    }
+
     val logbookPageResponse: MutableLiveData<List<LogbookPage>> = MutableLiveData()
     fun getLogbookPage(TPid: Integer) {
         viewModelScope.launch {
             val response = repository.getLogbookPage(TPid)
             logbookPageResponse.value = response
+        }
+    }
+
+    val oneLogbookPageResponse: MutableLiveData<LogbookPage> = MutableLiveData()
+    fun getLogbookPage(id: Int) {
+        viewModelScope.launch {
+            val response = repository.getLogbookPage(id)
+            oneLogbookPageResponse.value = response
         }
     }
 
@@ -58,6 +90,14 @@ class MainViewModel (private val repository: Repository): ViewModel()
         }
     }
 
+    val oneTrainingEffResponse: MutableLiveData<TrainingEff> = MutableLiveData()
+    fun getTrainingEff(id: Int) {
+        viewModelScope.launch {
+            val response = repository.getTrainingEff(id)
+            oneTrainingEffResponse.value = response
+        }
+    }
+
     val exerciseEffResponse: MutableLiveData<List<ExerciseEff>> = MutableLiveData()
     fun getExerciseEff(TEid: Integer) {
         viewModelScope.launch {
@@ -66,11 +106,27 @@ class MainViewModel (private val repository: Repository): ViewModel()
         }
     }
 
+    val oneExerciseEffResponse: MutableLiveData<ExerciseEff> = MutableLiveData()
+    fun getExerciseEff(id: Int) {
+        viewModelScope.launch {
+            val response = repository.getExerciseEff(id)
+            oneExerciseEffResponse.value = response
+        }
+    }
+
     val seriesEffResponse: MutableLiveData<List<SeriesEff>> = MutableLiveData()
     fun getSeriesEff(EEid: Integer) {
         viewModelScope.launch {
             val response = repository.getSeriesEff(EEid)
             seriesEffResponse.value = response
+        }
+    }
+
+    val oneSeriesEffResponse: MutableLiveData<SeriesEff> = MutableLiveData()
+    fun getSeriesEff(id: Int) {
+        viewModelScope.launch {
+            val response = repository.getSeriesEff(id)
+            oneSeriesEffResponse.value = response
         }
     }
 

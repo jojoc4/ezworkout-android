@@ -16,28 +16,56 @@ class Repository(private val sharedPref: SharedPreferences) {
         return  RetrofitInstance.api.getTrainingPlan(token)
     }
 
+    suspend fun getTrainingPlan(id: Int) : TrainingPlan {
+        return  RetrofitInstance.api.getTrainingPlan(token, id)
+    }
+
     suspend fun getTraining(TPid: Integer) : List<Training> {
         return  RetrofitInstance.api.getTraining(token, TPid)
+    }
+
+    suspend fun getTraining(id: Int) : Training {
+        return  RetrofitInstance.api.getTraining(token, id)
     }
 
     suspend fun getExercise(Tid: Integer) : List<Exercise> {
         return  RetrofitInstance.api.getExercise(token, Tid)
     }
 
+    suspend fun getExercise(id: Int) : Exercise {
+        return  RetrofitInstance.api.getExercise(token, id)
+    }
+
     suspend fun getLogbookPage(TPid: Integer) : List<LogbookPage> {
         return  RetrofitInstance.api.getLogbookPage(token, TPid)
+    }
+
+    suspend fun getLogbookPage(id: Int) : LogbookPage {
+        return  RetrofitInstance.api.getLogbookPage(token, id)
     }
 
     suspend fun getTrainingEff(LBPid: Integer) : List<TrainingEff> {
         return  RetrofitInstance.api.getTrainingEff(token, LBPid)
     }
 
+    suspend fun getTrainingEff(id: Int) : TrainingEff {
+        return  RetrofitInstance.api.getTrainingEff(token, id)
+    }
+
     suspend fun getExerciseEff(TEid: Integer) : List<ExerciseEff> {
         return  RetrofitInstance.api.getExerciseEff(token, TEid)
     }
 
+    suspend fun getExerciseEff(id: Int) : ExerciseEff {
+        return  RetrofitInstance.api.getExerciseEff(token, id)
+    }
+
     suspend fun getSeriesEff(EEid: Integer) : List<SeriesEff> {
         return  RetrofitInstance.api.getSeriesEff(token, EEid)
+    }
+
+    suspend fun getSeriesEff(id: Int) : SeriesEff {
+        return  RetrofitInstance.api.getSeriesEff(token, id)
     }
 
     suspend fun addLogbookPage(LogbookPage: LogbookPage) : LogbookPage {

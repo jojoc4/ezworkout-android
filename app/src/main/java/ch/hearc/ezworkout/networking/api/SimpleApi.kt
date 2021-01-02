@@ -10,23 +10,44 @@ interface SimpleApi {
     @GET("trainingPlan")
     suspend fun getTrainingPlan(@Header("Authorization") token: String): List<TrainingPlan>
 
+    @GET("trainingPlan/{id}")
+    suspend fun getTrainingPlan(@Header("Authorization") token: String, @Path("id") id: Int): TrainingPlan
+
     @GET("training/fromTP/{id}")
     suspend fun getTraining(@Header("Authorization") token: String, @Path("id") TPid: Integer): List<Training>
+
+    @GET("training/{id}")
+    suspend fun getTraining(@Header("Authorization") token: String, @Path("id") id: Int): Training
 
     @GET("exercise/fromT/{id}")
     suspend fun getExercise(@Header("Authorization") token: String, @Path("id") Tid: Integer): List<Exercise>
 
+    @GET("exercise/{id}")
+    suspend fun getExercise(@Header("Authorization") token: String, @Path("id") id: Int): Exercise
+
     @GET("logbookPage/fromTP/{id}")
     suspend fun getLogbookPage(@Header("Authorization") token: String, @Path("id") TPid: Integer): List<LogbookPage>
+
+    @GET("logbookPage/{id}")
+    suspend fun getLogbookPage(@Header("Authorization") token: String, @Path("id") id: Int): LogbookPage
 
     @GET("trainingEff/fromLBP/{id}")
     suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("id") LBPid: Integer): List<TrainingEff>
 
+    @GET("trainingEff/{id}")
+    suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("id") id: Int): TrainingEff
+
     @GET("exerciseEff/fromTE/{id}")
     suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("id") TEid: Integer): List<ExerciseEff>
 
+    @GET("exerciseEff/{id}")
+    suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("id") id: Int): ExerciseEff
+
     @GET("seriesEff/fromEE/{id}")
     suspend fun getSeriesEff(@Header("Authorization") token: String, @Path("id") EEid: Integer): List<SeriesEff>
+
+    @GET("seriesEff/{id}")
+    suspend fun getSeriesEff(@Header("Authorization") token: String, @Path("id") id: Int): SeriesEff
 
     @POST("logbookPage")
     suspend fun addLogbookPage(@Header("Authorization") token: String, @Query("trainigPlan") TPid: Integer): LogbookPage

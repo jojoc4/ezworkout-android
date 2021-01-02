@@ -54,16 +54,5 @@ class MainActivity : AppCompatActivity() {
             response.name?.let { Log.d("--------name-----------", it) }
 
         })
-
-        var new = SeriesEff()
-        new.exerciseEffId = 13
-        new.pause = 60
-        new.rep = 3
-        new.weight = 10
-
-        viewModel.addSeriesEff(new)
-        viewModel.newSeriesEffResponse.observe(this, { response ->
-            Log.d("--------id-----------",response.id.toString())
-        })
     }
 }
