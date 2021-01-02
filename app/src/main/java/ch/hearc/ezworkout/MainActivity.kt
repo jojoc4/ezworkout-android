@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.model.ExerciseEff
 import ch.hearc.ezworkout.networking.model.LogbookPage
 import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
@@ -53,14 +54,15 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        var new = TrainingEff()
-        new.logbookPageId = 3
-        new.date = "2021-01-02"
+        var new = ExerciseEff()
+        new.trainingEffId = 5
+        new.pause = 60
         new.skipped = 0
-        new.trainingId = 1
+        new.exerciseId = 1
+        new.rating = 5
 
-        viewModel.addTrainingEff(new)
-        viewModel.newTrainingEffResponse.observe(this, { response ->
+        viewModel.addExerciseEff(new)
+        viewModel.newExerciseEffResponse.observe(this, { response ->
             Log.d("--------id-----------",response.id.toString())
         })
     }

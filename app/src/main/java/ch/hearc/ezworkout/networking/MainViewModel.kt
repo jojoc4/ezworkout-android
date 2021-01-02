@@ -89,4 +89,12 @@ class MainViewModel (private val repository: Repository): ViewModel()
             newTrainingEffResponse.value = response
         }
     }
+
+    val newExerciseEffResponse: MutableLiveData<ExerciseEff> = MutableLiveData()
+    fun addExerciseEff(exerciseEff: ExerciseEff) {
+        viewModelScope.launch {
+            val response = repository.addExerciseEff(exerciseEff)
+            newExerciseEffResponse.value = response
+        }
+    }
 }

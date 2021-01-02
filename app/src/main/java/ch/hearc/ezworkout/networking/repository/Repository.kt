@@ -47,4 +47,8 @@ class Repository(private val sharedPref: SharedPreferences) {
     suspend fun addTrainingEff(trainingEff: TrainingEff) : TrainingEff {
         return  RetrofitInstance.api.addTrainingEff(token, trainingEff.logbookPageId, trainingEff.date.toString(), trainingEff.skipped, trainingEff.trainingId)
     }
+
+    suspend fun addExerciseEff(exerciseEff: ExerciseEff) : ExerciseEff {
+        return  RetrofitInstance.api.addExerciseEff(token, exerciseEff.trainingEffId, exerciseEff.pause, exerciseEff.skipped, exerciseEff.exerciseId, exerciseEff.rating)
+    }
 }
