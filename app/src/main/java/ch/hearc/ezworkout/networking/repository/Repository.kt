@@ -39,4 +39,8 @@ class Repository(private val sharedPref: SharedPreferences) {
     suspend fun getSeriesEff(EEid: Integer) : List<SeriesEff> {
         return  RetrofitInstance.api.getSeriesEff(token, EEid)
     }
+
+    suspend fun addLogbookPage(LogbookPage: LogbookPage) : LogbookPage {
+        return  RetrofitInstance.api.addLogbookPage(token, Integer(LogbookPage.trainingPlanId))
+    }
 }

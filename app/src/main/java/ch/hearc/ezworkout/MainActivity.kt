@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.model.LogbookPage
 import ch.hearc.ezworkout.networking.repository.Repository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -49,6 +50,14 @@ class MainActivity : AppCompatActivity() {
             Log.d("--------id-----------",response.id.toString())
             response.name?.let { Log.d("--------name-----------", it) }
 
+        })
+
+        var newLogbookPage = LogbookPage()
+        newLogbookPage.trainingPlanId = 1
+
+        viewModel.addLogbookPage(newLogbookPage)
+        viewModel.newlogbookPageResponse.observe(this, { response ->
+            Log.d("--------id-----------",response.id.toString())
         })
     }
 }

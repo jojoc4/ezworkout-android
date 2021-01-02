@@ -73,4 +73,12 @@ class MainViewModel (private val repository: Repository): ViewModel()
             seriesEffResponse.value = response
         }
     }
+
+    val newlogbookPageResponse: MutableLiveData<LogbookPage> = MutableLiveData()
+    fun addLogbookPage(logbookPage: LogbookPage) {
+        viewModelScope.launch {
+            val response = repository.addLogbookPage(logbookPage)
+            newlogbookPageResponse.value = response
+        }
+    }
 }
