@@ -1,3 +1,5 @@
+package ch.hearc.ezworkout.networking.utils
+
 import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Request

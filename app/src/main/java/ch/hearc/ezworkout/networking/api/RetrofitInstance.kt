@@ -1,6 +1,6 @@
 package ch.hearc.ezworkout.networking.api
 
-import LogJsonInterceptor
+import ch.hearc.ezworkout.networking.utils.LogJsonInterceptor
 import ch.hearc.ezworkout.networking.utils.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
