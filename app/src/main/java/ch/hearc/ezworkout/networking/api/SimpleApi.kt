@@ -1,9 +1,6 @@
 package ch.hearc.ezworkout.networking.api
 
-import ch.hearc.ezworkout.networking.model.Exercise
-import ch.hearc.ezworkout.networking.model.Training
-import ch.hearc.ezworkout.networking.model.TrainingPlan
-import ch.hearc.ezworkout.networking.model.User
+import ch.hearc.ezworkout.networking.model.*
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -20,4 +17,7 @@ interface SimpleApi {
 
     @GET("exercise/fromT/{id}")
     suspend fun getExercise(@Header("Authorization") token: String, @Path("id") Tid: Integer): List<Exercise>
+
+    @GET("logbookPage/fromTP/{id}")
+    suspend fun getLogbookPage(@Header("Authorization") token: String, @Path("id") TPid: Integer): List<LogbookPage>
 }

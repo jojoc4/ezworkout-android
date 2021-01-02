@@ -2,10 +2,7 @@ package ch.hearc.ezworkout.networking.repository
 
 import android.content.SharedPreferences
 import ch.hearc.ezworkout.networking.api.RetrofitInstance
-import ch.hearc.ezworkout.networking.model.Exercise
-import ch.hearc.ezworkout.networking.model.Training
-import ch.hearc.ezworkout.networking.model.TrainingPlan
-import ch.hearc.ezworkout.networking.model.User
+import ch.hearc.ezworkout.networking.model.*
 
 class Repository(private val sharedPref: SharedPreferences) {
 
@@ -25,5 +22,9 @@ class Repository(private val sharedPref: SharedPreferences) {
 
     suspend fun getExercise(Tid: Integer) : List<Exercise> {
         return  RetrofitInstance.api.getExercise(token, Tid)
+    }
+
+    suspend fun getLogbookPage(TPid: Integer) : List<LogbookPage> {
+        return  RetrofitInstance.api.getLogbookPage(token, TPid)
     }
 }

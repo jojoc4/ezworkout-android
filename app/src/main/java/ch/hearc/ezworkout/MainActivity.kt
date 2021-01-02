@@ -57,20 +57,11 @@ class MainActivity : AppCompatActivity() {
             {
                 Log.d("--------id-----------",tp.id.toString())
                 tp.name?.let { Log.d("--------name-----------", it) }
-                viewModel.getTraining(Integer(tp.id))
-                viewModel.trainingResponse.observe(this,{ response ->
-                    for(t in response)
+                viewModel.getLogbookPage(Integer(tp.id))
+                viewModel.logbookPageResponse.observe(this, Observer { response ->
+                    for (lbp in response)
                     {
-                        Log.d("\t--------id-----------",t.id.toString())
-                        t.name?.let { Log.d("\t--------name-----------", it) }
-                        viewModel.getExercise(Integer(t.id))
-                        viewModel.exerciseResponse.observe(this,{ response ->
-                            for(e in response)
-                            {
-                                Log.d("\t\t--------id-----------",e.id.toString())
-                                e.name?.let { Log.d("\t\t--------name-----------", it) }
-                            }
-                        })
+                        Log.d("--------id-----------",lbp.id.toString())
                     }
                 })
             }

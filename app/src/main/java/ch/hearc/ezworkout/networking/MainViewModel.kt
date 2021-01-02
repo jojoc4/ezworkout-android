@@ -3,10 +3,7 @@ package ch.hearc.ezworkout.networking
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.hearc.ezworkout.networking.model.Exercise
-import ch.hearc.ezworkout.networking.model.Training
-import ch.hearc.ezworkout.networking.model.TrainingPlan
-import ch.hearc.ezworkout.networking.model.User
+import ch.hearc.ezworkout.networking.model.*
 import ch.hearc.ezworkout.networking.repository.Repository
 import kotlinx.coroutines.launch
 
@@ -42,6 +39,14 @@ class MainViewModel (private val repository: Repository): ViewModel()
         viewModelScope.launch {
             val response = repository.getExercise(Tid)
             exerciseResponse.value = response
+        }
+    }
+
+    val logbookPageResponse: MutableLiveData<List<LogbookPage>> = MutableLiveData()
+    fun getLogbookPage(TPid: Integer) {
+        viewModelScope.launch {
+            val response = repository.getLogbookPage(TPid)
+            logbookPageResponse.value = response
         }
     }
 }
