@@ -27,4 +27,8 @@ class Repository(private val sharedPref: SharedPreferences) {
     suspend fun getLogbookPage(TPid: Integer) : List<LogbookPage> {
         return  RetrofitInstance.api.getLogbookPage(token, TPid)
     }
+
+    suspend fun getTrainingEff(LBPid: Integer) : List<TrainingEff> {
+        return  RetrofitInstance.api.getTrainingEff(token, LBPid)
+    }
 }

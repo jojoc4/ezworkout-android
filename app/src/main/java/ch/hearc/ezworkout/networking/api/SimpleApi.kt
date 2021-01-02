@@ -20,4 +20,7 @@ interface SimpleApi {
 
     @GET("logbookPage/fromTP/{id}")
     suspend fun getLogbookPage(@Header("Authorization") token: String, @Path("id") TPid: Integer): List<LogbookPage>
+
+    @GET("trainingEff/fromLBP/{id}")
+    suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("id") LBPid: Integer): List<TrainingEff>
 }

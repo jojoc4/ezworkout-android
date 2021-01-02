@@ -62,6 +62,13 @@ class MainActivity : AppCompatActivity() {
                     for (lbp in response)
                     {
                         Log.d("--------id-----------",lbp.id.toString())
+                        viewModel.getTrainingEff(Integer(lbp.id))
+                        viewModel.trainingEffResponse.observe(this, Observer { response ->
+                            for (exeff in response)
+                            {
+                                Log.d("--------id-----------",exeff.id.toString())
+                            }
+                        })
                     }
                 })
             }
