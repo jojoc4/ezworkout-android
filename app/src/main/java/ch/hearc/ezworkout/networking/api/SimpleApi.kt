@@ -23,4 +23,10 @@ interface SimpleApi {
 
     @GET("trainingEff/fromLBP/{id}")
     suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("id") LBPid: Integer): List<TrainingEff>
+
+    @GET("exerciseEff/fromTE/{id}")
+    suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("id") TEid: Integer): List<ExerciseEff>
+
+    @GET("seriesEff/fromEE/{id}")
+    suspend fun getSeriesEff(@Header("Authorization") token: String, @Path("id") EEid: Integer): List<SeriesEff>
 }

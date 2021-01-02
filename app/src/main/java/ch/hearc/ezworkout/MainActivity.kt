@@ -50,30 +50,5 @@ class MainActivity : AppCompatActivity() {
             response.name?.let { Log.d("--------name-----------", it) }
 
         })
-
-        viewModel.getTrainingPlan()
-        viewModel.trainingPlanResponse.observe(this, Observer { response ->
-            for (tp in response)
-            {
-                Log.d("--------id-----------",tp.id.toString())
-                tp.name?.let { Log.d("--------name-----------", it) }
-                viewModel.getLogbookPage(Integer(tp.id))
-                viewModel.logbookPageResponse.observe(this, Observer { response ->
-                    for (lbp in response)
-                    {
-                        Log.d("--------id-----------",lbp.id.toString())
-                        viewModel.getTrainingEff(Integer(lbp.id))
-                        viewModel.trainingEffResponse.observe(this, Observer { response ->
-                            for (exeff in response)
-                            {
-                                Log.d("--------id-----------",exeff.id.toString())
-                            }
-                        })
-                    }
-                })
-            }
-        })
-
-
     }
 }

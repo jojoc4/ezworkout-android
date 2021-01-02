@@ -31,4 +31,12 @@ class Repository(private val sharedPref: SharedPreferences) {
     suspend fun getTrainingEff(LBPid: Integer) : List<TrainingEff> {
         return  RetrofitInstance.api.getTrainingEff(token, LBPid)
     }
+
+    suspend fun getExerciseEff(TEid: Integer) : List<ExerciseEff> {
+        return  RetrofitInstance.api.getExerciseEff(token, TEid)
+    }
+
+    suspend fun getSeriesEff(EEid: Integer) : List<SeriesEff> {
+        return  RetrofitInstance.api.getSeriesEff(token, EEid)
+    }
 }
