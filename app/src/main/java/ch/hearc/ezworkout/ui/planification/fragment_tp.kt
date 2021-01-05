@@ -58,7 +58,7 @@ class fragment_tp : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyItemRecyclerViewAdapter(items)
+                adapter = activity?.let { MyItemRecyclerViewAdapter(items, it) }
             }
         }
         })
