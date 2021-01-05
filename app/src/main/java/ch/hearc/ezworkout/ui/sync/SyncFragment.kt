@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -15,9 +16,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.repository.Repository
 
 /**
  * synchronisation fragment
@@ -52,6 +58,14 @@ class SyncFragment : Fragment() {
         val endpoint = sharedPref.getString("endpoint", "")
 
         textView.text = "Vous êtes connecté à " + endpoint
+
+        var viewModel = ViewModelProvider(this, MainViewModelFactory(Repository(sharedPref))).get(MainViewModel::class.java)
+
+        viewModel.getUser()
+        viewModel.userResponse.observe(viewLifecycleOwner, Observer { response ->
+            response.name?.let { textView.text = "Bonjour "+ it + "\nVous êtes connecté à " + endpoint }
+
+        })
 
         btnSignOff.setOnClickListener {
             with(sharedPref.edit()) {
