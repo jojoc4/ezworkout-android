@@ -21,6 +21,7 @@ class tpDetails : AppCompatActivity() {
         setContentView(R.layout.activity_tp_details)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         val TPid = intent.getIntExtra("ch.hearc.ezworkout.TPid", 120)
         val viewModel = ViewModelProvider(this,
             MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
@@ -33,8 +34,12 @@ class tpDetails : AppCompatActivity() {
         })
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            Snackbar.make(view, "Sélectionné comme plan actuel", Snackbar.LENGTH_LONG).show()
+            with (sharedPref?.edit()) {
+                this?.putInt("currentTPid", TPid)
+                this?.apply()
+            }
+
         }
     }
 }
