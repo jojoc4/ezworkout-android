@@ -65,6 +65,9 @@ interface SimpleApi {
     @POST("trainingPlan")
     suspend fun addTrainingPlan(@Header("Authorization") token: String, @Query("name") name: String): TrainingPlan
 
+    @POST("training")
+    suspend fun addTraining(@Header("Authorization") token: String, @Query("name") name: String, @Query("trainingPlan") TPid: Int): Training
+
 
     @PUT("trainingPlan/{id}/")
     suspend fun updateTrainingPlan(@Header("Authorization") token: String, @Path("id") id: Int, @Query("name") name: String): TrainingPlan
