@@ -1,5 +1,6 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -9,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import ch.hearc.ezworkout.R
+import kotlinx.android.synthetic.*
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,7 +54,71 @@ class ChronoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chrono, container, false)
+        val root =  inflater.inflate(R.layout.fragment_chrono, container, false)
+
+        mButtonStartPause = root.findViewById(R.id.button_start_pause)
+        mButtonStop = root.findViewById(R.id.button_stop)
+
+        mButtonStartPause.setOnClickListener(View.OnClickListener {
+            if (mTimerRunning)
+            {
+                pauseTimer()
+            }else
+            {
+                startTimer()
+            }
+        })
+
+        mButtonStop.setOnClickListener(View.OnClickListener {
+
+            stopTimer()
+        })
+        updateCountDownText()
+
+        return root
+    }
+
+    fun startTimer()
+    {
+        mCountDownTimer = object: CountDownTimer(mTimeLeftInMilis, 1000)
+        {
+            override fun onTick(millisUntilFinished: Long)
+            {
+                mTimeLeftInMilis = millisUntilFinished
+                updateCountDownText()
+            }
+
+            override fun onFinish()
+            {
+
+            }
+        }
+        mCountDownTimer.start()
+        mTimerRunning = true
+        mButtonStartPause.setText("Pause")
+        mButtonStop.visibility = View.INVISIBLE
+    }
+
+    fun pauseTimer()
+    {
+        mCountDownTimer.cancel()
+        mTimerRunning = false
+        mButtonStartPause.setText("Start")
+        mButtonStop.visibility = View.VISIBLE
+    }
+
+    fun stopTimer()
+    {
+        mButtonStartPause.visibility = View.INVISIBLE
+    }
+
+    fun updateCountDownText()
+    {
+        val minutes: Int =  (mTimeLeftInMilis as Int / 1000) / 60
+        val seconds: Int =  (mTimeLeftInMilis as Int / 1000) % 60
+
+        val timeLeftFormatted:String = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds)
+        mTextViewCountDown.setText(timeLeftFormatted)
     }
 
     companion object {
