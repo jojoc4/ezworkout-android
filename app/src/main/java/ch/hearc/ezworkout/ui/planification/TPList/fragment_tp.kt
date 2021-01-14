@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification
+package ch.hearc.ezworkout.ui.planification.TPList
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -72,12 +72,6 @@ class fragment_tp : Fragment() {
         ).get(MainViewModel::class.java)
 
         viewModel.getTrainingPlan()
-        viewModel.trainingPlanResponse.observe(viewLifecycleOwner, Observer { response ->
-            items.clear()
-            for (tp in response) {
-                tp.name?.let { TP(tp.id, it) }?.let { items.add(it) }
-            }
-        })
     }
 
     /**
