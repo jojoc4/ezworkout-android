@@ -18,7 +18,8 @@ import ch.hearc.ezworkout.ui.planification.trainingDetails.TrainingDetails
  */
 class TrainingRecyclerViewAdapter(
     private val values: List<FragmentTraining.Tr>,
-    public val c: Context
+    public val c: Context,
+    public val TPid: Int
 ) : RecyclerView.Adapter<TrainingRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,6 +34,7 @@ class TrainingRecyclerViewAdapter(
         holder.lay.setOnClickListener {
             val intent = Intent(c, TrainingDetails::class.java).apply {
                 putExtra("ch.hearc.ezworkout.Trid", item.id)
+                putExtra("ch.hearc.ezworkout.TPid", TPid)
             }
             ContextCompat.startActivity(c, intent, null)
         }

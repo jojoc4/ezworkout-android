@@ -1,8 +1,11 @@
 package ch.hearc.ezworkout.ui.planification.trainingDetails
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
@@ -23,6 +26,7 @@ class TrainingDetails : AppCompatActivity() {
         setContentView(R.layout.activity_training_details)
 
         val Trid = intent.getIntExtra("ch.hearc.ezworkout.Trid", 120)
+        val TPid = intent.getIntExtra("ch.hearc.ezworkout.TPid", 120)
         getTr(Trid)
 
         val bundle = bundleOf("Trid" to Trid)
@@ -46,6 +50,23 @@ class TrainingDetails : AppCompatActivity() {
                 viewModel.updateTraining(updatedTr)
                 this.title =it
             })
+        }
+
+        findViewById<Button>(R.id.delete).setOnClickListener {
+            var db = AlertDialog.Builder(this)
+            db.setPositiveButton("Supprimer", DialogInterface.OnClickListener { _, _ ->
+                val viewModel = ViewModelProvider(this,
+                    MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
+                ).get(MainViewModel::class.java)
+                viewModel.delTraining(training, TPid)
+                finish()
+            })
+            db.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, _ ->
+                dialog.cancel()
+            })
+            db.setMessage("Êtes-vous sûr de voiloir supprimer cet entraînement?")
+            var ad = db.create()
+            ad.show()
         }
 
     }

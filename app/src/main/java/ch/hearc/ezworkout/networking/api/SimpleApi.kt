@@ -73,4 +73,7 @@ interface SimpleApi {
 
     @DELETE("trainingPlan/{id}")
     suspend fun delTrainingPlan(@Header("Authorization") token: String, @Path("id") id: Int): DeleteResponse
+
+    @POST("training/{id}/removeFromTrainingPlan")
+    suspend fun delTraining(@Header("Authorization") token: String, @Path("id") id: Int, @Query("trainingPlan") TPid: Int)
 }

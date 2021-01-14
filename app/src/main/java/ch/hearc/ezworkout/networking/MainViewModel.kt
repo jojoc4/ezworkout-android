@@ -195,4 +195,10 @@ class MainViewModel (private val repository: Repository): ViewModel()
             delTrainingPlanResponse.value = response
         }
     }
+
+    fun delTraining(tr: Training, TPid: Int) {
+        viewModelScope.launch {
+            repository.deleteTraining(tr, TPid)
+        }
+    }
 }
