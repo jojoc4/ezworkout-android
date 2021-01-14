@@ -3,6 +3,8 @@ package ch.hearc.ezworkout.ui.planification.TrDetails
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.core.os.bundleOf
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -12,6 +14,7 @@ import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.Training
 import ch.hearc.ezworkout.networking.model.TrainingPlan
 import ch.hearc.ezworkout.networking.repository.Repository
+import ch.hearc.ezworkout.ui.planification.TPDetails.FragmentTraining
 import ch.hearc.ezworkout.ui.planification.TPDetails.RenameDialog
 
 class TrainingDetails : AppCompatActivity() {
@@ -23,6 +26,12 @@ class TrainingDetails : AppCompatActivity() {
 
         val Trid = intent.getIntExtra("ch.hearc.ezworkout.Trid", 120)
         getTr(Trid)
+
+        val bundle = bundleOf("Trid" to Trid)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add(R.id.fragment_container_view, FragmentExercise::class.java, bundle)
+        }
 
         findViewById<Button>(R.id.rename).setOnClickListener { view ->
             val dialog = RenameDialog()
