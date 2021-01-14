@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.exercise.ExerciseTodayFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical" >
     <TextView
+        android:id="@+id/txtToday"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragment 2" />
+        android:layout_height="wrap_content"
+        android:text="Today"/>
+    <fragment
+        android:id="@+id/training_plan_fragment"
+        android:name="ch.hearc.ezworkout.ui.activities.exercise.SerieListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0" />
 
-</FrameLayout>
+</LinearLayout>
