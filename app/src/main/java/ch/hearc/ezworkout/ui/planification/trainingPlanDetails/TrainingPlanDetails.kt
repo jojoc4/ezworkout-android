@@ -15,6 +15,7 @@ import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.TrainingPlan
 import ch.hearc.ezworkout.networking.repository.Repository
+import ch.hearc.ezworkout.ui.planification.utils.RenameDialog
 
 class TrainingPlanDetails : AppCompatActivity() {
     lateinit var TP: TrainingPlan
