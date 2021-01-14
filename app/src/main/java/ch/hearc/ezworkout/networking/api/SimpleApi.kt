@@ -49,6 +49,7 @@ interface SimpleApi {
     @GET("seriesEff/{id}")
     suspend fun getSeriesEff(@Header("Authorization") token: String, @Path("id") id: Int): SeriesEff
 
+
     @POST("logbookPage")
     suspend fun addLogbookPage(@Header("Authorization") token: String, @Query("trainigPlan") TPid: Integer): LogbookPage
 
@@ -60,6 +61,16 @@ interface SimpleApi {
 
     @POST("seriesEff")
     suspend fun addSeriesEff(@Header("Authorization") token: String, @Query("exercise_eff") EEid: Int, @Query("pause") pause: Int, @Query("rep") rep: Int, @Query("weight") weight: Int): SeriesEff
+
+    @POST("trainingPlan")
+    suspend fun addTrainingPlan(@Header("Authorization") token: String, @Query("name") name: String): TrainingPlan
+
+    @POST("training")
+    suspend fun addTraining(@Header("Authorization") token: String, @Query("name") name: String, @Query("trainingPlan") TPid: Int): Training
+
+    @POST("exercise")
+    suspend fun addExercise(@Header("Authorization") token: String, @Query("name") name: String, @Query("comment") comment: String, @Query("nbSerie") nbSerie: Int, @Query("repMin") repMin: Int, @Query("repMax") repMax: Int, @Query("pauseSerie") pauseSerie: Int, @Query("pauseExercise") pauseExercise: Int, @Query("training") trid: Int): Exercise
+
 
     @PUT("trainingPlan/{id}/")
     suspend fun updateTrainingPlan(@Header("Authorization") token: String, @Path("id") id: Int, @Query("name") name: String): TrainingPlan

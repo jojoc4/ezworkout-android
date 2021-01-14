@@ -130,6 +130,7 @@ class MainViewModel (private val repository: Repository): ViewModel()
         }
     }
 
+
     val newlogbookPageResponse: MutableLiveData<LogbookPage> = MutableLiveData()
     fun addLogbookPage(logbookPage: LogbookPage) {
         viewModelScope.launch {
@@ -159,6 +160,30 @@ class MainViewModel (private val repository: Repository): ViewModel()
         viewModelScope.launch {
             val response = repository.addSeriesEff(seriesEff)
             newSeriesEffResponse.value = response
+        }
+    }
+
+    val newTrainingPlanResponse: MutableLiveData<TrainingPlan> = MutableLiveData()
+    fun addTrainingPlan(TP: TrainingPlan) {
+        viewModelScope.launch {
+            val response = repository.addTrainingPlan(TP)
+            newTrainingPlanResponse.value = response
+        }
+    }
+
+    val newTrainingResponse: MutableLiveData<Training> = MutableLiveData()
+    fun addTraining(Tr: Training, TPid: Int) {
+        viewModelScope.launch {
+            val response = repository.addTraining(Tr, TPid)
+            newTrainingResponse.value = response
+        }
+    }
+
+    val newExerciseResponse: MutableLiveData<Exercise> = MutableLiveData()
+    fun addExercise(ex: Exercise, Trid: Int) {
+        viewModelScope.launch {
+            val response = repository.addExercise(ex, Trid)
+            newExerciseResponse.value = response
         }
     }
 
