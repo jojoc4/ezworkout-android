@@ -11,14 +11,14 @@
         android:name="ch.hearc.ezworkout.ui.activities.exercise.ExerciseHistoryFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3" />
+        android:layout_weight="4" />
 
     <fragment
         android:id="@+id/exercise_today_fragment"
         android:name="ch.hearc.ezworkout.ui.activities.exercise.ExerciseTodayFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3" />
+        android:layout_weight="4" />
 
     <fragment
         android:id="@+id/exercise_chrono_fragment"
