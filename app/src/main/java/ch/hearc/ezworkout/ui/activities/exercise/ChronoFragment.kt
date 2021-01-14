@@ -58,6 +58,7 @@ class ChronoFragment : Fragment() {
 
         mButtonStartPause = root.findViewById(R.id.button_start_pause)
         mButtonStop = root.findViewById(R.id.button_stop)
+        mTextViewCountDown = root.findViewById(R.id.text_view_countdown)
 
         mButtonStartPause.setOnClickListener(View.OnClickListener {
             if (mTimerRunning)
@@ -114,8 +115,8 @@ class ChronoFragment : Fragment() {
 
     fun updateCountDownText()
     {
-        val minutes: Int =  (mTimeLeftInMilis as Int / 1000) / 60
-        val seconds: Int =  (mTimeLeftInMilis as Int / 1000) % 60
+        val minutes: Int =  (mTimeLeftInMilis.toInt() / 1000) / 60
+        val seconds: Int =  (mTimeLeftInMilis.toInt() / 1000) % 60
 
         val timeLeftFormatted:String = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds)
         mTextViewCountDown.setText(timeLeftFormatted)

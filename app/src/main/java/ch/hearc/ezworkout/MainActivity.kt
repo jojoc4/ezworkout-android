@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         //test database
+        /*
         viewModel = ViewModelProvider(this,MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))).get(MainViewModel::class.java)
 
         viewModel.getUser()
@@ -63,6 +64,6 @@ class MainActivity : AppCompatActivity() {
             Log.d("--------id-----------",response.id.toString())
             response.name?.let { Log.d("--------name-----------", it) }
 
-        })
+        })*/
     }
 }
