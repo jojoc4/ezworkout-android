@@ -59,11 +59,20 @@ class FragmentExercise : Fragment() {
                         columnCount <= 1 -> LinearLayoutManager(context)
                         else -> GridLayoutManager(context, columnCount)
                     }
-                    adapter = ExerciseRecyclerViewAdapter(items)
+                    adapter = activity?.let { ExerciseRecyclerViewAdapter(items, it) }
                 }
             }
         })
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        var viewModel = ViewModelProvider(this,
+            MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
+        ).get(MainViewModel::class.java)
+
+        viewModel.getExercise(Integer(Trainingid))
     }
 
     data class Ex(val id: Int, val content: String) {

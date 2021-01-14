@@ -66,4 +66,7 @@ interface SimpleApi {
 
     @PUT("training/{id}/")
     suspend fun updateTraining(@Header("Authorization") token: String, @Path("id") id: Int, @Query("name") name: String): Training
+
+    @PUT("exercise/{id}/")
+    suspend fun updateExercise(@Header("Authorization") token: String, @Path("id") id: Int, @Query("name") name: String, @Query("comment") comment: String, @Query("nbSerie") nbSerie: Int, @Query("repMin") repMin: Int, @Query("repMax") repMax: Int, @Query("pauseSerie") pauseSerie: Int, @Query("pauseExercise") pauseExercise: Int): Exercise
 }
