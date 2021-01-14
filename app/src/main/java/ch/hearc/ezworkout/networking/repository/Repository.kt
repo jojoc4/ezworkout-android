@@ -93,6 +93,10 @@ class Repository(private val sharedPref: SharedPreferences) {
         return  RetrofitInstance.api.addTraining(token, Tr.name.toString(), TPid)
     }
 
+    suspend fun addExercise(ex: Exercise, TrId: Int) : Exercise {
+        return  RetrofitInstance.api.addExercise(token, ex.name.toString(), ex.comment.toString(), ex.nbSerie, ex.repMin, ex.repMax, ex.pauseSerie, ex.pauseExercise, TrId)
+    }
+
 
     suspend fun updateTrainingPlan(tp: TrainingPlan): TrainingPlan{
         return RetrofitInstance.api.updateTrainingPlan(token, tp.id, tp.name.toString())

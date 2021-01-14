@@ -179,6 +179,14 @@ class MainViewModel (private val repository: Repository): ViewModel()
         }
     }
 
+    val newExerciseResponse: MutableLiveData<Exercise> = MutableLiveData()
+    fun addExercise(ex: Exercise, Trid: Int) {
+        viewModelScope.launch {
+            val response = repository.addExercise(ex, Trid)
+            newExerciseResponse.value = response
+        }
+    }
+
 
     val updateTrainingPlanResponse: MutableLiveData<TrainingPlan> = MutableLiveData()
     fun updateTrainingPlan(tp: TrainingPlan) {
