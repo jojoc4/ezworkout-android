@@ -3,8 +3,8 @@
 
     <item
         android:id="@+id/navigation_planification"
-        android:icon="@drawable/ic_plannification_black_24dp"
-        android:title="@string/plannification_title" />
+        android:icon="@drawable/ic_planification_black_24dp"
+        android:title="@string/planification_title" />
 
     <item
         android:id="@+id/navigation_trainings"
@@ -20,6 +20,5 @@
         android:id="@+id/navigation_sync"
         android:icon="@drawable/ic_account_24"
         android:title="@string/title_sync" />
-
 
 </menu>

@@ -6,25 +6,6 @@
     android:orientation="vertical"
     tools:context=".ui.activities.exercise.ExerciseActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Arm Extension">
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="17.01.2022">
-        </TextView>
-    </LinearLayout>
-
     <fragment
         android:id="@+id/exercise_history_fragment"
         android:name="ch.hearc.ezworkout.ui.activities.exercise.ExerciseHistoryFragment"
@@ -39,15 +20,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="3" />
 
-    <TextView
+    <fragment
+        android:id="@+id/exercise_chrono_fragment"
+        android:name="ch.hearc.ezworkout.ui.activities.exercise.ChronoFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:gravity="center"
-        android:layout_marginHorizontal="200px"
-        android:layout_marginVertical="20px"
-        android:text="[00:02:34]">
-    </TextView>
+        android:layout_weight="1" />
+
 
     <Button
         android:id="@+id/exercise_button"

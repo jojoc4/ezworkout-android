@@ -68,7 +68,7 @@ class TrainingFragment : Fragment() {
             val intent = Intent(activity, SettingsActivity::class.java)
             startActivity(intent)
         }
-        getActivity()?.setTitle("Exercises")
+        activity?.title = "Exercises"
 
         return root
     }

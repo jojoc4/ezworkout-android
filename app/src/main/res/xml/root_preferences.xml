@@ -21,6 +21,13 @@
             app:title="clé api"
             app:useSimpleSummaryProvider="true" />
 
+        <SeekBarPreference
+            app:key="currentTPid"
+            app:title="TP sélectionné"
+            app:useSimpleSummaryProvider="true"
+            app:min="0"
+            app:showSeekBarValue="true"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

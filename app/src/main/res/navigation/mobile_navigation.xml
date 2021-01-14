@@ -5,11 +5,11 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_trainings">
 
-    <!--<fragment
-        android:id="@+id/navigation_plannification"
-        android:name="ch.hearc.ezworkout.ui.activities.plannification.plannification"
-        android:label="@string/plannification_title"
-        tools:layout="@layout/plannification_fragment" />-->
+    <fragment
+        android:id="@+id/navigation_planification"
+        android:name="ch.hearc.ezworkout.ui.planification.trainingPlanList.FragmentTrainingPlan"
+        android:label="@string/planification_title"
+        tools:layout="@layout/fragment_training_plan" />
 
     <fragment
         android:id="@+id/navigation_trainings"
