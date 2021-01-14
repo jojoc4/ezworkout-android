@@ -1,13 +1,25 @@
 package ch.hearc.ezworkout.ui.planification.trainingPlanList
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
+import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.model.TrainingPlan
+import ch.hearc.ezworkout.networking.repository.Repository
 import ch.hearc.ezworkout.ui.planification.trainingPlanDetails.FragmentTraining
+import ch.hearc.ezworkout.ui.planification.trainingPlanDetails.TrainingPlanDetails
+import ch.hearc.ezworkout.ui.planification.utils.RenameDialog
 
 /**
  * A simple [Fragment] subclass.
@@ -29,6 +41,37 @@ class FragmentTrainingPlan : Fragment() {
         var childFragment = FragmentTrainingPlanList()
         var transaction = childFragmentManager.beginTransaction()
         transaction.replace(R.id.child_fragment_container, childFragment).commit()
+
+        view.findViewById<Button>(R.id.add).setOnClickListener {
+            val dialog = RenameDialog()
+            dialog.name.value = ""
+
+            dialog.show( parentFragmentManager, "Ajouter")
+            dialog.name.observe(viewLifecycleOwner, {
+                if(it != "") {
+                    val viewModel = ViewModelProvider(
+                        this,
+                        MainViewModelFactory(
+                            Repository(
+                                PreferenceManager.getDefaultSharedPreferences(
+                                    context
+                                )
+                            )
+                        )
+                    ).get(MainViewModel::class.java)
+                    var TP = TrainingPlan()
+                    TP.name = it
+                    viewModel.addTrainingPlan(TP)
+                    viewModel.newTrainingPlanResponse.observe(viewLifecycleOwner, { response ->
+                        val intent = Intent(context, TrainingPlanDetails::class.java).apply {
+                            putExtra("ch.hearc.ezworkout.TPid", response.id)
+                        }
+                        context?.let { it1 -> ContextCompat.startActivity(it1, intent, null) }
+                    })
+                }
+            })
+        }
+
         super.onViewCreated(view, savedInstanceState)
     }
 }

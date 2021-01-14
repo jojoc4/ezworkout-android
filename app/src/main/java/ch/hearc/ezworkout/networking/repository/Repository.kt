@@ -68,6 +68,7 @@ class Repository(private val sharedPref: SharedPreferences) {
         return  RetrofitInstance.api.getSeriesEff(token, id)
     }
 
+
     suspend fun addLogbookPage(LogbookPage: LogbookPage) : LogbookPage {
         return  RetrofitInstance.api.addLogbookPage(token, Integer(LogbookPage.trainingPlanId))
     }
@@ -84,6 +85,11 @@ class Repository(private val sharedPref: SharedPreferences) {
         return  RetrofitInstance.api.addSeriesEff(token, seriesEff.exerciseEffId, seriesEff.pause, seriesEff.rep, seriesEff.weight)
     }
 
+    suspend fun addTrainingPlan(TP: TrainingPlan) : TrainingPlan {
+        return  RetrofitInstance.api.addTrainingPlan(token, TP.name.toString())
+    }
+
+
     suspend fun updateTrainingPlan(tp: TrainingPlan): TrainingPlan{
         return RetrofitInstance.api.updateTrainingPlan(token, tp.id, tp.name.toString())
     }
@@ -95,6 +101,7 @@ class Repository(private val sharedPref: SharedPreferences) {
     suspend fun updateExercise(ex: Exercise): Exercise{
         return RetrofitInstance.api.updateExercise(token, ex.id, ex.name.toString(), ex.comment.toString(), ex.nbSerie, ex.repMin, ex.repMax, ex.pauseSerie, ex.pauseExercise)
     }
+
 
     suspend fun deleteTrainingPlan(tp: TrainingPlan): DeleteResponse{
         return RetrofitInstance.api.delTrainingPlan(token, tp.id)
