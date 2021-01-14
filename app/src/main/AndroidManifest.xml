@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.planification.TrDetails.TrainingDetails"></activity>
         <activity
-            android:name=".ui.planification.TPDetails.tpDetails"
+            android:name=".ui.planification.TPDetails.TrainingPlanDetails"
             android:label="@string/title_activity_tp_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.sync.ConnectActivity" />

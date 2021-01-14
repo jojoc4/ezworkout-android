@@ -87,4 +87,8 @@ class Repository(private val sharedPref: SharedPreferences) {
     suspend fun updateTrainingPlan(tp: TrainingPlan): TrainingPlan{
         return RetrofitInstance.api.updateTrainingPlan(token, tp.id, tp.name.toString())
     }
+
+    suspend fun updateTraining(tr: Training): Training{
+        return RetrofitInstance.api.updateTraining(token, tr.id, tr.name.toString())
+    }
 }

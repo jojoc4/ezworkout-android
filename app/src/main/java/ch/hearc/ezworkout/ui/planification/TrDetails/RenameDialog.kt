@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.TPDetails
+package ch.hearc.ezworkout.ui.planification.TrDetails
 
 import android.app.AlertDialog
 import android.app.Dialog

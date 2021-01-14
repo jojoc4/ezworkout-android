@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.TPDetails
+package ch.hearc.ezworkout.ui.planification.TPList
 
 import android.content.Context
 import android.content.Intent
@@ -10,20 +10,20 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.planification.TrDetails.TrainingDetails
+import ch.hearc.ezworkout.ui.planification.TPDetails.TrainingPlanDetails
 
 /**
- * [RecyclerView.Adapter] that can display a TRList.
+ * [RecyclerView.Adapter] that can display a TPList.
  * TODO: Replace the implementation with code for your data type.
  */
-class TrRecyclerViewAdapter(
-    private val values: List<fragment_tr.Tr>,
+class TrainingPlanRecyclerViewAdapter(
+    private val values: List<FragmentTrainingPlan.TP>,
     public val c: Context
-) : RecyclerView.Adapter<TrRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<TrainingPlanRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_tr, parent, false)
+            .inflate(R.layout.fragment_tp, parent, false)
         return ViewHolder(view)
     }
 
@@ -31,8 +31,8 @@ class TrRecyclerViewAdapter(
         val item = values[position]
         holder.contentView.text = item.content
         holder.lay.setOnClickListener {
-            val intent = Intent(c, TrainingDetails::class.java).apply {
-                putExtra("ch.hearc.ezworkout.Trid", item.id)
+            val intent = Intent(c, TrainingPlanDetails::class.java).apply {
+                putExtra("ch.hearc.ezworkout.TPid", item.id)
             }
             ContextCompat.startActivity(c, intent, null)
         }
@@ -43,8 +43,10 @@ class TrRecyclerViewAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val contentView: TextView = view.findViewById(R.id.content)
         val lay: LinearLayout = view.findViewById(R.id.container)
+
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
         }
     }
+
 }

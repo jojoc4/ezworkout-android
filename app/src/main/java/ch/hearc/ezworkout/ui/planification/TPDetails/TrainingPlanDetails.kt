@@ -16,7 +16,7 @@ import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.TrainingPlan
 import ch.hearc.ezworkout.networking.repository.Repository
 
-class tpDetails : AppCompatActivity() {
+class TrainingPlanDetails : AppCompatActivity() {
     lateinit var TP: TrainingPlan
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,12 +32,11 @@ class tpDetails : AppCompatActivity() {
         val bundle = bundleOf("TPid" to TPid)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            add(R.id.fragment_container_view, fragment_tr::class.java, bundle)
+            add(R.id.fragment_container_view, FragmentTraining::class.java, bundle)
         }
 
         findViewById<Button>(R.id.rename).setOnClickListener { view ->
             val dialog = RenameDialog()
-            dialog.TPid = TP.id
             dialog.name.value = TP.name.toString()
 
             dialog.show(supportFragmentManager, "Renommer")
