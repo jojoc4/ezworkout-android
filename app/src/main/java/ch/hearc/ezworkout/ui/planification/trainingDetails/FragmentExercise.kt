@@ -58,7 +58,7 @@ class FragmentExercise : Fragment() {
                         columnCount <= 1 -> LinearLayoutManager(context)
                         else -> GridLayoutManager(context, columnCount)
                     }
-                    adapter = activity?.let { ExerciseRecyclerViewAdapter(items, it) }
+                    adapter = activity?.let { ExerciseRecyclerViewAdapter(items, it, trainingid) }
                 }
             }
         })

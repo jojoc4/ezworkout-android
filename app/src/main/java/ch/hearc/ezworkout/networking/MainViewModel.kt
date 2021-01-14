@@ -201,4 +201,10 @@ class MainViewModel (private val repository: Repository): ViewModel()
             repository.deleteTraining(tr, TPid)
         }
     }
+
+    fun delExercise(ex: Exercise, trid: Int) {
+        viewModelScope.launch {
+            repository.deleteExercise(ex, trid)
+        }
+    }
 }

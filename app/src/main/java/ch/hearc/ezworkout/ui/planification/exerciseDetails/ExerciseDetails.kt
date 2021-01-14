@@ -1,9 +1,12 @@
 package ch.hearc.ezworkout.ui.planification.exerciseDetails
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +27,7 @@ class ExerciseDetails : AppCompatActivity() {
         setContentView(R.layout.activity_exercise_details)
 
         val exerciseId = intent.getIntExtra("ch.hearc.ezworkout.exId", 120)
+        val trid = intent.getIntExtra("ch.hearc.ezworkout.trid", 120)
         getExercise(exerciseId)
 
         val viewModel = ViewModelProvider(
@@ -41,6 +45,24 @@ class ExerciseDetails : AppCompatActivity() {
                 this.title = it
             })
         }
+
+        findViewById<Button>(R.id.delete).setOnClickListener {
+            var db = AlertDialog.Builder(this)
+            db.setPositiveButton("Supprimer", DialogInterface.OnClickListener { _, _ ->
+                val viewModel = ViewModelProvider(this,
+                    MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
+                ).get(MainViewModel::class.java)
+                viewModel.delExercise(exercise, trid)
+                finish()
+            })
+            db.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, _ ->
+                dialog.cancel()
+            })
+            db.setMessage("Êtes-vous sûr de voiloir supprimer cet exercice?")
+            var ad = db.create()
+            ad.show()
+        }
+
 
         findViewById<Button>(R.id.comment_s).setOnClickListener {
             exercise.comment = findViewById<EditText>(R.id.comment).text.toString()
