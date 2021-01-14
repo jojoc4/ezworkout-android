@@ -14,10 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.planification.exerciseDetails.ExerciseDetails"></activity>
+        <activity android:name=".ui.planification.trainingDetails.TrainingDetails" />
         <activity
-            android:name=".ui.planification.tpDetails"
+            android:name=".ui.planification.trainingPlanDetails.TrainingPlanDetails"
             android:label="@string/title_activity_tp_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.sync.ConnectActivity" />
         <activity android:name=".ui.activities.exercise.ExerciseActivity" />
         <activity

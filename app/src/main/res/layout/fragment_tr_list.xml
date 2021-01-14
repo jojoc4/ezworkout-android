@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="ch.hearc.ezworkout.ui.plannification.fragment_tp"
+    android:name="ch.hearc.ezworkout.ui.planification.TPDetails.fragment_tr"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.planification.trainingPlanList.FragmentTrainingPlan"
-    tools:listitem="@layout/fragment_tp" />
+    tools:context=".ui.planification.trainingPlanDetails.FragmentTraining"
+    tools:listitem="@layout/fragment_tr" />

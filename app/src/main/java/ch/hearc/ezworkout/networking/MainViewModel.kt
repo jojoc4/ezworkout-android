@@ -161,4 +161,50 @@ class MainViewModel (private val repository: Repository): ViewModel()
             newSeriesEffResponse.value = response
         }
     }
+
+
+    val updateTrainingPlanResponse: MutableLiveData<TrainingPlan> = MutableLiveData()
+    fun updateTrainingPlan(tp: TrainingPlan) {
+        viewModelScope.launch {
+            val response = repository.updateTrainingPlan(tp)
+            updateTrainingPlanResponse.value = response
+        }
+    }
+
+    val updateTrainingResponse: MutableLiveData<Training> = MutableLiveData()
+    fun updateTraining(tr: Training) {
+        viewModelScope.launch {
+            val response = repository.updateTraining(tr)
+            updateTrainingResponse.value = response
+        }
+    }
+
+    val updateExerciseResponse: MutableLiveData<Exercise> = MutableLiveData()
+    fun updateExercise(ex: Exercise) {
+        viewModelScope.launch {
+            val response = repository.updateExercise(ex)
+            updateExerciseResponse.value = response
+        }
+    }
+
+
+    val delTrainingPlanResponse: MutableLiveData<DeleteResponse> = MutableLiveData()
+    fun delTrainingPlan(tp: TrainingPlan) {
+        viewModelScope.launch {
+            val response = repository.deleteTrainingPlan(tp)
+            delTrainingPlanResponse.value = response
+        }
+    }
+
+    fun delTraining(tr: Training, TPid: Int) {
+        viewModelScope.launch {
+            repository.deleteTraining(tr, TPid)
+        }
+    }
+
+    fun delExercise(ex: Exercise, trid: Int) {
+        viewModelScope.launch {
+            repository.deleteExercise(ex, trid)
+        }
+    }
 }

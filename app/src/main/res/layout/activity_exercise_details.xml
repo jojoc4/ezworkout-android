@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.planification.exerciseDetails.ExerciseDetails">
+
+    <EditText
+        android:id="@+id/comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@id/comment_s"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/comment_s"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="S"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Nombre de Séries :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comment" />
+
+    <Button
+        android:id="@+id/nbSeries_m"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="-"
+        app:layout_constraintEnd_toStartOf="@id/nbSerie"
+        app:layout_constraintTop_toBottomOf="@id/comment" />
+
+    <TextView
+        android:id="@+id/nbSerie"
+        android:layout_width="71dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/nbSeries_m"
+        app:layout_constraintTop_toBottomOf="@id/comment" />
+
+    <Button
+        android:id="@+id/nbSeries_p"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nbSerie"
+        app:layout_constraintTop_toBottomOf="@id/comment" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Nombre de répétitions min :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nbSerie" />
+
+    <Button
+        android:id="@+id/repMin_m"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="-"
+        app:layout_constraintEnd_toStartOf="@id/repMin"
+        app:layout_constraintTop_toBottomOf="@id/nbSerie" />
+
+    <TextView
+        android:id="@+id/repMin"
+        android:layout_width="71dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/repMin_m"
+        app:layout_constraintTop_toBottomOf="@id/nbSerie" />
+
+    <Button
+        android:id="@+id/repMin_p"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/repMin"
+        app:layout_constraintTop_toBottomOf="@id/nbSerie" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Nombre de répétitions max :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/repMin" />
+
+    <Button
+        android:id="@+id/repMax_m"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="-"
+        app:layout_constraintEnd_toStartOf="@id/repMax"
+        app:layout_constraintTop_toBottomOf="@id/repMin" />
+
+    <TextView
+        android:id="@+id/repMax"
+        android:layout_width="71dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/repMax_m"
+        app:layout_constraintTop_toBottomOf="@id/repMin" />
+
+    <Button
+        android:id="@+id/repMax_p"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/repMax"
+        app:layout_constraintTop_toBottomOf="@id/repMin" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Pause en les séries (s) :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/repMax" />
+
+    <Button
+        android:id="@+id/pauseSerie_m"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="-"
+        app:layout_constraintEnd_toStartOf="@id/pauseSerie"
+        app:layout_constraintTop_toBottomOf="@id/repMax" />
+
+    <TextView
+        android:id="@+id/pauseSerie"
+        android:layout_width="71dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/pauseSerie_m"
+        app:layout_constraintTop_toBottomOf="@id/repMax" />
+
+    <Button
+        android:id="@+id/pauseSerie_p"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pauseSerie"
+        app:layout_constraintTop_toBottomOf="@id/repMax" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Pause en les exercices (s) :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pauseSerie" />
+
+    <Button
+        android:id="@+id/pauseExercise_m"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="-"
+        app:layout_constraintEnd_toStartOf="@id/pauseExercise"
+        app:layout_constraintTop_toBottomOf="@id/pauseSerie" />
+
+    <TextView
+        android:id="@+id/pauseExercise"
+        android:layout_width="71dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/pauseExercise_m"
+        app:layout_constraintTop_toBottomOf="@id/pauseSerie" />
+
+    <Button
+        android:id="@+id/pauseExercise_p"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pauseExercise"
+        app:layout_constraintTop_toBottomOf="@id/pauseSerie" />
+
+
+
+    <Button
+        android:id="@+id/rename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Renommer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/delete"
+        android:hint="Nouveau nom"/>
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Supprimer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rename"
+        android:hint="Nouveau nom"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

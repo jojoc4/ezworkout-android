@@ -60,4 +60,23 @@ interface SimpleApi {
 
     @POST("seriesEff")
     suspend fun addSeriesEff(@Header("Authorization") token: String, @Query("exercise_eff") EEid: Int, @Query("pause") pause: Int, @Query("rep") rep: Int, @Query("weight") weight: Int): SeriesEff
+
+    @PUT("trainingPlan/{id}/")
+    suspend fun updateTrainingPlan(@Header("Authorization") token: String, @Path("id") id: Int, @Query("name") name: String): TrainingPlan
+
+    @PUT("training/{id}/")
+    suspend fun updateTraining(@Header("Authorization") token: String, @Path("id") id: Int, @Query("name") name: String): Training
+
+    @PUT("exercise/{id}/")
+    suspend fun updateExercise(@Header("Authorization") token: String, @Path("id") id: Int, @Query("name") name: String, @Query("comment") comment: String, @Query("nbSerie") nbSerie: Int, @Query("repMin") repMin: Int, @Query("repMax") repMax: Int, @Query("pauseSerie") pauseSerie: Int, @Query("pauseExercise") pauseExercise: Int): Exercise
+
+
+    @DELETE("trainingPlan/{id}")
+    suspend fun delTrainingPlan(@Header("Authorization") token: String, @Path("id") id: Int): DeleteResponse
+
+    @POST("training/{id}/removeFromTrainingPlan")
+    suspend fun delTraining(@Header("Authorization") token: String, @Path("id") id: Int, @Query("trainingPlan") TPid: Int)
+
+    @POST("exercise/{id}/removeFromTraining")
+    suspend fun delExercise(@Header("Authorization") token: String, @Path("id") id: Int, @Query("training") trid: Int)
 }

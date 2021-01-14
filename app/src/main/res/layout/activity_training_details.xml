@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    tools:context=".ui.planification.trainingDetails.TrainingDetails">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
@@ -34,4 +34,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/rename"
         android:hint="Nouveau nom"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

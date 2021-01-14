@@ -1,7 +1,6 @@
-package ch.hearc.ezworkout.ui.planification
+package ch.hearc.ezworkout.ui.planification.trainingPlanList
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +19,7 @@ import ch.hearc.ezworkout.networking.repository.Repository
 /**
  * A fragment representing a list of Items.
  */
-class fragment_tp : Fragment() {
+class FragmentTrainingPlan : Fragment() {
 
     private var columnCount = 1
     val items: MutableList<TP> = ArrayList()
@@ -58,12 +57,21 @@ class fragment_tp : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = activity?.let { MyItemRecyclerViewAdapter(items, it) }
+                adapter = activity?.let { TrainingPlanRecyclerViewAdapter(items, it) }
             }
         }
         })
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        var viewModel = ViewModelProvider(this,
+            MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
+        ).get(MainViewModel::class.java)
+
+        viewModel.getTrainingPlan()
     }
 
     /**
@@ -81,7 +89,7 @@ class fragment_tp : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            fragment_tp().apply {
+            FragmentTrainingPlan().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
