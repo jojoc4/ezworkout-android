@@ -58,11 +58,20 @@ class fragment_tr : Fragment() {
                         columnCount <= 1 -> LinearLayoutManager(context)
                         else -> GridLayoutManager(context, columnCount)
                     }
-                    adapter = TrRecyclerViewAdapter(items)
+                    adapter = activity?.let { TrRecyclerViewAdapter(items, it) }
                 }
             }
         })
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        var viewModel = ViewModelProvider(this,
+            MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
+        ).get(MainViewModel::class.java)
+
+        viewModel.getTraining(Integer(TPid))
     }
 
     companion object {
