@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.planification.tpDetails"
+            android:name=".ui.planification.TPDetails.tpDetails"
             android:label="@string/title_activity_tp_details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.sync.ConnectActivity" />

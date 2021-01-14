@@ -1,13 +1,12 @@
-package ch.hearc.ezworkout.ui.planification
+package ch.hearc.ezworkout.ui.planification.TPDetails
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
+import androidx.core.os.bundleOf
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -29,6 +28,12 @@ class tpDetails : AppCompatActivity() {
         val TPid = intent.getIntExtra("ch.hearc.ezworkout.TPid", 120)
 
         getTP(TPid)
+
+        val bundle = bundleOf("TPid" to TPid)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add(R.id.fragment_container_view, fragment_tr::class.java, bundle)
+        }
 
         findViewById<Button>(R.id.rename).setOnClickListener { view ->
             val dialog = RenameDialog()

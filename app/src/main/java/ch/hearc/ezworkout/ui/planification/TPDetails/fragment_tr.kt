@@ -1,7 +1,6 @@
-package ch.hearc.ezworkout.ui.planification
+package ch.hearc.ezworkout.ui.planification.TPDetails
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,10 +19,10 @@ import ch.hearc.ezworkout.networking.repository.Repository
 /**
  * A fragment representing a list of Items.
  */
-class fragment_tp : Fragment() {
-
+class fragment_tr : Fragment() {
+    var TPid = 0
+    val items: MutableList<fragment_tr.Tr> = ArrayList()
     private var columnCount = 1
-    val items: MutableList<TP> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,55 +36,33 @@ class fragment_tp : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_tp_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_tr_list, container, false)
 
+        TPid = requireArguments().getInt("TPid")
 
         var viewModel = ViewModelProvider(this,
             MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
         ).get(MainViewModel::class.java)
 
-        viewModel.getTrainingPlan()
-        viewModel.trainingPlanResponse.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.getTraining(Integer(TPid))
+        viewModel.trainingResponse.observe(viewLifecycleOwner, Observer { response ->
             items.clear()
-            for (tp in response){
-                tp.name?.let { TP(tp.id, it) }?.let { items.add(it) }
+            for (tr in response) {
+                tr.name?.let { fragment_tr.Tr(tr.id, it) }?.let { items.add(it) }
             }
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
+            // Set the adapter
+            if (view is RecyclerView) {
+                with(view) {
+                    layoutManager = when {
+                        columnCount <= 1 -> LinearLayoutManager(context)
+                        else -> GridLayoutManager(context, columnCount)
+                    }
+                    adapter = TrRecyclerViewAdapter(items)
                 }
-                adapter = activity?.let { MyItemRecyclerViewAdapter(items, it) }
             }
-        }
         })
-
         return view
-    }
-
-    override fun onResume() {
-        super.onResume()
-        var viewModel = ViewModelProvider(this,
-            MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
-        ).get(MainViewModel::class.java)
-
-        viewModel.getTrainingPlan()
-        viewModel.trainingPlanResponse.observe(viewLifecycleOwner, Observer { response ->
-            items.clear()
-            for (tp in response) {
-                tp.name?.let { TP(tp.id, it) }?.let { items.add(it) }
-            }
-        })
-    }
-
-    /**
-     * A TP item representing a piece of content.
-     */
-    data class TP(val id: Int, val content: String) {
-        override fun toString(): String = content
     }
 
     companion object {
@@ -96,10 +73,14 @@ class fragment_tp : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            fragment_tp().apply {
+            fragment_tr().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
+    }
+
+    data class Tr(val id: Int, val content: String) {
+        override fun toString(): String = content
     }
 }
