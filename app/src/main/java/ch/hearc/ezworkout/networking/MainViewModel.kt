@@ -186,4 +186,13 @@ class MainViewModel (private val repository: Repository): ViewModel()
             updateExerciseResponse.value = response
         }
     }
+
+
+    val delTrainingPlanResponse: MutableLiveData<DeleteResponse> = MutableLiveData()
+    fun delTrainingPlan(tp: TrainingPlan) {
+        viewModelScope.launch {
+            val response = repository.deleteTrainingPlan(tp)
+            delTrainingPlanResponse.value = response
+        }
+    }
 }

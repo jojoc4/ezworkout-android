@@ -1,7 +1,10 @@
 package ch.hearc.ezworkout.ui.planification.trainingPlanDetails
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -51,6 +54,27 @@ class TrainingPlanDetails : AppCompatActivity() {
                 viewModel.updateTrainingPlan(updatedTP)
                 this.title =it
             })
+        }
+
+        findViewById<Button>(R.id.delete).setOnClickListener {
+           if(trainingPlan.id == sharedPref.getInt("currentTPid", 0)){
+               Toast.makeText(this, "Vous ne pouvez pas supprimer le plan d'entraînement actuellement sélectionné", Toast.LENGTH_LONG).show();
+           }else{
+               var db = AlertDialog.Builder(this)
+               db.setPositiveButton("Supprimer", DialogInterface.OnClickListener { _, _ ->
+                   val viewModel = ViewModelProvider(this,
+                       MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
+                   ).get(MainViewModel::class.java)
+                   viewModel.delTrainingPlan(trainingPlan)
+                   finish()
+               })
+               db.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, _ ->
+                   dialog.cancel()
+               })
+               db.setMessage("Êtes-vous sûr de voiloir supprimer ce plan d'entraînement?")
+               var ad = db.create()
+               ad.show()
+           }
         }
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
