@@ -66,6 +66,21 @@ class fragment_tp : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        var viewModel = ViewModelProvider(this,
+            MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
+        ).get(MainViewModel::class.java)
+
+        viewModel.getTrainingPlan()
+        viewModel.trainingPlanResponse.observe(viewLifecycleOwner, Observer { response ->
+            items.clear()
+            for (tp in response) {
+                tp.name?.let { TP(tp.id, it) }?.let { items.add(it) }
+            }
+        })
+    }
+
     /**
      * A TP item representing a piece of content.
      */

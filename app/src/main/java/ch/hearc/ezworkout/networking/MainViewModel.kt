@@ -161,4 +161,13 @@ class MainViewModel (private val repository: Repository): ViewModel()
             newSeriesEffResponse.value = response
         }
     }
+
+
+    val updateTrainingPlanResponse: MutableLiveData<TrainingPlan> = MutableLiveData()
+    fun updateTrainingPlan(tp: TrainingPlan) {
+        viewModelScope.launch {
+            val response = repository.updateTrainingPlan(tp)
+            updateTrainingPlanResponse.value = response
+        }
+    }
 }

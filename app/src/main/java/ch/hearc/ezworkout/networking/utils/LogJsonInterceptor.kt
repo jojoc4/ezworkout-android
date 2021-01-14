@@ -1,6 +1,7 @@
 package ch.hearc.ezworkout.networking.utils
 
 import android.util.Log
+import androidx.core.net.toUri
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -16,7 +17,7 @@ class LogJsonInterceptor : Interceptor {
         val rawJson: String = response.body()!!.string()
         val rawRequest = bodyToString(request)
         if(!response.isSuccessful){
-            Log.d("json interceptor request", String.format("raw request is: %s", rawRequest))
+            Log.d("json interceptor request", String.format("raw request is: %s: %s", response.request().method(), response.request().url().toString()))
             Log.d("json interceptor response", String.format("raw JSON response is: %s", rawJson))
         }
 
