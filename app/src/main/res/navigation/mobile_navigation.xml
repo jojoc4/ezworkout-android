@@ -9,7 +9,7 @@
         android:id="@+id/navigation_planification"
         android:name="ch.hearc.ezworkout.ui.planification.trainingPlanList.FragmentTrainingPlan"
         android:label="@string/planification_title"
-        tools:layout="@layout/fragment_tp" />
+        tools:layout="@layout/fragment_training_plan" />
 
     <fragment
         android:id="@+id/navigation_trainings"

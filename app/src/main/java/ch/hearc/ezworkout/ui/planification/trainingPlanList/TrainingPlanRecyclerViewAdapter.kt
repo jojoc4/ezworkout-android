@@ -17,7 +17,7 @@ import ch.hearc.ezworkout.ui.planification.trainingPlanDetails.TrainingPlanDetai
  * TODO: Replace the implementation with code for your data type.
  */
 class TrainingPlanRecyclerViewAdapter(
-    private val values: List<FragmentTrainingPlan.TP>,
+    private val values: List<FragmentTrainingPlanList.TP>,
     public val c: Context
 ) : RecyclerView.Adapter<TrainingPlanRecyclerViewAdapter.ViewHolder>() {
 
