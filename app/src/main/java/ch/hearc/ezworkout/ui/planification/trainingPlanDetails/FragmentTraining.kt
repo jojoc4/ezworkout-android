@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.TPDetails
+package ch.hearc.ezworkout.ui.planification.trainingPlanDetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,7 +20,7 @@ import ch.hearc.ezworkout.networking.repository.Repository
  * A fragment representing a list of Items.
  */
 class FragmentTraining : Fragment() {
-    var TPid = 0
+    var trainingPlanId = 0
     val items: MutableList<FragmentTraining.Tr> = ArrayList()
     private var columnCount = 1
 
@@ -38,13 +38,13 @@ class FragmentTraining : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_tr_list, container, false)
 
-        TPid = requireArguments().getInt("TPid")
+        trainingPlanId = requireArguments().getInt("TPid")
 
         var viewModel = ViewModelProvider(this,
             MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
         ).get(MainViewModel::class.java)
 
-        viewModel.getTraining(Integer(TPid))
+        viewModel.getTraining(Integer(trainingPlanId))
         viewModel.trainingResponse.observe(viewLifecycleOwner, Observer { response ->
             items.clear()
             for (tr in response) {
@@ -71,7 +71,7 @@ class FragmentTraining : Fragment() {
             MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
         ).get(MainViewModel::class.java)
 
-        viewModel.getTraining(Integer(TPid))
+        viewModel.getTraining(Integer(trainingPlanId))
     }
 
     companion object {

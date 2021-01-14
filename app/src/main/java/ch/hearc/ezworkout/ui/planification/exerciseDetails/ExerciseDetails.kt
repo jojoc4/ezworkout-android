@@ -1,7 +1,6 @@
-package ch.hearc.ezworkout.ui.planification.ExerciseDetails
+package ch.hearc.ezworkout.ui.planification.exerciseDetails
 
 import android.os.Bundle
-import android.view.View.OnFocusChangeListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -14,7 +13,7 @@ import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.Exercise
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.planification.TPDetails.RenameDialog
+import ch.hearc.ezworkout.ui.planification.utils.RenameDialog
 
 
 class ExerciseDetails : AppCompatActivity() {
@@ -32,7 +31,7 @@ class ExerciseDetails : AppCompatActivity() {
             MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
         ).get(MainViewModel::class.java)
 
-        findViewById<Button>(R.id.rename).setOnClickListener { view ->
+        findViewById<Button>(R.id.rename).setOnClickListener {
             val dialog = RenameDialog()
             dialog.name.value = exercise.name.toString()
             dialog.show(supportFragmentManager, "Renommer")

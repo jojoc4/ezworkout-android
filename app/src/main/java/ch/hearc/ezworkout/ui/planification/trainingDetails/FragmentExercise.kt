@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.TrDetails
+package ch.hearc.ezworkout.ui.planification.trainingDetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,14 +15,13 @@ import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.planification.TPDetails.FragmentTraining
 import java.util.*
 
 /**
  * A fragment representing a list of Items.
  */
 class FragmentExercise : Fragment() {
-    var Trainingid = 0
+    var trainingid = 0
     private var columnCount = 1
     val items: MutableList<Ex> = ArrayList()
 
@@ -39,13 +38,13 @@ class FragmentExercise : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_exercise_list, container, false)
-        Trainingid = requireArguments().getInt("Trid")
+        trainingid = requireArguments().getInt("Trid")
 
         var viewModel = ViewModelProvider(this,
             MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
         ).get(MainViewModel::class.java)
 
-        viewModel.getExercise(Integer(Trainingid))
+        viewModel.getExercise(Integer(trainingid))
         viewModel.exerciseResponse.observe(viewLifecycleOwner, Observer { response ->
             items.clear()
             for (ex in response) {
@@ -72,7 +71,7 @@ class FragmentExercise : Fragment() {
             MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
         ).get(MainViewModel::class.java)
 
-        viewModel.getExercise(Integer(Trainingid))
+        viewModel.getExercise(Integer(trainingid))
     }
 
     data class Ex(val id: Int, val content: String) {

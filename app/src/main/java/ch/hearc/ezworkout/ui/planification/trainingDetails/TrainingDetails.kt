@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.TrDetails
+package ch.hearc.ezworkout.ui.planification.trainingDetails
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +16,7 @@ import ch.hearc.ezworkout.networking.repository.Repository
 import ch.hearc.ezworkout.ui.planification.utils.RenameDialog
 
 class TrainingDetails : AppCompatActivity() {
-    lateinit var Tr: Training
+    lateinit var training: Training
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +31,9 @@ class TrainingDetails : AppCompatActivity() {
             add(R.id.fragment_container_view, FragmentExercise::class.java, bundle)
         }
 
-        findViewById<Button>(R.id.rename).setOnClickListener { view ->
+        findViewById<Button>(R.id.rename).setOnClickListener {
             val dialog = RenameDialog()
-            dialog.name.value = Tr.name.toString()
+            dialog.name.value = training.name.toString()
 
             dialog.show(supportFragmentManager, "Renommer")
             dialog.name.observe(this, {
@@ -57,7 +57,7 @@ class TrainingDetails : AppCompatActivity() {
         viewModel.getTraining(Trid)
         viewModel.oneTrainingResponse.observe(this, Observer { response ->
             this.title = response.name
-            this.Tr = response
+            this.training = response
 
         })
     }

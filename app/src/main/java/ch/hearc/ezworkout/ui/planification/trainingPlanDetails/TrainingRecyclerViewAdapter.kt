@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.TPDetails
+package ch.hearc.ezworkout.ui.planification.trainingPlanDetails
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.planification.TrDetails.TrainingDetails
+import ch.hearc.ezworkout.ui.planification.trainingDetails.TrainingDetails
 
 /**
  * [RecyclerView.Adapter] that can display a TRList.

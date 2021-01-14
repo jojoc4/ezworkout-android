@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.TrDetails
+package ch.hearc.ezworkout.ui.planification.trainingDetails
 
 import android.content.Context
 import android.content.Intent
@@ -10,11 +10,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.planification.ExerciseDetails.ExerciseDetails
+import ch.hearc.ezworkout.ui.planification.exerciseDetails.ExerciseDetails
 
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem].
+ * [RecyclerView.Adapter] that can display a exercise.
  * TODO: Replace the implementation with code for your data type.
  */
 class ExerciseRecyclerViewAdapter(
