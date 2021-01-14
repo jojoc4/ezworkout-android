@@ -1,6 +1,5 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import ch.hearc.ezworkout.R
-import kotlinx.android.synthetic.*
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,7 +52,7 @@ class ChronoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val root =  inflater.inflate(R.layout.fragment_chrono, container, false)
+        val root =  inflater.inflate(R.layout.a_e_exercise_chrono_fragment, container, false)
 
         mButtonStartPause = root.findViewById(R.id.button_start_pause)
         mButtonStop = root.findViewById(R.id.button_stop)
