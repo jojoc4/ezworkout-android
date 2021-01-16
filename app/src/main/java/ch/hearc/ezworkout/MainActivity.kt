@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.api.RetrofitInstance
 import ch.hearc.ezworkout.networking.model.ExerciseEff
 import ch.hearc.ezworkout.networking.model.LogbookPage
 import ch.hearc.ezworkout.networking.model.SeriesEff
@@ -32,38 +33,55 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //verify that the connection to webapp is ok
         var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         val connected = sharedPref.getBoolean("connected", false)
         if(!connected){
             val intent = Intent(this, ConnectActivity::class.java)
             startActivity(intent)
-        }
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        }else{
+            RetrofitInstance.url = "https://"+sharedPref.getString("endpoint", "ezw.dev.jojoc4.ch").toString()
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
+            val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_planification,
-                R.id.navigation_trainings,
-                R.id.navigation_sync
+            val navController = findNavController(R.id.nav_host_fragment)
+            // Passing each menu ID as a set of Ids because each
+            // menu should be considered as top level destinations.
+            val appBarConfiguration = AppBarConfiguration(
+                setOf(
+                    R.id.navigation_planification,
+                    R.id.navigation_trainings,
+                    R.id.navigation_sync
+                )
             )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+            setupActionBarWithNavController(navController, appBarConfiguration)
+            navView.setupWithNavController(navController)
 
-        //test database
-        /*
-        viewModel = ViewModelProvider(this,MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))).get(MainViewModel::class.java)
 
-        viewModel.getUser()
-        viewModel.userResponse.observe(this, Observer { response ->
-            Log.d("--------id-----------",response.id.toString())
-            response.name?.let { Log.d("--------name-----------", it) }
+            //test database
+            viewModel = ViewModelProvider(this,MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))).get(MainViewModel::class.java)
 
-        })*/
+            viewModel.getUser()
+            viewModel.userResponse.observe(this, Observer { response ->
+                Log.d("--------id-----------",response.id.toString())
+                response.name?.let { Log.d("--------name-----------", it) }
+
+            })
+
+        }
+    }
+
+    override fun onResume() {
+        //verify that connection to webapp is ok
+        var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+        val connected = sharedPref.getBoolean("connected", false)
+
+        if(!connected){
+            val intent = Intent(this, ConnectActivity::class.java)
+            startActivity(intent)
+        }else {
+            super.onResume()
+        }
     }
 }
