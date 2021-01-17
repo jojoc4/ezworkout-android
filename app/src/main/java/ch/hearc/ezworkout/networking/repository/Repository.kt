@@ -98,28 +98,28 @@ class Repository(private val sharedPref: SharedPreferences) {
     }
 
 
-    suspend fun updateTrainingPlan(tp: TrainingPlan): TrainingPlan{
+    suspend fun updateTrainingPlan(tp: TrainingPlan): TrainingPlan {
         return RetrofitInstance.api.updateTrainingPlan(token, tp.id, tp.name.toString())
     }
 
-    suspend fun updateTraining(tr: Training): Training{
+    suspend fun updateTraining(tr: Training): Training {
         return RetrofitInstance.api.updateTraining(token, tr.id, tr.name.toString())
     }
 
-    suspend fun updateExercise(ex: Exercise): Exercise{
+    suspend fun updateExercise(ex: Exercise): Exercise {
         return RetrofitInstance.api.updateExercise(token, ex.id, ex.name.toString(), ex.comment.toString(), ex.nbSerie, ex.repMin, ex.repMax, ex.pauseSerie, ex.pauseExercise)
     }
 
 
-    suspend fun deleteTrainingPlan(tp: TrainingPlan): DeleteResponse{
+    suspend fun deleteTrainingPlan(tp: TrainingPlan): DeleteResponse {
         return RetrofitInstance.api.delTrainingPlan(token, tp.id)
     }
 
-    suspend fun deleteTraining(tr: Training, TPid: Int){
+    suspend fun deleteTraining(tr: Training, TPid: Int) {
         return RetrofitInstance.api.delTraining(token, tr.id, TPid)
     }
 
-    suspend fun deleteExercise(ex: Exercise, trid: Int){
+    suspend fun deleteExercise(ex: Exercise, trid: Int) {
         return RetrofitInstance.api.delExercise(token, ex.id, trid)
     }
 }

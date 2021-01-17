@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.trainingDetails
+package ch.hearc.ezworkout.ui.planning.trainingDetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,7 +21,7 @@ import java.util.*
  * A fragment representing a list of Items.
  */
 class FragmentExercise : Fragment() {
-    var trainingid = 0
+    var trainingId = 0
     private var columnCount = 1
     val items: MutableList<Ex> = ArrayList()
 
@@ -38,13 +38,13 @@ class FragmentExercise : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_exercise_list, container, false)
-        trainingid = requireArguments().getInt("Trid")
+        trainingId = requireArguments().getInt("Trid")
 
         var viewModel = ViewModelProvider(this,
             MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
         ).get(MainViewModel::class.java)
 
-        viewModel.getExercise(Integer(trainingid))
+        viewModel.getExercise(Integer(trainingId))
         viewModel.exerciseResponse.observe(viewLifecycleOwner, Observer { response ->
             items.clear()
             for (ex in response) {
@@ -58,7 +58,7 @@ class FragmentExercise : Fragment() {
                         columnCount <= 1 -> LinearLayoutManager(context)
                         else -> GridLayoutManager(context, columnCount)
                     }
-                    adapter = activity?.let { ExerciseRecyclerViewAdapter(items, it, trainingid) }
+                    adapter = activity?.let { ExerciseRecyclerViewAdapter(items, it, trainingId) }
                 }
             }
         })
@@ -71,7 +71,7 @@ class FragmentExercise : Fragment() {
             MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(activity)))
         ).get(MainViewModel::class.java)
 
-        viewModel.getExercise(Integer(trainingid))
+        viewModel.getExercise(Integer(trainingId))
     }
 
     data class Ex(val id: Int, val content: String) {

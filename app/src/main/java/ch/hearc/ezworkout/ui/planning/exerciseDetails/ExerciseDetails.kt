@@ -1,11 +1,10 @@
-package ch.hearc.ezworkout.ui.planification.exerciseDetails
+package ch.hearc.ezworkout.ui.planning.exerciseDetails
 
 import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -16,7 +15,7 @@ import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.Exercise
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.planification.utils.RenameDialog
+import ch.hearc.ezworkout.ui.planning.utils.RenameDialog
 
 
 class ExerciseDetails : AppCompatActivity() {

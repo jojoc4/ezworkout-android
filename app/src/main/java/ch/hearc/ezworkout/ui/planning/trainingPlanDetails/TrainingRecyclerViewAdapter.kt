@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.trainingDetails
+package ch.hearc.ezworkout.ui.planning.trainingPlanDetails
 
 import android.content.Context
 import android.content.Intent
@@ -10,22 +10,21 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.planification.exerciseDetails.ExerciseDetails
-
+import ch.hearc.ezworkout.ui.planning.trainingDetails.TrainingDetails
 
 /**
- * [RecyclerView.Adapter] that can display a exercise.
+ * [RecyclerView.Adapter] that can display a TRList.
  * TODO: Replace the implementation with code for your data type.
  */
-class ExerciseRecyclerViewAdapter(
-    private val values: List<FragmentExercise.Ex>,
+class TrainingRecyclerViewAdapter(
+    private val values: List<FragmentTraining.Tr>,
     public val c: Context,
-    public val trid: Int
-) : RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ViewHolder>() {
+    public val TPid: Int
+) : RecyclerView.Adapter<TrainingRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_exercise, parent, false)
+            .inflate(R.layout.fragment_tr, parent, false)
         return ViewHolder(view)
     }
 
@@ -33,9 +32,9 @@ class ExerciseRecyclerViewAdapter(
         val item = values[position]
         holder.contentView.text = item.content
         holder.lay.setOnClickListener {
-            val intent = Intent(c, ExerciseDetails::class.java).apply {
-                putExtra("ch.hearc.ezworkout.exId", item.id)
-                putExtra("ch.hearc.ezworkout.trid", trid)
+            val intent = Intent(c, TrainingDetails::class.java).apply {
+                putExtra("ch.hearc.ezworkout.Trid", item.id)
+                putExtra("ch.hearc.ezworkout.TPid", TPid)
             }
             ContextCompat.startActivity(c, intent, null)
         }
