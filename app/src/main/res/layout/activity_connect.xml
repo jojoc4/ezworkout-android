@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="328dp"
-        android:text="Pour utiliser EZWorkout, vous devez vous connecter à notre application web.\n\nPour ce faire, veuillez vous rendre dans la page &quot;connexion à l'application mobile&quot; depuis votre ordinateur puis cliquez sur le boutton ci-dessous pour scanner le qr code."
+        android:text="Pour utiliser EZWorkout, vous devez vous connecter à notre application web.\n\nPour ce faire, veuillez vous rendre dans la page &quot;connexion à l'application mobile&quot; depuis votre ordinateur puis cliquez sur le bouton ci-dessous pour scanner le qrcode."
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/scanner"

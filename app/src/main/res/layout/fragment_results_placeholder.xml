@@ -14,7 +14,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:text="Cette fonctionnalité n'est pas encore disponible.\n\nPour accèder à vos résultats, utilisez le site web."
+        android:text="Cette fonctionnalité n'est pas encore disponible.\n\nPour accéder à vos résultats, utilisez le site web."
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

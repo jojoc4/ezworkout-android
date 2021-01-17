@@ -24,7 +24,7 @@ class RenameDialog : DialogFragment() {
                         name.value = customLout.findViewById<EditText>(R.id.name)?.text.toString()
 
                     })
-                .setNegativeButton("Anuller",
+                .setNegativeButton("Annuler",
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
                     })

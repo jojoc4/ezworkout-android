@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="Cette Application à besoin d'une connection internet pour fonctionner.\n\n Veuillez vous connecter et presser sur le boutton si-dessous pour réessayer."
+        android:text="Cette application a besoin d'une connexion internet pour fonctionner.\n\n Veuillez vous connecter et presser sur le bouton ci-dessous pour réessayer."
         android:textAlignment="center"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"

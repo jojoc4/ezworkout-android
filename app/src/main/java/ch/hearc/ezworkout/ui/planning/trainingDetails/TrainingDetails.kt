@@ -67,7 +67,7 @@ class TrainingDetails : AppCompatActivity() {
             db.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, _ ->
                 dialog.cancel()
             })
-            db.setMessage("Êtes-vous sûr de voiloir supprimer cet entraînement?")
+            db.setMessage("Êtes-vous sûr de vouloir supprimer cet entraînement?")
             var ad = db.create()
             ad.show()
         }
