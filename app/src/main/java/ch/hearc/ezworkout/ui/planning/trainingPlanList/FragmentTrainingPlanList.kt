@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.trainingPlanList
+package ch.hearc.ezworkout.ui.planning.trainingPlanList
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.trainingPlanDetails
+package ch.hearc.ezworkout.ui.planning.trainingPlanDetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,7 +21,7 @@ import ch.hearc.ezworkout.networking.repository.Repository
  */
 class FragmentTraining : Fragment() {
     var trainingPlanId = 0
-    val items: MutableList<FragmentTraining.Tr> = ArrayList()
+    val items: MutableList<Tr> = ArrayList()
     private var columnCount = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class FragmentTraining : Fragment() {
         viewModel.trainingResponse.observe(viewLifecycleOwner, Observer { response ->
             items.clear()
             for (tr in response) {
-                tr.name?.let { FragmentTraining.Tr(tr.id, it) }?.let { items.add(it) }
+                tr.name?.let { Tr(tr.id, it) }?.let { items.add(it) }
             }
 
             // Set the adapter

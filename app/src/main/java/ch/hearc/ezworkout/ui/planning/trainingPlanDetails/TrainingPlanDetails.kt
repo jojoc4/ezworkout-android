@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.trainingPlanDetails
+package ch.hearc.ezworkout.ui.planning.trainingPlanDetails
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -21,8 +21,8 @@ import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.Training
 import ch.hearc.ezworkout.networking.model.TrainingPlan
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.planification.trainingDetails.TrainingDetails
-import ch.hearc.ezworkout.ui.planification.utils.RenameDialog
+import ch.hearc.ezworkout.ui.planning.trainingDetails.TrainingDetails
+import ch.hearc.ezworkout.ui.planning.utils.RenameDialog
 
 class TrainingPlanDetails : AppCompatActivity() {
     lateinit var trainingPlan: TrainingPlan

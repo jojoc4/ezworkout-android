@@ -31,22 +31,17 @@ import ch.hearc.ezworkout.networking.repository.Repository
  */
 class SyncFragment : Fragment() {
 
-    private lateinit var syncViewModel: SyncViewModel
-
     private lateinit var btnSignOff: Button
     private lateinit var textView: TextView
 
     private lateinit var sharedPref: SharedPreferences
 
 
-    @SuppressLint("WrongConstant")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        syncViewModel =
-            ViewModelProviders.of(this).get(SyncViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_sync, container, false)
 
         //vars initialisation

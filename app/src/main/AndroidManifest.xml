@@ -17,10 +17,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.sync.NetworkErrorActivity"></activity>
-        <activity android:name=".ui.planification.exerciseDetails.ExerciseDetails" />
-        <activity android:name=".ui.planification.trainingDetails.TrainingDetails" />
+        <activity android:name=".ui.planning.exerciseDetails.ExerciseDetails" />
+        <activity android:name=".ui.planning.trainingDetails.TrainingDetails" />
         <activity
-            android:name=".ui.planification.trainingPlanDetails.TrainingPlanDetails"
+            android:name=".ui.planning.trainingPlanDetails.TrainingPlanDetails"
             android:label="@string/title_activity_tp_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.sync.ConnectActivity" />
