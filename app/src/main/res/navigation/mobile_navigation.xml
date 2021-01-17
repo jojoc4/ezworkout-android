@@ -17,11 +17,11 @@
         android:label="@string/title_training_plan"
         tools:layout="@layout/a_tp_training_plan_fragment" />
 
-    <!--<fragment
+    <fragment
         android:id="@+id/navigation_history"
-        android:name="ch.hearc.ezworkout.ui.activities.history.history"
+        android:name="ch.hearc.ezworkout.ui.results.ResultsPlaceholderFragment"
         android:label="@string/history_title"
-        tools:layout="@layout/history" />-->
+        tools:layout="@layout/fragment_results_placeholder" />
 
     <fragment
         android:id="@+id/navigation_sync"
