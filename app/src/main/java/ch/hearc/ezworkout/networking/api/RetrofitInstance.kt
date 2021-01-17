@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    public var url = "https://ezw.dev.jojoc4.ch"
+    var url = "https://ezw.dev.jojoc4.ch"
 
     private val retrofit by lazy {
         val httpClient = OkHttpClient.Builder()
@@ -20,7 +20,7 @@ object RetrofitInstance {
             .build()
     }
 
-    val api: SimpleApi by lazy {
-        retrofit.create(SimpleApi::class.java)
+    val api: EZWorkoutAPI by lazy {
+        retrofit.create(EZWorkoutAPI::class.java)
     }
 }
