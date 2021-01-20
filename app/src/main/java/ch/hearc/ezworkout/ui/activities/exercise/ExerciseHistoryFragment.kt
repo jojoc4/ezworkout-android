@@ -1,11 +1,16 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import androidx.fragment.app.Fragment
 import ch.hearc.ezworkout.R
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +26,7 @@ class ExerciseHistoryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var listView: ListView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +41,36 @@ class ExerciseHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.a_e_exercise_history_fragment, container, false)
+        val root = inflater.inflate(
+            ch.hearc.ezworkout.R.layout.a_e_exercise_history_fragment,
+            container,
+            false
+        )
+
+        // Get ListView object from xml
+        listView = root.findViewById(R.id.list) as ListView
+
+        // Defined Array values to show in ListView
+        val values = arrayOf(
+            "Série 1: 12kg - x8",
+            "Série 2: 15kg - x10",
+            "Série 3: 12kg - x10"
+        )
+
+        // Define a new Adapter
+        // First parameter - Context
+        // Second parameter - Layout for the row
+        // Third parameter - ID of the TextView to which the data is written
+        // Forth - the Array of data
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            requireActivity().applicationContext,
+            android.R.layout.simple_list_item_1, android.R.id.text1, values
+        )
+
+        // Assign adapter to ListView
+        listView!!.adapter = adapter
+
+        return root
     }
 
     companion object {
