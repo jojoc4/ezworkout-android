@@ -11,15 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Today"
-        android:textSize="24dp"
+        android:text="@string/today"
+        android:textSize="24sp"
         android:textStyle="bold"/>
 
-    <fragment
-        android:id="@+id/training_plan_fragment"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/serie_list_fragment"
         android:name="ch.hearc.ezworkout.ui.activities.exercise.SerieListFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/a_e_serie_list_fragment" />
 
 </LinearLayout>

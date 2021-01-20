@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_weight="1"
     android:background="#ECECEC"
     android:clickable="true"
     android:focusable="true"
@@ -11,29 +12,23 @@
     android:paddingRight="8dp"
     android:paddingBottom="5dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/serie_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/text_margin"
+        android:layout_weight="0"
+        android:gravity="center_vertical"
+        android:textAppearance="?attr/textAppearanceListItem"></TextView>
+
+    <TextView
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/serie_number"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:layout_marginHorizontal="@dimen/text_margin"
-            android:textAppearance="?attr/textAppearanceListItem">
-        </TextView>
-        <TextView
-            android:id="@+id/content"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textStyle="bold">
-        </TextView>
-    </LinearLayout>
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textStyle="bold">
+    </TextView>
 
 </LinearLayout>
