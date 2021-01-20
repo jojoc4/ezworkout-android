@@ -5,17 +5,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.model.ExerciseEff
+import ch.hearc.ezworkout.networking.model.TrainingEff
+import ch.hearc.ezworkout.networking.repository.Repository
+import ch.hearc.ezworkout.ui.activities.training.ExerciseContent
 
 /**
  * A simple [Fragment] subclass.
@@ -23,18 +26,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ExerciseHistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listView: ListView? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val model: ExerciseViewModel by activityViewModels()
+    private lateinit var myAdapter: ArrayAdapter<String>
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var listView: ListView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,10 +47,8 @@ class ExerciseHistoryFragment : Fragment() {
         listView = root.findViewById(R.id.list) as ListView
 
         // Defined Array values to show in ListView
-        val values = arrayOf(
-            "Série 1: 12kg - x8",
-            "Série 2: 15kg - x10",
-            "Série 3: 12kg - x10"
+        val values = mutableListOf(
+            "No data found"
         )
 
         // Define a new Adapter
@@ -62,27 +56,84 @@ class ExerciseHistoryFragment : Fragment() {
         // Second parameter - Layout for the row
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
-        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+        myAdapter = ArrayAdapter<String>(
             requireActivity().applicationContext,
             android.R.layout.simple_list_item_1, android.R.id.text1, values
         )
 
         // Assign adapter to ListView
-        listView!!.adapter = adapter
-
-        /*
-        // ListView Item Click Listener
-        listView!!.onItemClickListener = OnItemClickListener { parent, view, position, id ->
-            // ListView Clicked item value
-            val itemValue = listView!!.getItemAtPosition(position) as String
-
-            // Show
-            Log.d("Position :", position.toString())
-            Log.d("ListItem :", itemValue)
-        }
-        */
+        listView!!.adapter = myAdapter
 
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
+
+        // Access db data local model
+        mainViewModel = ViewModelProvider(
+            this,
+            MainViewModelFactory(Repository(sharedPref))
+        ).get(MainViewModel::class.java)
+
+        val trainingPlanId = model.trainingPlanId.value
+        val trainingId = model.trainingId.value
+        val exerciseId = model.exerciseId.value
+
+        // Load data
+        mainViewModel.getLogbookPage(Integer(trainingPlanId!!))
+        mainViewModel.logbookPageResponse.observe(viewLifecycleOwner, Observer { response ->
+            val logbookPages = response
+            val lastLogbookPage = if (logbookPages.isEmpty()) null else logbookPages.last()
+
+            if (lastLogbookPage != null) {
+                mainViewModel.getTrainingEff(Integer(lastLogbookPage.id))
+                mainViewModel.trainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
+                    val effTrainings = response
+                    var effTraining: TrainingEff? = null
+
+                    effTrainings.forEach {
+                        if (it.trainingId == trainingId) effTraining = it
+                    }
+
+                    if (effTraining != null) {
+                        mainViewModel.getExerciseEff(Integer(effTraining!!.id))
+                        mainViewModel.exerciseEffResponse.observe(
+                            viewLifecycleOwner,
+                            Observer { response ->
+                                val effExercises = response
+                                var effExercise: ExerciseEff? = null
+
+                                effExercises.forEach {
+                                    if (it.exerciseId == exerciseId) effExercise = it
+                                }
+
+                                if (effExercise != null) {
+                                    mainViewModel.getSeriesEff(Integer(effExercise!!.id))
+                                    mainViewModel.seriesEffResponse.observe(
+                                        viewLifecycleOwner,
+                                        Observer { response ->
+                                            val effSeries = response
+
+                                            myAdapter.clear()
+
+                                            var i = 1
+                                            effSeries.forEach {
+                                                myAdapter.add("Série " + i + " : " + it.weight + "kg - x" + it.rep)
+                                                i++
+                                            }
+
+                                            // Notify adapter
+                                            myAdapter.notifyDataSetChanged()
+                                        })
+                                } else Log.d("Err", "No effExercise found")
+                            })
+                    } else Log.d("Err", "No effTraining found")
+                })
+            } else Log.d("Err", "No lastbookpage found")
+        })
     }
 
     companion object {
@@ -90,18 +141,9 @@ class ExerciseHistoryFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment ExerciseHistoryFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ExerciseHistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = ExerciseHistoryFragment().apply { arguments = Bundle().apply { } }
     }
 }

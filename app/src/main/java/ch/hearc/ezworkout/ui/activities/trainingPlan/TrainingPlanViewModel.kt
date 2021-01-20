@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 
 class TrainingPlanViewModel : ViewModel() {
 
+    val trainingPlanId = MutableLiveData<Int>()
+
     val selected = MutableLiveData<TrainingContent.TrainingItem>()
 
     fun select(trainingItem: TrainingContent.TrainingItem) {
