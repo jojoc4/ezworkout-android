@@ -2,15 +2,21 @@ package ch.hearc.ezworkout.ui.activities.trainingPlan
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.repository.Repository
 
 /**
  * A fragment representing a list of trainings.
@@ -22,8 +28,10 @@ class TrainingPlanListFragment : Fragment() {
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
     private val model: TrainingPlanViewModel by activityViewModels()
+    private lateinit var myAdapter: TrainingPlanRecyclerViewAdapter
+    private lateinit var mainViewModel: MainViewModel
 
-    override fun onCreate( savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
@@ -39,12 +47,14 @@ class TrainingPlanListFragment : Fragment() {
 
         // Set the adapter
         if (view is RecyclerView) {
+            myAdapter = TrainingPlanRecyclerViewAdapter(TrainingContent.ITEMS, model)
+
             with(view) {
                 layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = TrainingPlanRecyclerViewAdapter(TrainingContent.ITEMS, model)
+                adapter = myAdapter
             }
         }
 
@@ -54,25 +64,38 @@ class TrainingPlanListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        model.selected.value = TrainingContent.TrainingItem("1", "Hello")
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
 
-        Log.d(
-            "TrainingPlanFragment : ",
-            model.selected.value?.label.toString()
-        )
-        // TODO : addOnItemTouchListener
-       // view.findViewById<RecyclerView>(R.id.list).addOnItemTouchListener()
-        /*
-        view.findViewById<RecyclerView>(R.id.list).setOnClickListener { view ->
-            Log.d(
-                "Clicked on recyclerview training list item:",
-                view.toString()
-            )
-        }
-         */
+        // Clear local data
+        TrainingContent.ITEMS.clear()
+        TrainingContent.ITEM_MAP.clear()
+        model.selected.value = null
+
+        // Access db data local model
+        mainViewModel = ViewModelProvider(
+            this,
+            MainViewModelFactory(Repository(sharedPref))
+        ).get(MainViewModel::class.java)
+
+        // TODO: if no currentTPid found => ask user to choose one
+
+        val currentTPid = sharedPref.getInt("currentTPid", 1)
+
+        // Load data
+        mainViewModel.getTraining(Integer(currentTPid))
+        mainViewModel.trainingResponse.observe(viewLifecycleOwner, Observer { response ->
+            // Add new data
+            response.forEach {
+                TrainingContent.addItem(TrainingContent.createTrainingItem(it.id, it.name!!))
+            }
+
+            // Select the first element by default
+            model.selected.value = TrainingContent.ITEMS[0]
+
+            // Notify adapter
+            myAdapter.notifyDataSetChanged()
+        })
     }
-
-
 
 
     companion object {

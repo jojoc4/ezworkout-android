@@ -63,7 +63,7 @@ class SyncFragment : Fragment() {
 
         viewModel.getUser()
         viewModel.userResponse.observe(viewLifecycleOwner, Observer { response ->
-            response.name?.let { textView.text = "Bonjour "+ it + "\nVous êtes connecté à " + endpoint }
+            response.name?.let { textView.text = "Bonjour $it\nVous êtes connecté à $endpoint" }
 
         })
 

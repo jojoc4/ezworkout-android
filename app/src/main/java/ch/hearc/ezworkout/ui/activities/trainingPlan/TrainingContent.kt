@@ -25,16 +25,16 @@ object TrainingContent {
 
     init {
         // Add some sample items.
-        addItem(createTrainingItem(1, "Bras jour"))
-        addItem(createTrainingItem(2, "Jambe jour"))
+        //addItem(createTrainingItem(1, "Bras jour"))
+        //addItem(createTrainingItem(2, "Jambe jour"))
     }
 
-    private fun addItem(item: TrainingItem) {
+    fun addItem(item: TrainingItem) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
+        ITEM_MAP[item.id] = item
     }
 
-    private fun createTrainingItem(id: Int, label: String): TrainingItem {
+    fun createTrainingItem(id: Int, label: String): TrainingItem {
         return TrainingItem(id.toString(), label)
     }
 
