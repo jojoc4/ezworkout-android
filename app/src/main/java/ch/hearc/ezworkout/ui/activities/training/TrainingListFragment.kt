@@ -1,6 +1,7 @@
 package ch.hearc.ezworkout.ui.activities.training
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -16,8 +17,6 @@ import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
-import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingPlanRecyclerViewAdapter
 
 /**
  * A fragment representing a list of exercises.
@@ -62,8 +61,8 @@ class TrainingListFragment : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
 
@@ -78,12 +77,10 @@ class TrainingListFragment : Fragment() {
             MainViewModelFactory(Repository(sharedPref))
         ).get(MainViewModel::class.java)
 
-        // TODO: if no currentTPid found => ask user to choose one
-
-        val exerciceId = 1
+        val exerciseId = model.exerciseId.value
 
         // Load data
-        mainViewModel.getExercise(Integer(exerciceId))
+        mainViewModel.getExercise(Integer(exerciseId!!))
         mainViewModel.exerciseResponse.observe(viewLifecycleOwner, Observer { response ->
             // Add new data
             response.forEach {
@@ -97,7 +94,6 @@ class TrainingListFragment : Fragment() {
             myAdapter.notifyDataSetChanged()
         })
     }
-
 
     companion object {
 

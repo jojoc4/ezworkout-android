@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProviders
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.ui.activities.exercise.ExerciseActivity
@@ -19,7 +20,7 @@ class TrainingFragment : Fragment() {
         fun newInstance() = TrainingFragment()
     }
 
-    private lateinit var viewModel: TrainingViewModel
+    private val viewModel: TrainingViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,15 +50,9 @@ class TrainingFragment : Fragment() {
             // Create a new activity and pass the bundle to it
             val intent = Intent(activity, ExerciseActivity::class.java)
             val bundle = Bundle()
-            // TODO PRINT
-            Log.d(
-                "viewModel : ", (viewModel != null).toString()
-            )
-            Log.d(
-                "Value : ",
-                (viewModel.selected.value != null).toString()
-            )
-            bundle.putString("exercise_id", viewModel.selected.value?.label)
+
+            bundle.putInt("exerciseId", viewModel.selected.value?.id!!)
+            bundle.putString("exerciseLabel", viewModel.selected.value?.label!!)
             intent.putExtras(bundle)
 
             startActivity(intent)
@@ -69,15 +64,11 @@ class TrainingFragment : Fragment() {
             startActivity(intent)
         }
 
-        Log.d("------t------", viewModel.exerciseId.value.toString())
-
         return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity()).get(TrainingViewModel::class.java)
-
 
         // TODO: Use the ViewModel
     }

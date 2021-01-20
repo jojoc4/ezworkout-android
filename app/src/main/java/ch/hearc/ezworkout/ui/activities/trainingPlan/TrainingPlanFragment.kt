@@ -51,6 +51,7 @@ class TrainingPlanFragment : Fragment() {
             val bundle = Bundle()
 
             bundle.putInt("trainingId", viewModel.selected.value?.id!!)
+            bundle.putString("trainingLabel", viewModel.selected.value?.label!!)
             intent.putExtras(bundle)
 
             startActivity(intent)
