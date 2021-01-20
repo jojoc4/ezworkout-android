@@ -49,14 +49,7 @@ class TrainingPlanFragment : Fragment() {
             // Create a new activity and pass the bundle to it
             val intent = Intent(activity, TrainingActivity::class.java)
             val bundle = Bundle()
-            // TODO PRINT
-            Log.d(
-                "viewModel : ", (viewModel != null).toString()
-            )
-            Log.d(
-                "Value : ",
-                (viewModel.selected.value != null).toString()
-            )
+
             bundle.putString("training_id", viewModel.selected.value?.label)
             intent.putExtras(bundle)
 
