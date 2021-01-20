@@ -1,5 +1,7 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
+import android.text.Editable
+import android.widget.EditText
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -26,7 +28,7 @@ object SerieContent {
     init {
         // Add some sample items.
         for (i in 1..COUNT) {
-            addItem(createSerieItem(i))
+            addItem(createSerieItem(i, EditText(), 12))
         }
     }
 
@@ -35,23 +37,19 @@ object SerieContent {
         ITEM_MAP.put(item.id, item)
     }
 
-    private fun createSerieItem(position: Int): SerieItem {
-        return SerieItem(position.toString(), "Item " + position, makeDetails(position))
-    }
-
-    private fun makeDetails(position: Int): String {
-        val builder = StringBuilder()
-        builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
-            builder.append("\nMore details information here.")
-        }
-        return builder.toString()
+    private fun createSerieItem(id: Int, kg:EditText, serieCount:EditText): SerieItem {
+        return SerieItem(id.toString(), kg, serieCount)
     }
 
     /**
      * A serie item representing a piece of content.
      */
-    data class SerieItem(val id: String, val content: String, val details: String) {
+    data class SerieItem(val id: String, val kg: EditText, val serieCount: EditText) {
+        val label = "kg    x"
+        val content = StringBuilder()
+            .append(kg.toString())
+            .append(label)
+            .append(serieCount.toString()).toString()
         override fun toString(): String = content
     }
 }

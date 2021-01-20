@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import ch.hearc.ezworkout.R
 
@@ -26,17 +27,22 @@ class ExerciseRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.idView.text = item.id
-        holder.contentView.text = item.content
+        holder.kgView.text = item.kg
+        holder.labelView.text = item.label
+        holder.serieCountView.text = item.serieCount
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.findViewById(R.id.serie_number)
-        val contentView: TextView = view.findViewById(R.id.content)
+        val kgView: EditText = view.findViewById(R.id.kg)
+        val labelView: TextView = view.findViewById(R.id.label)
+        val serieCountView: EditText = view.findViewById(R.id.serie_count)
+
 
         override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+            return super.toString() + " '" + labelView.text + "'"
         }
     }
 }
