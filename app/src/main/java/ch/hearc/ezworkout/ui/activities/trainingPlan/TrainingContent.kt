@@ -19,7 +19,7 @@ object TrainingContent {
     /**
      * A map of training items, by ID.
      */
-    val ITEM_MAP: MutableMap<String, TrainingItem> = HashMap()
+    val ITEM_MAP: MutableMap<Int, TrainingItem> = HashMap()
 
     private val COUNT = 25
 
@@ -35,13 +35,13 @@ object TrainingContent {
     }
 
     fun createTrainingItem(id: Int, label: String): TrainingItem {
-        return TrainingItem(id.toString(), label)
+        return TrainingItem(id, label)
     }
 
     /**
      * A training item representing a piece of content.
      */
-    data class TrainingItem(val id: String, val label: String) {
+    data class TrainingItem(val id: Int, val label: String) {
         override fun toString(): String = label
     }
 }

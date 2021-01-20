@@ -25,16 +25,16 @@ object ExerciseContent {
 
     init {
         // Add some sample items.
-        addItem(createExerciseItem(1, "Developpe couche"))
-        addItem(createExerciseItem(2, "Biceps curl"))
+        //addItem(createExerciseItem(1, "Developpe couche"))
+        //addItem(createExerciseItem(2, "Biceps curl"))
     }
 
-    private fun addItem(item: ExerciseItem) {
+    fun addItem(item: ExerciseItem) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
+        ITEM_MAP[item.id] = item
     }
 
-    private fun createExerciseItem(id: Int, label: String): ExerciseItem {
+    fun createExerciseItem(id: Int, label: String): ExerciseItem {
         return ExerciseItem(id.toString(), label)
     }
 

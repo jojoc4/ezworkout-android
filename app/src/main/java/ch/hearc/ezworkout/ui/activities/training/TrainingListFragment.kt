@@ -7,9 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.repository.Repository
+import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
+import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingPlanRecyclerViewAdapter
 
 /**
  * A fragment representing a list of exercises.
@@ -21,6 +29,8 @@ class TrainingListFragment : Fragment() {
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
     private val model: TrainingViewModel by activityViewModels()
+    private lateinit var myAdapter: TrainingRecyclerViewAdapter
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate( savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +48,14 @@ class TrainingListFragment : Fragment() {
 
         // Set the adapter
         if (view is RecyclerView) {
+            myAdapter = TrainingRecyclerViewAdapter(ExerciseContent.ITEMS, model)
+
             with(view) {
                 layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = TrainingRecyclerViewAdapter(ExerciseContent.ITEMS, model)
+                adapter = myAdapter
             }
         }
 
@@ -53,16 +65,37 @@ class TrainingListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO : addOnItemTouchListener
-        // view.findViewById<RecyclerView>(R.id.list).addOnItemTouchListener()
-        /*
-        view.findViewById<RecyclerView>(R.id.list).setOnClickListener { view ->
-            Log.d(
-                "Clicked on recyclerview training list item:",
-                view.toString()
-            )
-        }
-         */
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
+
+        // Clear local data
+        ExerciseContent.ITEMS.clear()
+        ExerciseContent.ITEM_MAP.clear()
+        model.selected.value = null
+
+        // Access db data local model
+        mainViewModel = ViewModelProvider(
+            this,
+            MainViewModelFactory(Repository(sharedPref))
+        ).get(MainViewModel::class.java)
+
+        // TODO: if no currentTPid found => ask user to choose one
+
+        val exerciceId = 1
+
+        // Load data
+        mainViewModel.getExercise(Integer(exerciceId))
+        mainViewModel.exerciseResponse.observe(viewLifecycleOwner, Observer { response ->
+            // Add new data
+            response.forEach {
+                ExerciseContent.addItem(ExerciseContent.createExerciseItem(it.id, it.name!!))
+            }
+
+            // Select the first element by default
+            model.selected.value = ExerciseContent.ITEMS[0]
+
+            // Notify adapter
+            myAdapter.notifyDataSetChanged()
+        })
     }
 
 

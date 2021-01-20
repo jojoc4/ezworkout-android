@@ -68,7 +68,8 @@ class TrainingFragment : Fragment() {
             val intent = Intent(activity, SettingsActivity::class.java)
             startActivity(intent)
         }
-        activity?.title = "Exercises"
+
+        Log.d("------t------", viewModel.exerciseId.value.toString())
 
         return root
     }

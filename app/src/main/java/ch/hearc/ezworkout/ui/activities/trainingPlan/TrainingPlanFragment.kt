@@ -50,7 +50,7 @@ class TrainingPlanFragment : Fragment() {
             val intent = Intent(activity, TrainingActivity::class.java)
             val bundle = Bundle()
 
-            bundle.putString("training_id", viewModel.selected.value?.label)
+            bundle.putInt("trainingId", viewModel.selected.value?.id!!)
             intent.putExtras(bundle)
 
             startActivity(intent)
