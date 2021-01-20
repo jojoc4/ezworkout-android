@@ -26,23 +26,18 @@ class ExerciseRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.kgView.text = item.kg
-        holder.labelView.text = item.label
-        holder.serieCountView.text = item.serieCount
+        holder.idView.text = "Serie " + item.id
+        holder.contentView.text = item.content
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.findViewById(R.id.serie_number)
-        val kgView: EditText = view.findViewById(R.id.kg)
-        val labelView: TextView = view.findViewById(R.id.label)
-        val serieCountView: EditText = view.findViewById(R.id.serie_count)
-
+        val contentView: TextView = view.findViewById(R.id.content)
 
         override fun toString(): String {
-            return super.toString() + " '" + labelView.text + "'"
+            return super.toString() + " '" + contentView.text + "'"
         }
     }
 }

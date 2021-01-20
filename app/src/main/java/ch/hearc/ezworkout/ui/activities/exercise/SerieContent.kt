@@ -28,7 +28,7 @@ object SerieContent {
     init {
         // Add some sample items.
         for (i in 1..COUNT) {
-            addItem(createSerieItem(i, EditText(), 12))
+            addItem(createSerieItem(i, 25, 12))
         }
     }
 
@@ -37,19 +37,19 @@ object SerieContent {
         ITEM_MAP.put(item.id, item)
     }
 
-    private fun createSerieItem(id: Int, kg:EditText, serieCount:EditText): SerieItem {
-        return SerieItem(id.toString(), kg, serieCount)
+    private fun createSerieItem(id: Int, kg:Int, serieCount:Int): SerieItem {
+        return SerieItem(id.toString(), kg.toString(), serieCount.toString())
     }
 
     /**
      * A serie item representing a piece of content.
      */
-    data class SerieItem(val id: String, val kg: EditText, val serieCount: EditText) {
-        val label = "kg    x"
+    data class SerieItem(val id: String, val kg: String, val serieCount: String) {
+        val label = "kg            x"
         val content = StringBuilder()
-            .append(kg.toString())
+            .append(kg)
             .append(label)
-            .append(serieCount.toString()).toString()
+            .append(serieCount).toString()
         override fun toString(): String = content
     }
 }

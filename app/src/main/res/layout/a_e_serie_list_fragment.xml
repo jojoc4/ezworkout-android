@@ -6,8 +6,10 @@
     android:name="ch.hearc.ezworkout.ui.activities.exercise.SerieListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_weight="1"
+    android:gravity="center"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.activities.exercise.SerieListFragment"
     tools:listitem="@layout/a_e_serie_item" />
