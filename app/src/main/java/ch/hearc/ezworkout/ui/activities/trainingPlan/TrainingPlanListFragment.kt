@@ -80,6 +80,7 @@ class TrainingPlanListFragment : Fragment() {
         // TODO: if no currentTPid found => ask user to choose one
 
         val currentTPid = sharedPref.getInt("currentTPid", 1)
+        model.trainingPlanId.value = currentTPid
 
         // Load data
         mainViewModel.getTraining(Integer(currentTPid))

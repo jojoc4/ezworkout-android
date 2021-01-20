@@ -52,6 +52,7 @@ class TrainingPlanFragment : Fragment() {
 
             bundle.putInt("trainingId", viewModel.selected.value?.id!!)
             bundle.putString("trainingLabel", viewModel.selected.value?.label!!)
+            bundle.putInt("trainingPlanId", viewModel.trainingPlanId.value!!)
             intent.putExtras(bundle)
 
             startActivity(intent)

@@ -7,7 +7,8 @@ import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
 
 class TrainingViewModel : ViewModel() {
 
-    val exerciseId = MutableLiveData<Int>()
+    val trainingPlanId = MutableLiveData<Int>()
+    val trainingId = MutableLiveData<Int>()
 
     val selected = MutableLiveData<ExerciseContent.ExerciseItem>()
 

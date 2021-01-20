@@ -14,12 +14,16 @@ class ExerciseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val trainingPlanId: Int = intent.getIntExtra("trainingPlanId", 0)
+        val trainingId: Int = intent.getIntExtra("trainingId", 0)
         val exerciseId: Int = intent.getIntExtra("exerciseId", 0)
         val exerciseLabel: String? = intent.getStringExtra("exerciseLabel")
 
         setContentView(R.layout.a_e_exercise_activity)
         title = "$exerciseId : $exerciseLabel"
 
+        model.trainingPlanId.value = trainingPlanId
+        model.trainingId.value = trainingId
         model.exerciseId.value = exerciseId
     }
 }
