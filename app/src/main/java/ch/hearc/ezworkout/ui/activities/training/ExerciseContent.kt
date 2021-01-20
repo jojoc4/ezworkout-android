@@ -19,29 +19,29 @@ object ExerciseContent {
     /**
      * A map of exercise items, by ID.
      */
-    val ITEM_MAP: MutableMap<String, ExerciseItem> = HashMap()
+    val ITEM_MAP: MutableMap<Int, ExerciseItem> = HashMap()
 
     private val COUNT = 25
 
     init {
         // Add some sample items.
-        addItem(createExerciseItem(1, "Developpe couche"))
-        addItem(createExerciseItem(2, "Biceps curl"))
+        //addItem(createExerciseItem(1, "Developpe couche"))
+        //addItem(createExerciseItem(2, "Biceps curl"))
     }
 
-    private fun addItem(item: ExerciseItem) {
+    fun addItem(item: ExerciseItem) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
+        ITEM_MAP[item.id] = item
     }
 
-    private fun createExerciseItem(id: Int, label: String): ExerciseItem {
-        return ExerciseItem(id.toString(), label)
+    fun createExerciseItem(id: Int, label: String): ExerciseItem {
+        return ExerciseItem(id, label)
     }
 
     /**
      * A exercise item representing a piece of content.
      */
-    data class ExerciseItem(val id: String, val label: String) {
+    data class ExerciseItem(val id: Int, val label: String) {
         override fun toString(): String = label
     }
 }

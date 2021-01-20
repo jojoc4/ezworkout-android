@@ -22,8 +22,6 @@ class TrainingRecyclerViewAdapter(
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.a_list_item, parent, false)
 
-        model.selected.value = ExerciseItem("2", "Bonjour")
-
         return ViewHolder(view)
     }
 
