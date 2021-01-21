@@ -1,17 +1,19 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context.VIBRATOR_SERVICE
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.fragment.app.Fragment
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import ch.hearc.ezworkout.R
-import kotlinx.android.synthetic.*
 import java.util.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,16 +32,19 @@ class ChronoFragment : Fragment() {
     private var param2: String? = null
     private var StartTimeInMilis:Long = 600000 // TODO: receive that in parameter
 
+
     private lateinit var mTextViewCountDown: TextView
     private lateinit var mButtonStartPause: Button
     private lateinit var mButtonStop: Button
     private lateinit var mCountDownTimer: CountDownTimer
 
+    val vibrator = requireActivity().getSystemService(VIBRATOR_SERVICE) as Vibrator
+    private lateinit var vibrationEffect1: VibrationEffect
+
     private var mTimerRunning: Boolean = false
 
     private var mTimeLeftInMilis: Long = StartTimeInMilis
 
-    // https://youtu.be/MDuGwI6P-X8?t=230
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +64,12 @@ class ChronoFragment : Fragment() {
         mButtonStartPause = root.findViewById(R.id.button_start_pause)
         mButtonStop = root.findViewById(R.id.button_stop)
         mTextViewCountDown = root.findViewById(R.id.text_view_countdown)
+
+        val timings = longArrayOf(0, 1000, 500)
+        val amplitudes = intArrayOf(0, VibrationEffect.DEFAULT_AMPLITUDE, 0)
+        vibrationEffect1 = VibrationEffect.createWaveform(timings,amplitudes,2)
+
+
 
         mButtonStartPause.setOnClickListener(View.OnClickListener {
             if (mTimerRunning)
@@ -91,7 +102,7 @@ class ChronoFragment : Fragment() {
 
             override fun onFinish()
             {
-
+                vibrator.vibrate(vibrationEffect1);
             }
         }
         mCountDownTimer.start()
@@ -111,6 +122,8 @@ class ChronoFragment : Fragment() {
     fun stopTimer()
     {
         mButtonStartPause.visibility = View.INVISIBLE
+        vibrator.cancel();
+
     }
 
     fun updateCountDownText()
@@ -141,4 +154,5 @@ class ChronoFragment : Fragment() {
                 }
             }
     }
+
 }
