@@ -47,7 +47,7 @@ class TrainingPlanDetails : AppCompatActivity() {
             val dialog = RenameDialog()
             dialog.name.value = trainingPlan.name.toString()
 
-            dialog.show(supportFragmentManager, "Renommer")
+            dialog.show(supportFragmentManager, getString(R.string.rename))
             dialog.name.observe(this, {
                 val viewModel = ViewModelProvider(this,
                     MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
@@ -62,27 +62,27 @@ class TrainingPlanDetails : AppCompatActivity() {
 
         findViewById<Button>(R.id.delete).setOnClickListener {
            if(trainingPlan.id == sharedPref.getInt("currentTPid", 0)){
-               Toast.makeText(this, "Vous ne pouvez pas supprimer le plan d'entraînement actuellement sélectionné", Toast.LENGTH_LONG).show();
+               Toast.makeText(this, getString(R.string.trainingPlan_delete_error), Toast.LENGTH_LONG).show();
            }else{
                var db = AlertDialog.Builder(this)
-               db.setPositiveButton("Supprimer", DialogInterface.OnClickListener { _, _ ->
+               db.setPositiveButton(getString(R.string.delete), DialogInterface.OnClickListener { _, _ ->
                    val viewModel = ViewModelProvider(this,
                        MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
                    ).get(MainViewModel::class.java)
                    viewModel.delTrainingPlan(trainingPlan)
                    finish()
                })
-               db.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, _ ->
+               db.setNegativeButton(getString(R.string.cancel), DialogInterface.OnClickListener { dialog, _ ->
                    dialog.cancel()
                })
-               db.setMessage("Êtes-vous sûr de vouloir supprimer ce plan d'entraînement?")
+               db.setMessage(getString(R.string.trainingPlan_delete_confirmation))
                var ad = db.create()
                ad.show()
            }
         }
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Sélectionné comme plan actuel", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(view, getString(R.string.trainingPlan_selected), Snackbar.LENGTH_LONG).show()
             with (sharedPref?.edit()) {
                 this?.putInt("currentTPid", TPid)
                 this?.apply()
@@ -93,7 +93,7 @@ class TrainingPlanDetails : AppCompatActivity() {
             val dialog = RenameDialog()
             dialog.name.value = ""
 
-            dialog.show( supportFragmentManager, "Ajouter")
+            dialog.show( supportFragmentManager, getString(R.string.add))
             dialog.name.observe(this, {
                 if(it != "") {
                     val viewModel = ViewModelProvider(this, MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this) ))).get(MainViewModel::class.java)

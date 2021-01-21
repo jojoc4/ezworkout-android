@@ -19,12 +19,12 @@ class RenameDialog : DialogFragment() {
             val customLout = inflater.inflate(R.layout.dialog_rename, null)
             builder.setView(customLout)
 
-            builder.setPositiveButton("Enregistrer",
+            builder.setPositiveButton(getString(R.string.save),
                     DialogInterface.OnClickListener { dialog, id ->
                         name.value = customLout.findViewById<EditText>(R.id.name)?.text.toString()
 
                     })
-                .setNegativeButton("Annuler",
+                .setNegativeButton(getString(R.string.cancel),
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
                     })

@@ -27,7 +27,7 @@ class QRReader : AppCompatActivity() {
 
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
 
-        setTitle("Scannez le QrCode")
+        setTitle(getString(R.string.qrscanner_title))
 
         codeScanner = CodeScanner(this, scannerView)
 

@@ -43,7 +43,7 @@ class FragmentTrainingPlan : Fragment() {
             val dialog = RenameDialog()
             dialog.name.value = ""
 
-            dialog.show( parentFragmentManager, "Ajouter")
+            dialog.show( parentFragmentManager, getString(R.string.add))
             dialog.name.observe(viewLifecycleOwner, {
                 if(it != "") {
                     val viewModel = ViewModelProvider(

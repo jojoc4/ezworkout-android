@@ -42,7 +42,7 @@ class TrainingDetails : AppCompatActivity() {
             val dialog = RenameDialog()
             dialog.name.value = training.name.toString()
 
-            dialog.show(supportFragmentManager, "Renommer")
+            dialog.show(supportFragmentManager, getString(R.string.rename))
             dialog.name.observe(this, {
                 val viewModel = ViewModelProvider(this,
                     MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
@@ -57,17 +57,17 @@ class TrainingDetails : AppCompatActivity() {
 
         findViewById<Button>(R.id.delete).setOnClickListener {
             var db = AlertDialog.Builder(this)
-            db.setPositiveButton("Supprimer", DialogInterface.OnClickListener { _, _ ->
+            db.setPositiveButton(getString(R.string.delete), DialogInterface.OnClickListener { _, _ ->
                 val viewModel = ViewModelProvider(this,
                     MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
                 ).get(MainViewModel::class.java)
                 viewModel.delTraining(training, TPid)
                 finish()
             })
-            db.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, _ ->
+            db.setNegativeButton(getString(R.string.cancel), DialogInterface.OnClickListener { dialog, _ ->
                 dialog.cancel()
             })
-            db.setMessage("Êtes-vous sûr de vouloir supprimer cet entraînement?")
+            db.setMessage(getString(R.string.training_delete_confirmation))
             var ad = db.create()
             ad.show()
         }
@@ -76,7 +76,7 @@ class TrainingDetails : AppCompatActivity() {
             val dialog = RenameDialog()
             dialog.name.value = ""
 
-            dialog.show( supportFragmentManager, "Ajouter")
+            dialog.show( supportFragmentManager, getString(R.string.add))
             dialog.name.observe(this, {
                 if(it != "") {
                     val viewModel = ViewModelProvider(this, MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this) ))).get(MainViewModel::class.java)

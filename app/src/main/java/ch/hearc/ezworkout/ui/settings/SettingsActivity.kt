@@ -16,7 +16,7 @@ class SettingsActivity : AppCompatActivity() {
                 .replace(R.id.settings, SettingsFragment())
                 .commit()
         }
-        setTitle("Paramètres")
+        setTitle(getString(R.string.settings_title))
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
