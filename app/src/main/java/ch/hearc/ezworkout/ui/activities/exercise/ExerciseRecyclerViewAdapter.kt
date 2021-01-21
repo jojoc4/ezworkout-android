@@ -1,14 +1,16 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
-import androidx.recyclerview.widget.RecyclerView
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.ezworkout.R
-
 import ch.hearc.ezworkout.ui.activities.exercise.SerieContent.SerieItem
+
 
 /**
  * [RecyclerView.Adapter] that can display a [SerieItem].
@@ -28,6 +30,14 @@ class ExerciseRecyclerViewAdapter(
         val item = values[position]
         holder.idView.text = "Serie " + item.id
         holder.contentView.text = item.content
+        holder.contentView.setOnClickListener(View.OnClickListener { v ->
+            val activity = v.context as AppCompatActivity
+            val newDialog = SerieInputDialogFragment()
+            val params = Bundle()
+            params.putString("serie", item.id)
+            newDialog.arguments = params
+            newDialog.show(activity.supportFragmentManager, "hey")
+        })
     }
 
     override fun getItemCount(): Int = values.size
