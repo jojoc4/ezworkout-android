@@ -1,11 +1,17 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
+import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
 import android.content.SharedPreferences
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +22,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
 import java.util.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -39,6 +46,14 @@ class ChronoFragment : Fragment() {
 
     private lateinit var vibrator: Vibrator
     private lateinit var vibrationEffect1: VibrationEffect
+
+    private var mSensorManager: SensorManager? = null
+    private var mAccel = 0f // acceleration apart from gravity
+    private var mAccelCurrent = 0f // current acceleration including gravity
+    private var mAccelLast = 0f// last acceleration including gravity
+
+    private var mShaking = false
+
 
     private var mTimerRunning: Boolean = false
 
@@ -84,7 +99,12 @@ class ChronoFragment : Fragment() {
             stopTimer()
         })
         updateCountDownText()
-        
+
+        mSensorManager = context?.getSystemService(Context.SENSOR_SERVICE) as SensorManager?;
+        mSensorManager!!.registerListener(mSensorListener, mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        mAccel = 0.00f;
+        mAccelCurrent = SensorManager.GRAVITY_EARTH;
+        mAccelLast = SensorManager.GRAVITY_EARTH;
     }
 
     fun startTimer()
@@ -134,4 +154,38 @@ class ChronoFragment : Fragment() {
         val timeLeftFormatted:String = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds)
         mTextViewCountDown.setText(timeLeftFormatted)
     }
+
+    private val mSensorListener: SensorEventListener = object : SensorEventListener {
+        override fun onSensorChanged(se: SensorEvent) {
+            val x = se.values[0]
+            val y = se.values[1]
+            val z = se.values[2]
+            mAccelLast = mAccelCurrent
+            mAccelCurrent =
+                Math.sqrt((x * x + y * y + z * z).toDouble()).toFloat()
+            val delta = mAccelCurrent - mAccelLast
+            mAccel = mAccel * 0.9f + delta // perform low-cut filter
+
+            if (mAccel >= 2)
+            {
+                pauseTimer()
+                Log.d("taggle","---------accel---------")
+            }
+            Log.d("---------bjr---------",mAccel.toString())
+        }
+
+        override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int)
+        {}
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mSensorManager?.registerListener(mSensorListener, mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    override fun onPause() {
+        mSensorManager?.unregisterListener(mSensorListener);
+        super.onPause()
+    }
+
 }
