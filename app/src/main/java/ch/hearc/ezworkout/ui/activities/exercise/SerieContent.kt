@@ -21,7 +21,7 @@ object SerieContent {
     /**
      * A map of sample (serie) items, by ID.
      */
-    val ITEM_MAP: MutableMap<String, SerieItem> = HashMap()
+    val ITEM_MAP: MutableMap<Int, SerieItem> = HashMap()
 
     val COUNT = 5
 
@@ -37,24 +37,19 @@ object SerieContent {
         ITEM_MAP.put(item.id, item)
     }
 
-    private fun editItem(id: Int, kg:String, serieCount:String) {
-        ITEMS.get(id).kg = kg
-        ITEMS[1].kg = kg
-    }
-
-    private fun createSerieItem(id: Int, kg:String, serieCount:String): SerieItem {
-        return SerieItem(id.toString(), kg, serieCount)
+    private fun createSerieItem(id: Int, kg:String, reps:String): SerieItem {
+        return SerieItem(id, kg, reps)
     }
 
     /**
      * A serie item representing a piece of content.
      */
-    data class SerieItem(val id: String, val kg: String, val serieCount: String) {
+    data class SerieItem(val id: Int, var kg: String, var reps: String) {
         val label = "kg            x"
-        val content = StringBuilder()
+        var content = StringBuilder()
             .append(kg)
             .append(label)
-            .append(serieCount).toString()
+            .append(reps).toString()
         override fun toString(): String = content
     }
 }

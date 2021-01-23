@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import ch.hearc.ezworkout.R
@@ -21,13 +22,21 @@ class SerieInputDialogFragment : DialogFragment() {
 
             val root = inflater.inflate(R.layout.a_e_serie_input_dialog_fragment, null)
 
-            val serieTxt = "Serie" + arguments?.getString("serie")
+            val serieId = arguments?.getInt("serie")!!
+            val serieTxt = "Serie" + serieId.toString()
             root.findViewById<TextView>(R.id.serieNb).setText(serieTxt)
+            val kgEdit = root.findViewById<EditText>(R.id.kg)
+            val repsEdit = root.findViewById<EditText>(R.id.reps)
 
             builder.setView(root)
                 .setPositiveButton("Validate",
                     DialogInterface.OnClickListener { dialog, id ->
-                        Log.d("Info", arguments.toString())
+                        Log.d("Bro", id?.toString())
+                        Log.d("Bro", SerieContent.ITEMS.toString())
+                        SerieContent.ITEMS[serieId] = SerieContent.SerieItem(serieId,
+                            kgEdit.text.toString(),
+                            repsEdit.text.toString())
+                        Log.d("Bro", SerieContent.ITEMS.toString())
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, id ->

@@ -14,8 +14,8 @@
         android:textStyle="bold"
         android:contentDescription="@string/app_name" />
     <EditText
-        android:id="@+id/username"
-        android:inputType="textEmailAddress"
+        android:id="@+id/kg"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -24,8 +24,8 @@
         android:layout_marginBottom="4dp"
         android:hint="kg" />
     <EditText
-        android:id="@+id/password"
-        android:inputType="textPassword"
+        android:id="@+id/reps"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
