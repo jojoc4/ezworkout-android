@@ -17,7 +17,7 @@ class LogJsonInterceptor : Interceptor {
         val request: Request = chain.request()
         val response: Response = chain.proceed(request)
         val rawJson: String = response.body()!!.string()
-        if(response.isSuccessful){
+        if(!response.isSuccessful){
             Log.d("json interceptor request", String.format("raw request is: %s: %s", response.request().method(), response.request().url().toString()))
             Log.d("json interceptor response", String.format("raw JSON response is: %s", rawJson))
         }
