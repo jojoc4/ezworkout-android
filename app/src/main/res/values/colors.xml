@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#EF5326</color>
     <color name="colorSecondary">#F27654</color>
     <color name="colorSecondaryDark">#F27654</color>
-    <color name="colorLighter">#FEF0EC</color>
-    <color name="colorLight">#FDE0D8</color>
+    <color name="colorLighter">#EEEEEE</color>
+    <color name="colorLight">#CCCCCC</color>
     <color name="colorAccent">#03DAC5</color>
 </resources>
