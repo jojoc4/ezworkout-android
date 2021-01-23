@@ -9,4 +9,5 @@ class ExerciseViewModel : ViewModel() {
     val trainingId = MutableLiveData<Int>()
     val exerciseId = MutableLiveData<Int>()
 
+    val todaysSeries = MutableLiveData<List<Pair<Int, Int>>>()
 }

@@ -33,7 +33,7 @@ class SerieInputDialogFragment : DialogFragment() {
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
                     })
-            //serieNb.text = "Serie" + arguments?.getString("serie")
+
             // Create the AlertDialog object and return it
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
