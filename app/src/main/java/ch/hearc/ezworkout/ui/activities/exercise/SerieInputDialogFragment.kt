@@ -33,14 +33,12 @@ class SerieInputDialogFragment : DialogFragment() {
             builder.setView(root)
                 .setPositiveButton("Validate",
                     DialogInterface.OnClickListener { dialog, id ->
-                        Log.d("Bro", id?.toString())
-                        Log.d("Bro", SerieContent.ITEMS.toString())
-                        SerieContent.ITEMS[serieId] = SerieContent.SerieItem(serieId,
+                        SerieContent.editItem(serieId,
                             kgEdit.text.toString(),
                             repsEdit.text.toString())
+
                         (it.supportFragmentManager.findFragmentById(R.id.exercise_today_fragment) as ExerciseTodayFragment)
                             .myAdapter.notifyDataSetChanged()
-                        Log.d("Bro", SerieContent.ITEMS.toString())
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, id ->

@@ -33,7 +33,6 @@ class ExerciseRecyclerViewAdapter(
         holder.contentView.text = item.content
         holder.contentView.setOnClickListener(View.OnClickListener { v ->
             val activity = v.context as AppCompatActivity
-            Log.d("Bro", activity.supportFragmentManager.fragments.toString())
             val newDialog = SerieInputDialogFragment()
             val params = Bundle()
             params.putInt("serie", item.id)

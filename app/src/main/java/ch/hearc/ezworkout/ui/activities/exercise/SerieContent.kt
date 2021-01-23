@@ -1,6 +1,7 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
 import android.text.Editable
+import android.util.Log
 import android.widget.EditText
 import java.util.ArrayList
 import java.util.HashMap
@@ -35,6 +36,18 @@ object SerieContent {
     private fun addItem(item: SerieItem) {
         ITEMS.add(item)
         ITEM_MAP.put(item.id, item)
+    }
+
+   fun editItem(id: Int, kg:String, reps:String) {
+
+        var kgTxt = kg
+        var repsTxt = reps
+
+        if(kg.isNullOrEmpty())
+            kgTxt = "__"
+        if(reps.isNullOrEmpty())
+            repsTxt = "__"
+        ITEMS[id - 1] = SerieItem(id, kgTxt, repsTxt) // id - 1 : because ids go from 1 to serieCount
     }
 
     private fun createSerieItem(id: Int, kg:String, reps:String): SerieItem {
