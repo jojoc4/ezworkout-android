@@ -16,6 +16,7 @@ import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.repository.Repository
+import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
 
 /**
  * A fragment representing a list of exercises.
@@ -78,12 +79,23 @@ class TrainingListFragment : Fragment() {
 
         val exerciseId = model.trainingId.value
 
-        // Load data
-        mainViewModel.getExercise(Integer(exerciseId!!))
+        // Get current LBPageId
+        mainViewModel.getTrainingEff(model.currentLBPid.value!!, model.trainingId.value!!)
+        mainViewModel.LBPAndTrTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
+            if (response.isEmpty()) {
+                model.trainingEffId.value = null
+            } else {
+                model.trainingEffId.value = response.last().id
+            }
+
+            mainViewModel.getExercise(Integer(exerciseId!!))
+        })
+
+        // Exercise data handler
         mainViewModel.exerciseResponse.observe(viewLifecycleOwner, Observer { response ->
             // Add new data
             response.forEach {
-                ExerciseContent.addItem(ExerciseContent.createExerciseItem(it.id, it.name!!))
+                ExerciseContent.addItem(ExerciseContent.createExerciseItem(it.id, it.name!!, false))
             }
 
             // Select the first element by default
@@ -91,6 +103,20 @@ class TrainingListFragment : Fragment() {
 
             // Notify adapter
             myAdapter.notifyDataSetChanged()
+
+            if (model.trainingEffId.value != null) {
+                ExerciseContent.ITEMS.forEach {
+                    mainViewModel.getExerciseEff(model.trainingEffId.value!!, it.id)
+                }
+            }
+        })
+
+        // ExerciseEff data handler (=> skipped)
+        mainViewModel.ETrAndExExerciseEffResponse.observe(viewLifecycleOwner, Observer { response ->
+            if (response.isNotEmpty()) {
+                ExerciseContent.ITEM_MAP[response.first().exerciseId]!!.skipped = response.first().skipped == 1
+                myAdapter.notifyDataSetChanged()
+            }
         })
     }
 

@@ -82,6 +82,7 @@ class TrainingPlanFragment : Fragment() {
                 val intent = Intent(activity, TrainingActivity::class.java)
                 val bundle = Bundle()
 
+                bundle.putInt("currentLBPid", model.currentLBPid.value!!)
                 bundle.putInt("trainingId", model.selected.value!!.id)
                 bundle.putString("trainingLabel", model.selected.value!!.label)
                 bundle.putInt("trainingPlanId", model.trainingPlanId.value!!)
