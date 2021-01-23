@@ -1,6 +1,7 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,8 +25,9 @@ class SerieListFragment : Fragment() {
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
     private val model: ExerciseViewModel by activityViewModels()
-    private lateinit var myAdapter: ExerciseRecyclerViewAdapter
     private lateinit var mainViewModel: MainViewModel
+
+    private lateinit var myAdapter: ExerciseRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +45,7 @@ class SerieListFragment : Fragment() {
 
         // Set the adapter
         if (view is RecyclerView) {
-            myAdapter = ExerciseRecyclerViewAdapter(SerieContent.ITEMS, model)
+            myAdapter = (parentFragment as ExerciseTodayFragment).myAdapter
 
             with(view) {
                 layoutManager = when {

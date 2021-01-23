@@ -1,6 +1,7 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +33,13 @@ class ExerciseRecyclerViewAdapter(
         holder.contentView.text = item.content
         holder.contentView.setOnClickListener(View.OnClickListener { v ->
             val activity = v.context as AppCompatActivity
+            Log.d("Bro", activity.supportFragmentManager.fragments.toString())
             val newDialog = SerieInputDialogFragment()
             val params = Bundle()
             params.putInt("serie", item.id)
             newDialog.arguments = params
             newDialog.show(activity.supportFragmentManager, "Hey")
+            this.notifyDataSetChanged()
         })
     }
 

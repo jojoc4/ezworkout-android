@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.ezworkout.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,11 +25,15 @@ class ExerciseTodayFragment : Fragment() {
 
     private val model: ExerciseViewModel by activityViewModels()
 
+    lateinit var myAdapter: ExerciseRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        myAdapter = ExerciseRecyclerViewAdapter(SerieContent.ITEMS, model)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.a_e_exercise_today_fragment, container, false)
     }

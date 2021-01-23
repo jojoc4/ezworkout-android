@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import ch.hearc.ezworkout.R
 import kotlinx.android.synthetic.main.a_e_serie_input_dialog_fragment.*
+import ch.hearc.ezworkout.ui.activities.exercise.SerieListFragment
+import kotlinx.android.synthetic.main.a_e_exercise_activity.*
 
 class SerieInputDialogFragment : DialogFragment() {
 
@@ -36,6 +38,8 @@ class SerieInputDialogFragment : DialogFragment() {
                         SerieContent.ITEMS[serieId] = SerieContent.SerieItem(serieId,
                             kgEdit.text.toString(),
                             repsEdit.text.toString())
+                        (it.supportFragmentManager.findFragmentById(R.id.exercise_today_fragment) as ExerciseTodayFragment)
+                            .myAdapter.notifyDataSetChanged()
                         Log.d("Bro", SerieContent.ITEMS.toString())
                     })
                 .setNegativeButton("Cancel",
