@@ -1,12 +1,10 @@
 package ch.hearc.ezworkout.networking.utils
 
 import android.util.Log
-import androidx.core.net.toUri
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.ResponseBody
-import okio.Buffer
 import java.io.IOException
 
 /***

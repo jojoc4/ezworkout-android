@@ -34,6 +34,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //verify that the credential to webapp are saved
         var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+
+        if(!sharedPref.contains("vibration")){
+            with (sharedPref?.edit()) {
+                this?.putBoolean("vibration", true)
+                this?.apply()
+            }
+
+        }
+
+
         val connected = sharedPref.getBoolean("connected", false)
         if(!connected){
             val intent = Intent(this, ConnectActivity::class.java)

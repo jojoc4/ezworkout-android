@@ -20,4 +20,16 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="today">Today</string>
+    <string name="delete">Supprimer</string>
+    <string name="rename">Renommer</string>
+    <string name="cancel">Annuler</string>
+    <string name="exercise_delete_confirmation">Êtes-vous sûr de vouloir supprimer cet exercice?</string>
+    <string name="training_delete_confirmation">Êtes-vous sûr de vouloir supprimer cet entraînement?</string>
+    <string name="add">Ajouter</string>
+    <string name="trainingPlan_delete_confirmation">Êtes-vous sûr de vouloir supprimer ce plan d\'entraînement?</string>
+    <string name="trainingPlan_delete_error">Vous ne pouvez pas supprimer le plan d\'entraînement actuellement sélectionné</string>
+    <string name="trainingPlan_selected">Sélectionné comme plan actuel</string>
+    <string name="save">Enregistrer</string>
+    <string name="settings_title">Paramètres</string>
+    <string name="qrscanner_title">Scannez le QrCode</string>
 </resources>

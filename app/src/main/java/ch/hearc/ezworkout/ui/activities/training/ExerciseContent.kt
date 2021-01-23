@@ -34,14 +34,14 @@ object ExerciseContent {
         ITEM_MAP[item.id] = item
     }
 
-    fun createExerciseItem(id: Int, label: String): ExerciseItem {
-        return ExerciseItem(id, label)
+    fun createExerciseItem(id: Int, label: String, skipped: Boolean): ExerciseItem {
+        return ExerciseItem(id, label, skipped)
     }
 
     /**
      * A exercise item representing a piece of content.
      */
-    data class ExerciseItem(val id: Int, val label: String) {
+    data class ExerciseItem(val id: Int, val label: String, var skipped: Boolean) {
         override fun toString(): String = label
     }
 }

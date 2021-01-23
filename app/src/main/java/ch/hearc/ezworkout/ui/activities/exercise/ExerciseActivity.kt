@@ -20,10 +20,14 @@ class ExerciseActivity : AppCompatActivity() {
         val exerciseLabel: String? = intent.getStringExtra("exerciseLabel")
 
         setContentView(R.layout.a_e_exercise_activity)
-        title = "$exerciseId : $exerciseLabel"
+        title = "$exerciseLabel"
 
         model.trainingPlanId.value = trainingPlanId
         model.trainingId.value = trainingId
         model.exerciseId.value = exerciseId
+        //setContentView(R.layout.a_e_exercise_activity)
+        //setTitle(exercise_id)
+
+        model.chronoDurationMilis.value = 10000
     }
 }
