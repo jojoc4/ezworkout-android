@@ -52,12 +52,20 @@ class Repository(private val sharedPref: SharedPreferences) {
         return  RetrofitInstance.api.getTrainingEff(token, id)
     }
 
+    suspend fun getTrainingEff(idLBP: Int, idTr: Int): List<TrainingEff> {
+        return  RetrofitInstance.api.getTrainingEff(token, idLBP, idTr)
+    }
+
     suspend fun getExerciseEff(TEid: Integer): List<ExerciseEff> {
         return  RetrofitInstance.api.getExerciseEff(token, TEid)
     }
 
     suspend fun getExerciseEff(id: Int): ExerciseEff {
         return  RetrofitInstance.api.getExerciseEff(token, id)
+    }
+
+    suspend fun getExerciseEff(idETr: Int, idEx: Int): List<ExerciseEff> {
+        return  RetrofitInstance.api.getExerciseEff(token, idETr, idEx)
     }
 
     suspend fun getSeriesEff(EEid: Integer): List<SeriesEff> {
@@ -106,8 +114,16 @@ class Repository(private val sharedPref: SharedPreferences) {
         return RetrofitInstance.api.updateTraining(token, tr.id, tr.name.toString())
     }
 
+    suspend fun updateTrainingEff(tr: TrainingEff): TrainingEff {
+        return RetrofitInstance.api.updateTrainingEff(token, tr.id, tr.logbookPageId, tr.date.toString(), tr.skipped, tr.trainingId)
+    }
+
     suspend fun updateExercise(ex: Exercise): Exercise {
         return RetrofitInstance.api.updateExercise(token, ex.id, ex.name.toString(), ex.comment.toString(), ex.nbSerie, ex.repMin, ex.repMax, ex.pauseSerie, ex.pauseExercise)
+    }
+
+    suspend fun updateExerciseEff(ex: ExerciseEff): ExerciseEff {
+        return RetrofitInstance.api.updateExerciseEff(token, ex.id, ex.trainingEffId, ex.pause, ex.skipped, ex.exerciseId, ex.rating)
     }
 
 

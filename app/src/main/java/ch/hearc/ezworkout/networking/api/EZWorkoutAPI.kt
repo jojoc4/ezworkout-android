@@ -37,11 +37,17 @@ interface EZWorkoutAPI {
     @GET("trainingEff/{id}")
     suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("id") id: Int): TrainingEff
 
+    @GET("trainingEff/fromLBPAndTraining/{idLBP}/{idTr}")
+    suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("idLBP") idLBP: Int, @Path("idTr") idTr: Int): List<TrainingEff>
+
     @GET("exerciseEff/fromTE/{id}")
     suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("id") TEid: Integer): List<ExerciseEff>
 
     @GET("exerciseEff/{id}")
     suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("id") id: Int): ExerciseEff
+
+    @GET("exerciseEff/fromTEAndExercise/{idETr}/{idEx}")
+    suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("idETr") idETr: Int, @Path("idEx") idEx: Int): List<ExerciseEff>
 
     @GET("seriesEff/fromEE/{id}")
     suspend fun getSeriesEff(@Header("Authorization") token: String, @Path("id") EEid: Integer): List<SeriesEff>
@@ -78,8 +84,14 @@ interface EZWorkoutAPI {
     @PUT("training/{id}/")
     suspend fun updateTraining(@Header("Authorization") token: String, @Path("id") id: Int, @Query("name") name: String): Training
 
+    @PUT("trainingEff/{id}/")
+    suspend fun updateTrainingEff(@Header("Authorization") token: String, @Path("id") id: Int, @Query("logbookPage") idLBP: Int, @Query("date") date: String, @Query("skipped") skipped: Int, @Query("training") idTr: Int): TrainingEff
+
     @PUT("exercise/{id}/")
     suspend fun updateExercise(@Header("Authorization") token: String, @Path("id") id: Int, @Query("name") name: String, @Query("comment") comment: String, @Query("nbSerie") nbSerie: Int, @Query("repMin") repMin: Int, @Query("repMax") repMax: Int, @Query("pauseSerie") pauseSerie: Int, @Query("pauseExercise") pauseExercise: Int): Exercise
+
+    @PUT("exerciseEff/{id}/")
+    suspend fun updateExerciseEff(@Header("Authorization") token: String, @Path("id") id: Int, @Query("training_eff") idETr: Int, @Query("pause") pause: Int, @Query("skipped") skipped: Int, @Query("exercise") IdExercise: Int, @Query("rating") rating: Int): ExerciseEff
 
 
     @DELETE("trainingPlan/{id}")
