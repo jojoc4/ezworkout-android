@@ -1,6 +1,7 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
 import android.text.Editable
+import android.util.Log
 import android.widget.EditText
 import java.util.ArrayList
 import java.util.HashMap
@@ -21,14 +22,14 @@ object SerieContent {
     /**
      * A map of sample (serie) items, by ID.
      */
-    val ITEM_MAP: MutableMap<String, SerieItem> = HashMap()
+    val ITEM_MAP: MutableMap<Int, SerieItem> = HashMap()
 
-    private val COUNT = 5
+    val COUNT = 5
 
     init {
         // Add some sample items.
         for (i in 1..COUNT) {
-            addItem(createSerieItem(i, 25, 12))
+            addItem(createSerieItem(i, "__", "__"))
         }
     }
 
@@ -37,19 +38,31 @@ object SerieContent {
         ITEM_MAP.put(item.id, item)
     }
 
-    private fun createSerieItem(id: Int, kg:Int, serieCount:Int): SerieItem {
-        return SerieItem(id.toString(), kg.toString(), serieCount.toString())
+   fun editItem(id: Int, kg:String, reps:String) {
+
+        var kgTxt = kg
+        var repsTxt = reps
+
+        if(kg.isNullOrEmpty())
+            kgTxt = "__"
+        if(reps.isNullOrEmpty())
+            repsTxt = "__"
+        ITEMS[id - 1] = SerieItem(id, kgTxt, repsTxt) // id - 1 : because ids go from 1 to serieCount
+    }
+
+    private fun createSerieItem(id: Int, kg:String, reps:String): SerieItem {
+        return SerieItem(id, kg, reps)
     }
 
     /**
      * A serie item representing a piece of content.
      */
-    data class SerieItem(val id: String, val kg: String, val serieCount: String) {
+    data class SerieItem(val id: Int, var kg: String, var reps: String) {
         val label = "kg            x"
-        val content = StringBuilder()
+        var content = StringBuilder()
             .append(kg)
             .append(label)
-            .append(serieCount).toString()
+            .append(reps).toString()
         override fun toString(): String = content
     }
 }
