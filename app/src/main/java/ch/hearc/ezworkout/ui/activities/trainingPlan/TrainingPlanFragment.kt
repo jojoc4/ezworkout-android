@@ -51,9 +51,9 @@ class TrainingPlanFragment : Fragment() {
         // Observer
         mainViewModel.LBPAndTrTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
             if (skipping) {
-                if (response != null) {
-                    response.skipped = 1
-                    mainViewModel.updateTrainingEff(response)
+                if (response.isNotEmpty()) {
+                    response.first().skipped = 1
+                    mainViewModel.updateTrainingEff(response.first())
                 } else {
                     val trainingEff = TrainingEff()
                     trainingEff.logbookPageId = model.currentLBPid.value!!
@@ -64,9 +64,10 @@ class TrainingPlanFragment : Fragment() {
                     mainViewModel.addTrainingEff(trainingEff)
                 }
             } else {
-                if (response != null) {
-                    response.skipped = 0
-                    mainViewModel.updateTrainingEff(response)
+                if (response.isNotEmpty()) {
+                    response.first().skipped = 0
+
+                    mainViewModel.updateTrainingEff(response.first())
                 } else {
                     val trainingEff = TrainingEff()
                     trainingEff.logbookPageId = model.currentLBPid.value!!

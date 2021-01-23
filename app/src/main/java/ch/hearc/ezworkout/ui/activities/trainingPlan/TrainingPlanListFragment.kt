@@ -111,8 +111,6 @@ class TrainingPlanListFragment : Fragment() {
             // Notify adapter
             myAdapter.notifyDataSetChanged()
 
-            Log.d("####", model.currentLBPid.value.toString())
-
             if (model.currentLBPid.value != null) {
                 TrainingContent.ITEMS.forEach {
                     mainViewModel.getTrainingEff(model.currentLBPid.value!!, it.id)
@@ -122,8 +120,8 @@ class TrainingPlanListFragment : Fragment() {
 
         // TrainingEff data handler (=> skipped)
         mainViewModel.LBPAndTrTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
-            if (response != null) {
-                TrainingContent.ITEM_MAP[response.id]!!.skipped = response.skipped == 1
+            if (response.isNotEmpty()) {
+                TrainingContent.ITEM_MAP[response.first().trainingId]!!.skipped = response.first().skipped == 1
                 myAdapter.notifyDataSetChanged()
             }
         })
