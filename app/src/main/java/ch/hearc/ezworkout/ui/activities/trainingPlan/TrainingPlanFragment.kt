@@ -40,19 +40,19 @@ class TrainingPlanFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.a_tp_training_plan_fragment, container, false)
 
-        // Get mainViewModel and currentTPid
+        // Get mainViewModel
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
         mainViewModel = ViewModelProvider(
             this,
             MainViewModelFactory(Repository(sharedPref))
         ).get(MainViewModel::class.java)
-        val currentTPid = sharedPref.getInt("currentTPid", 1)
 
         // Observer
         mainViewModel.LBPAndTrTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
             if (skipping) {
                 if (response.isNotEmpty()) {
                     response.first().skipped = 1
+
                     mainViewModel.updateTrainingEff(response.first())
                 } else {
                     val trainingEff = TrainingEff()

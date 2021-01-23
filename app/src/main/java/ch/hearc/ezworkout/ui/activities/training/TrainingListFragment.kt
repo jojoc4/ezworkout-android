@@ -66,11 +66,6 @@ class TrainingListFragment : Fragment() {
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
 
-        // Clear local data
-        ExerciseContent.ITEMS.clear()
-        ExerciseContent.ITEM_MAP.clear()
-        model.selected.value = null
-
         // Access db data local model
         mainViewModel = ViewModelProvider(
             this,
@@ -79,8 +74,6 @@ class TrainingListFragment : Fragment() {
 
         val exerciseId = model.trainingId.value
 
-        // Get current LBPageId
-        mainViewModel.getTrainingEff(model.currentLBPid.value!!, model.trainingId.value!!)
         mainViewModel.LBPAndTrTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isEmpty()) {
                 model.trainingEffId.value = null
@@ -118,6 +111,18 @@ class TrainingListFragment : Fragment() {
                 myAdapter.notifyDataSetChanged()
             }
         })
+
+        getData()
+    }
+
+    private fun getData() {
+        // Clear local data
+        ExerciseContent.ITEMS.clear()
+        ExerciseContent.ITEM_MAP.clear()
+        model.selected.value = null
+
+        // Get current LBPageId
+        mainViewModel.getTrainingEff(model.currentLBPid.value!!, model.trainingId.value!!)
     }
 
     companion object {
