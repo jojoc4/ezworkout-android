@@ -8,7 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.ui.activities.training.TrainingRecyclerViewAdapter
+import ch.hearc.ezworkout.ui.activities.training.TrainingViewModel
 
 /**
  * A fragment representing a list of Items.
@@ -16,6 +20,12 @@ import ch.hearc.ezworkout.R
 class SerieListFragment : Fragment() {
 
     private var columnCount = 1
+
+    // Use the 'by activityViewModels()' Kotlin property delegate
+    // from the fragment-ktx artifact
+    private val model: ExerciseViewModel by activityViewModels()
+    private lateinit var myAdapter: ExerciseRecyclerViewAdapter
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +43,14 @@ class SerieListFragment : Fragment() {
 
         // Set the adapter
         if (view is RecyclerView) {
+            myAdapter = ExerciseRecyclerViewAdapter(SerieContent.ITEMS, model)
+
             with(view) {
                 layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = ExerciseRecyclerViewAdapter(SerieContent.ITEMS)
+                adapter = myAdapter
             }
         }
         return view

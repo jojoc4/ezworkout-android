@@ -17,7 +17,7 @@ import ch.hearc.ezworkout.ui.activities.exercise.SerieContent.SerieItem
  * TODO: Replace the implementation with code for your data type.
  */
 class ExerciseRecyclerViewAdapter(
-    private val values: List<SerieItem>
+    private val values: List<SerieItem>, private val model: ExerciseViewModel
 ) : RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,7 +36,7 @@ class ExerciseRecyclerViewAdapter(
             val params = Bundle()
             params.putString("serie", item.id)
             newDialog.arguments = params
-            newDialog.show(activity.supportFragmentManager, "hey")
+            newDialog.show(activity.supportFragmentManager, "Hey")
         })
     }
 

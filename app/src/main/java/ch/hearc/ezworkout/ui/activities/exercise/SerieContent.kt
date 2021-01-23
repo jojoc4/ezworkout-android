@@ -23,12 +23,12 @@ object SerieContent {
      */
     val ITEM_MAP: MutableMap<String, SerieItem> = HashMap()
 
-    private val COUNT = 5
+    val COUNT = 5
 
     init {
         // Add some sample items.
         for (i in 1..COUNT) {
-            addItem(createSerieItem(i, 25, 12))
+            addItem(createSerieItem(i, "__", "__"))
         }
     }
 
@@ -37,8 +37,13 @@ object SerieContent {
         ITEM_MAP.put(item.id, item)
     }
 
-    private fun createSerieItem(id: Int, kg:Int, serieCount:Int): SerieItem {
-        return SerieItem(id.toString(), kg.toString(), serieCount.toString())
+    private fun editItem(id: Int, kg:String, serieCount:String) {
+        ITEMS.get(id).kg = kg
+        ITEMS[1].kg = kg
+    }
+
+    private fun createSerieItem(id: Int, kg:String, serieCount:String): SerieItem {
+        return SerieItem(id.toString(), kg, serieCount)
     }
 
     /**
