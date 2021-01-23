@@ -38,7 +38,7 @@ interface EZWorkoutAPI {
     suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("id") id: Int): TrainingEff
 
     @GET("trainingEff/fromLBPAndTraining/{idLBP}/{idTr}")
-    suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("idLBP") idLBP: Int, @Path("idTr") idTr: Int): TrainingEff
+    suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("idLBP") idLBP: Int, @Path("idTr") idTr: Int): List<TrainingEff>
 
     @GET("exerciseEff/fromTE/{id}")
     suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("id") TEid: Integer): List<ExerciseEff>
@@ -47,7 +47,7 @@ interface EZWorkoutAPI {
     suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("id") id: Int): ExerciseEff
 
     @GET("exerciseEff/fromTEAndExercise/{idETr}/{idEx}")
-    suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("idETr") idETr: Int, @Path("idEx") idEx: Int): ExerciseEff
+    suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("idETr") idETr: Int, @Path("idEx") idEx: Int): List<ExerciseEff>
 
     @GET("seriesEff/fromEE/{id}")
     suspend fun getSeriesEff(@Header("Authorization") token: String, @Path("id") EEid: Integer): List<SeriesEff>

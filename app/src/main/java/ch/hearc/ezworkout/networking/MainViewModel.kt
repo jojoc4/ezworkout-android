@@ -98,7 +98,7 @@ class MainViewModel (private val repository: Repository): ViewModel()
         }
     }
 
-    val LBPAndTrTrainingEffResponse: MutableLiveData<TrainingEff> = MutableLiveData()
+    val LBPAndTrTrainingEffResponse: MutableLiveData<List<TrainingEff>> = MutableLiveData()
     fun getTrainingEff(idLBP: Int, idTr: Int) {
         viewModelScope.launch {
             val response = repository.getTrainingEff(idLBP, idTr)
@@ -122,7 +122,7 @@ class MainViewModel (private val repository: Repository): ViewModel()
         }
     }
 
-    val ETrAndExExerciseEffResponse: MutableLiveData<ExerciseEff> = MutableLiveData()
+    val ETrAndExExerciseEffResponse: MutableLiveData<List<ExerciseEff>> = MutableLiveData()
     fun getExerciseEff(idETr: Int, idEx: Int) {
         viewModelScope.launch {
             val response = repository.getExerciseEff(idETr, idEx)
