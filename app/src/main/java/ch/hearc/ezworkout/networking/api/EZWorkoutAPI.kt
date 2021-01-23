@@ -37,11 +37,17 @@ interface EZWorkoutAPI {
     @GET("trainingEff/{id}")
     suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("id") id: Int): TrainingEff
 
+    @GET("trainingEff/fromLBPAndTraining/{idLBP}/{idTr}")
+    suspend fun getTrainingEff(@Header("Authorization") token: String, @Path("idLBP") idLBP: Int, @Path("idTr") idTr: Int): TrainingEff
+
     @GET("exerciseEff/fromTE/{id}")
     suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("id") TEid: Integer): List<ExerciseEff>
 
     @GET("exerciseEff/{id}")
     suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("id") id: Int): ExerciseEff
+
+    @GET("exerciseEff/fromTEAndExercise/{idETr}/{idEx}")
+    suspend fun getExerciseEff(@Header("Authorization") token: String, @Path("idETr") idETr: Int, @Path("idEx") idEx: Int): ExerciseEff
 
     @GET("seriesEff/fromEE/{id}")
     suspend fun getSeriesEff(@Header("Authorization") token: String, @Path("id") EEid: Integer): List<SeriesEff>
