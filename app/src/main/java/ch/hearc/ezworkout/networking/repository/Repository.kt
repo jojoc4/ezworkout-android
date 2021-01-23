@@ -114,8 +114,16 @@ class Repository(private val sharedPref: SharedPreferences) {
         return RetrofitInstance.api.updateTraining(token, tr.id, tr.name.toString())
     }
 
+    suspend fun updateTrainingEff(tr: TrainingEff): TrainingEff {
+        return RetrofitInstance.api.updateTrainingEff(token, tr.id, tr.logbookPageId, tr.date.toString(), tr.skipped, tr.trainingId)
+    }
+
     suspend fun updateExercise(ex: Exercise): Exercise {
         return RetrofitInstance.api.updateExercise(token, ex.id, ex.name.toString(), ex.comment.toString(), ex.nbSerie, ex.repMin, ex.repMax, ex.pauseSerie, ex.pauseExercise)
+    }
+
+    suspend fun updateExerciseEff(ex: ExerciseEff): ExerciseEff {
+        return RetrofitInstance.api.updateExerciseEff(token, ex.id, ex.trainingEffId, ex.pause, ex.skipped, ex.exerciseId, ex.rating)
     }
 
 
