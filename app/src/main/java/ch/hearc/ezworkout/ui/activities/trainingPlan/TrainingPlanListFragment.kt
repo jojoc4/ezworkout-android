@@ -1,5 +1,6 @@
 package ch.hearc.ezworkout.ui.activities.trainingPlan
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,7 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
+import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
+import java.time.LocalDateTime
 
 /**
  * A fragment representing a list of trainings.
@@ -82,12 +86,23 @@ class TrainingPlanListFragment : Fragment() {
         val currentTPid = sharedPref.getInt("currentTPid", 1)
         model.trainingPlanId.value = currentTPid
 
-        // Load data
-        mainViewModel.getTraining(Integer(currentTPid))
+        // Get current LBPageId
+        mainViewModel.getLogbookPage(Integer(currentTPid))
+        mainViewModel.logbookPageResponse.observe(viewLifecycleOwner, Observer { response ->
+            if (response.isEmpty()) {
+                model.currentLBPid.value = null
+            } else {
+                model.currentLBPid.value = response.last().id
+            }
+
+            mainViewModel.getTraining(Integer(currentTPid))
+        })
+
+        // Training data handler
         mainViewModel.trainingResponse.observe(viewLifecycleOwner, Observer { response ->
             // Add new data
             response.forEach {
-                TrainingContent.addItem(TrainingContent.createTrainingItem(it.id, it.name!!))
+                TrainingContent.addItem(TrainingContent.createTrainingItem(it.id, it.name!!, false))
             }
 
             // Select the first element by default
@@ -95,6 +110,22 @@ class TrainingPlanListFragment : Fragment() {
 
             // Notify adapter
             myAdapter.notifyDataSetChanged()
+
+            Log.d("####", model.currentLBPid.value.toString())
+
+            if (model.currentLBPid.value != null) {
+                TrainingContent.ITEMS.forEach {
+                    mainViewModel.getTrainingEff(model.currentLBPid.value!!, it.id)
+                }
+            }
+        })
+
+        // TrainingEff data handler (=> skipped)
+        mainViewModel.LBPAndTrTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
+            if (response != null) {
+                TrainingContent.ITEM_MAP[response.id]!!.skipped = response.skipped == 1
+                myAdapter.notifyDataSetChanged()
+            }
         })
     }
 

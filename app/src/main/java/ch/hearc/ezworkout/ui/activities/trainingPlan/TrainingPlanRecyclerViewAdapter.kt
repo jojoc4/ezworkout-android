@@ -29,7 +29,7 @@ class TrainingPlanRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.labelView.text = item.label
+        holder.labelView.text = item.label // + (if (item.skipped) " [SKIPPED]" else "")
         holder.itemView.isSelected = selectedPos == position;
 
         holder.itemView.setOnClickListener {
