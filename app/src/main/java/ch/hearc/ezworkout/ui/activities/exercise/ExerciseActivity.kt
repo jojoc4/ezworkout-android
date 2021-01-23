@@ -25,8 +25,8 @@ class ExerciseActivity : AppCompatActivity() {
         model.trainingPlanId.value = trainingPlanId
         model.trainingId.value = trainingId
         model.exerciseId.value = exerciseId
-        setContentView(R.layout.a_e_exercise_activity)
-        setTitle(exercise_id)
+        //setContentView(R.layout.a_e_exercise_activity)
+        //setTitle(exercise_id)
 
         model.chronoDurationMilis.value = 10000
     }

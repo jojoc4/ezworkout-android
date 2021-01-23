@@ -62,7 +62,7 @@ class ChronoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val root =  inflater.inflate(R.layout.fragment_chrono, container, false)
+        val root =  inflater.inflate(R.layout.a_e_exercise_chrono_fragment, container, false)
 
         mButtonStartPause = root.findViewById(R.id.button_start_pause)
         mButtonStop = root.findViewById(R.id.button_stop)
@@ -101,7 +101,6 @@ class ChronoFragment : Fragment() {
         updateCountDownText()
 
         mSensorManager = context?.getSystemService(Context.SENSOR_SERVICE) as SensorManager?;
-        mSensorManager!!.registerListener(mSensorListener, mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
         mAccel = 0.00f;
         mAccelCurrent = SensorManager.GRAVITY_EARTH;
         mAccelLast = SensorManager.GRAVITY_EARTH;
@@ -110,6 +109,7 @@ class ChronoFragment : Fragment() {
     fun startTimer()
     {
         mCountDownTimer = object: CountDownTimer(mTimeLeftInMilis, 1000)
+
         {
             override fun onTick(millisUntilFinished: Long)
             {
@@ -129,6 +129,8 @@ class ChronoFragment : Fragment() {
         mTimerRunning = true
         mButtonStartPause.setText("Pause")
         mButtonStop.visibility = View.INVISIBLE
+
+        mSensorManager!!.registerListener(mSensorListener, mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     fun pauseTimer()
@@ -137,6 +139,8 @@ class ChronoFragment : Fragment() {
         mTimerRunning = false
         mButtonStartPause.setText("Start")
         mButtonStop.visibility = View.VISIBLE
+
+        mSensorManager?.unregisterListener(mSensorListener);
     }
 
     fun stopTimer()
@@ -166,12 +170,12 @@ class ChronoFragment : Fragment() {
             val delta = mAccelCurrent - mAccelLast
             mAccel = mAccel * 0.9f + delta // perform low-cut filter
 
-            if (mAccel >= 2)
+            if (mAccel >= 5)
             {
                 pauseTimer()
-                Log.d("taggle","---------accel---------")
+                //Log.d("taggle","---------accel---------")
             }
-            Log.d("---------bjr---------",mAccel.toString())
+            //Log.d("---------bjr---------",mAccel.toString())
         }
 
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int)
