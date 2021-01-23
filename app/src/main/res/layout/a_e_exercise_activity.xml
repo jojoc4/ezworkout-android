@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/exercise_chrono_fragment"
-        android:name="ch.hearc.ezworkout.ui.activities.exercise.ChronoFragment"
+        android:name="ch.hearc.ezworkout.ui.activities.exercise.ExerciseChronoFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />

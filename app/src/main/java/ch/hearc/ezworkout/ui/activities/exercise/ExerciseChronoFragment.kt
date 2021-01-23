@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,10 +25,10 @@ import java.util.*
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ChronoFragment.newInstance] factory method to
+ * Use the [ExerciseChronoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ChronoFragment : Fragment() {
+class ExerciseChronoFragment : Fragment() {
 
 
     private var StartTimeInMilis:Long = 300000
