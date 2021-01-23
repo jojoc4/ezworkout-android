@@ -109,7 +109,6 @@ class ChronoFragment : Fragment() {
     fun startTimer()
     {
         mCountDownTimer = object: CountDownTimer(mTimeLeftInMilis, 1000)
-
         {
             override fun onTick(millisUntilFinished: Long)
             {
@@ -135,12 +134,14 @@ class ChronoFragment : Fragment() {
 
     fun pauseTimer()
     {
-        mCountDownTimer.cancel()
-        mTimerRunning = false
-        mButtonStartPause.setText("Start")
-        mButtonStop.visibility = View.VISIBLE
+        if (mTimerRunning) {
+            mCountDownTimer.cancel()
+            mTimerRunning = false
+            mButtonStartPause.setText("Start")
+            mButtonStop.visibility = View.VISIBLE
 
-        mSensorManager?.unregisterListener(mSensorListener);
+            mSensorManager?.unregisterListener(mSensorListener);
+        }
     }
 
     fun stopTimer()
