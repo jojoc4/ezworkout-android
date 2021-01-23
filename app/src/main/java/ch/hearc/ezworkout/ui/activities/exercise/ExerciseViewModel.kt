@@ -13,4 +13,5 @@ class ExerciseViewModel : ViewModel() {
     val logbookPages = MutableLiveData<List<LogbookPage>>()
     val currentLBIndex = MutableLiveData<Int>()
 
+    val chronoDurationMilis = MutableLiveData<Long>()
 }
