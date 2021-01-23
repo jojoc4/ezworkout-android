@@ -16,9 +16,12 @@ import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
 import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
+import kotlinx.android.synthetic.main.a_e_exercise_history_fragment.*
+import java.time.LocalDateTime
 
 class TrainingPlanFragment : Fragment() {
 
@@ -28,6 +31,7 @@ class TrainingPlanFragment : Fragment() {
 
     private val model: TrainingPlanViewModel by activityViewModels()
     private lateinit var mainViewModel: MainViewModel
+    private var skipping: Boolean = false
     private var checkingTrainingEff: Boolean = false
 
     override fun onCreateView(
@@ -44,42 +48,69 @@ class TrainingPlanFragment : Fragment() {
         ).get(MainViewModel::class.java)
         val currentTPid = sharedPref.getInt("currentTPid", 1)
 
+        // Observer
+        mainViewModel.LBPAndTrTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
+            if (skipping) {
+                if (response != null) {
+                    response.skipped = 1
+                    mainViewModel.updateTrainingEff(response)
+                } else {
+                    val trainingEff = TrainingEff()
+                    trainingEff.logbookPageId = model.currentLBPid.value!!
+                    trainingEff.trainingId = model.selected.value!!.id
+                    trainingEff.date = LocalDateTime.now().toString()
+                    trainingEff.skipped = 1
+
+                    mainViewModel.addTrainingEff(trainingEff)
+                }
+            } else {
+                if (response != null) {
+                    response.skipped = 0
+                    mainViewModel.updateTrainingEff(response)
+                } else {
+                    val trainingEff = TrainingEff()
+                    trainingEff.logbookPageId = model.currentLBPid.value!!
+                    trainingEff.trainingId = model.selected.value!!.id
+                    trainingEff.date = LocalDateTime.now().toString()
+                    trainingEff.skipped = 0
+
+                    mainViewModel.addTrainingEff(trainingEff)
+                }
+
+                // Create a new activity and pass the bundle to it
+                val intent = Intent(activity, TrainingActivity::class.java)
+                val bundle = Bundle()
+
+                bundle.putInt("trainingId", model.selected.value!!.id)
+                bundle.putString("trainingLabel", model.selected.value!!.label)
+                bundle.putInt("trainingPlanId", model.trainingPlanId.value!!)
+                intent.putExtras(bundle)
+
+                startActivity(intent)
+            }
+
+            checkingTrainingEff = false
+        })
+
         // Start button handler
         val btnStart: Button = root.findViewById(R.id.start)
         btnStart.setOnClickListener {
-            if (!checkingTrainingEff) {
+            if (!checkingTrainingEff && model.currentLBPid.value != null) {
                 checkingTrainingEff = true
+                skipping = false
 
-                //mainViewModel.getTrainingEff(currentTPid, model.selected.value!!.id)
-                mainViewModel.oneTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
-                    if (response != null) {
-
-                    }
-
-                    // Create a new activity and pass the bundle to it
-                    val intent = Intent(activity, TrainingActivity::class.java)
-                    val bundle = Bundle()
-
-                    bundle.putInt("trainingId", model.selected.value!!.id)
-                    bundle.putString("trainingLabel", model.selected.value!!.label)
-                    bundle.putInt("trainingPlanId", model.trainingPlanId.value!!)
-                    intent.putExtras(bundle)
-
-                    startActivity(intent)
-                })
+                mainViewModel.getTrainingEff(model.currentLBPid.value!!, model.selected.value!!.id)
             } else Log.d("Err", "Already busy!")
         }
 
         // Skip button handler
         val btnSkip: Button = root.findViewById(R.id.skip)
         btnSkip.setOnClickListener {
-            if (!checkingTrainingEff) {
+            if (!checkingTrainingEff && model.currentLBPid.value != null) {
                 checkingTrainingEff = true
+                skipping = true
 
-                //mainViewModel.getTrainingEff(currentTPid, model.selected.value!!.id)
-                mainViewModel.trainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
-                    // TODO
-                })
+                mainViewModel.getTrainingEff(model.currentLBPid.value!!, model.selected.value!!.id)
             } else Log.d("Err", "Already busy!")
         }
 
