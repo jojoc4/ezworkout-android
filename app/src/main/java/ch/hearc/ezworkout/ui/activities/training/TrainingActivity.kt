@@ -17,7 +17,7 @@ class TrainingActivity : AppCompatActivity() {
         val trainingLabel: String? = intent.getStringExtra("trainingLabel")
 
         setContentView(R.layout.a_t_training_activity)
-        title = "$trainingId : $trainingLabel"
+        title = "$trainingLabel"
 
         model.trainingPlanId.value = trainingPlanId
         model.trainingId.value = trainingId
