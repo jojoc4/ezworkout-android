@@ -18,8 +18,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.repository.Repository
 import java.util.*
 
 
@@ -81,6 +85,7 @@ class ExerciseChronoFragment : Fragment() {
         vibrationEffect1 = VibrationEffect.createWaveform(timings,amplitudes,2)
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
+
         vibrator = requireActivity().getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         mButtonStartPause.setOnClickListener(View.OnClickListener {
