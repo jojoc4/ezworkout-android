@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="00:00"
-        android:textColor="@android:color/black"
         android:textSize="60sp"
         />
 
@@ -34,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Stop"
+            android:text="End"
             android:visibility="invisible"
             tools:visibility="visible"
 
