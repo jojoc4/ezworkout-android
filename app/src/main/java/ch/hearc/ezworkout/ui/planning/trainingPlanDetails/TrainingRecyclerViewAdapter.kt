@@ -14,7 +14,6 @@ import ch.hearc.ezworkout.ui.planning.trainingDetails.TrainingDetails
 
 /**
  * [RecyclerView.Adapter] that can display a TRList.
- * TODO: Replace the implementation with code for your data type.
  */
 class TrainingRecyclerViewAdapter(
     private val values: List<FragmentTraining.Tr>,

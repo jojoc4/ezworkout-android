@@ -15,7 +15,6 @@ import ch.hearc.ezworkout.ui.planning.exerciseDetails.ExerciseDetails
 
 /**
  * [RecyclerView.Adapter] that can display a exercise.
- * TODO: Replace the implementation with code for your data type.
  */
 class ExerciseRecyclerViewAdapter(
     private val values: List<FragmentExercise.Ex>,
