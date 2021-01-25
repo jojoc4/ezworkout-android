@@ -37,6 +37,7 @@ class ExerciseActivity : AppCompatActivity() {
         model.trainingPlanId.value = trainingPlanId
         model.trainingId.value = trainingId
         model.exerciseId.value = exerciseId
+        model.chronoDurationReady.value = false
         //setContentView(R.layout.a_e_exercise_activity)
         //setTitle(exercise_id)
 
@@ -49,12 +50,11 @@ class ExerciseActivity : AppCompatActivity() {
         mainViewModel.getExercise(exerciseId)
 
         model.chronoDurationMilis.value = 60000
+
         mainViewModel.oneExerciseResponse.observe(this, Observer { response ->
-
-            Log.d("-------pause----------",response.pauseExercise.toLong().toString())
-            model.chronoDurationMilis.value = response.pauseExercise.toLong()
+            model.chronoDurationMilis.value = response.pauseExercise.toLong() * 1000
+            model.chronoDurationReady.value = true
         })
-
 
     }
 

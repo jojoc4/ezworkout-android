@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,8 +36,8 @@ import java.util.*
 class ExerciseChronoFragment : Fragment() {
 
 
-    private var StartTimeInMilis:Long = 300000
-    private var mTimeLeftInMilis: Long = StartTimeInMilis
+
+    private var mTimeLeftInMilis: Long = 0
 
     private val model: ExerciseViewModel by activityViewModels()
 
@@ -77,8 +78,15 @@ class ExerciseChronoFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        StartTimeInMilis = model.chronoDurationMilis.value!!
-        mTimeLeftInMilis = StartTimeInMilis
+        mTimeLeftInMilis = model.chronoDurationMilis.value!!
+
+        model.chronoDurationReady.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it)
+            {
+                setChronoDuration()
+            }
+        })
+
 
         val timings = longArrayOf(0, 1000, 500)
         val amplitudes = intArrayOf(0, VibrationEffect.DEFAULT_AMPLITUDE, 0)
@@ -108,6 +116,12 @@ class ExerciseChronoFragment : Fragment() {
         mAccel = 0.00f;
         mAccelCurrent = SensorManager.GRAVITY_EARTH;
         mAccelLast = SensorManager.GRAVITY_EARTH;
+    }
+
+    fun setChronoDuration()
+    {
+        mTimeLeftInMilis = model.chronoDurationMilis.value!!
+        updateCountDownText()
     }
 
     fun startTimer()
@@ -150,9 +164,12 @@ class ExerciseChronoFragment : Fragment() {
 
     fun stopTimer()
     {
-        mButtonStartPause.visibility = View.INVISIBLE
-        vibrator.cancel();
+        mButtonStop.visibility = View.INVISIBLE
+        vibrator.cancel()
+        model.chronoEffDurationMilis.value =  model.chronoDurationMilis.value!!- mTimeLeftInMilis
+        setChronoDuration()
 
+        Log.d("-------pause----------",model.chronoEffDurationMilis.value.toString())
     }
 
     fun updateCountDownText()
