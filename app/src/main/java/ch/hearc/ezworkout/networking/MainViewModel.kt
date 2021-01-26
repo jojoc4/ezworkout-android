@@ -272,4 +272,13 @@ class MainViewModel (private val repository: Repository): ViewModel()
             repository.deleteExercise(ex, trid)
         }
     }
+
+
+    val isFullResponse: MutableLiveData<DeleteResponse> = MutableLiveData()
+    fun isFull(idLBP: Int) {
+        viewModelScope.launch {
+            val response = repository.isFull(idLBP)
+            isFullResponse.value = response
+        }
+    }
 }

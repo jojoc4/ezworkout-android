@@ -105,4 +105,7 @@ interface EZWorkoutAPI {
 
     @POST("exercise/{id}/removeFromTraining")
     suspend fun delExercise(@Header("Authorization") token: String, @Path("id") id: Int, @Query("training") trid: Int)
+
+    @GET("logbookPage/isFull/{id}")
+    suspend fun isFull(@Header("Authorization") token: String, @Path("id") id: Int): DeleteResponse
 }

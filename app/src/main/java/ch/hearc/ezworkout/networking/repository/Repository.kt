@@ -142,4 +142,9 @@ class Repository(private val sharedPref: SharedPreferences) {
     suspend fun deleteExercise(ex: Exercise, trid: Int) {
         return RetrofitInstance.api.delExercise(token, ex.id, trid)
     }
+
+
+    suspend fun isFull(id: Int): DeleteResponse{
+        return RetrofitInstance.api.isFull(token, id)
+    }
 }
