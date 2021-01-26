@@ -58,11 +58,14 @@ object SerieContent {
      * A serie item representing a piece of content.
      */
     data class SerieItem(val id: Int, var kg: String, var reps: String) {
-        val label = "kg            x"
+        val labelKg = "kg"
+        val labelReps = "x"
         var content = StringBuilder()
+            .append(reps)
+            .append(labelReps)
             .append(kg)
-            .append(label)
-            .append(reps).toString()
+            .append(labelKg)
+            .toString()
         override fun toString(): String = content
     }
 }

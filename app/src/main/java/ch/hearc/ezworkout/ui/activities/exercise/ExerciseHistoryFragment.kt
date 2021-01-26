@@ -186,7 +186,7 @@ class ExerciseHistoryFragment : Fragment() {
                 myAdapter.clear()
                 var i = 1
                 response.forEach {
-                    myAdapter.add("Série " + i + " : " + it.weight + "kg - x" + it.rep)
+                    myAdapter.add("Série " + i + " : " + it.rep + "x" + it.weight + "kg")
                     i++
                 }
 
