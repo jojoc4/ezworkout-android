@@ -38,6 +38,7 @@ class ExerciseActivity : AppCompatActivity() {
         model.trainingId.value = trainingId
         model.exerciseId.value = exerciseId
         model.chronoDurationReady.value = false
+        model.currentSerieIndex.value = 0
         //setContentView(R.layout.a_e_exercise_activity)
         //setTitle(exercise_id)
 

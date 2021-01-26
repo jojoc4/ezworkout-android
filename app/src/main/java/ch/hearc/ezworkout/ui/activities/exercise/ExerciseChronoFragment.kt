@@ -19,12 +19,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.networking.MainViewModel
-import ch.hearc.ezworkout.networking.MainViewModelFactory
-import ch.hearc.ezworkout.networking.repository.Repository
 import java.util.*
 
 
@@ -34,8 +30,6 @@ import java.util.*
  * create an instance of this fragment.
  */
 class ExerciseChronoFragment : Fragment() {
-
-
 
     private var mTimeLeftInMilis: Long = 0
 
@@ -83,7 +77,7 @@ class ExerciseChronoFragment : Fragment() {
         model.chronoDurationReady.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it)
             {
-                setChronoDuration()
+                resetChronoDuration()
             }
         })
 
@@ -118,7 +112,7 @@ class ExerciseChronoFragment : Fragment() {
         mAccelLast = SensorManager.GRAVITY_EARTH;
     }
 
-    fun setChronoDuration()
+    fun resetChronoDuration()
     {
         mTimeLeftInMilis = model.chronoDurationMilis.value!!
         updateCountDownText()
@@ -167,9 +161,10 @@ class ExerciseChronoFragment : Fragment() {
         mButtonStop.visibility = View.INVISIBLE
         vibrator.cancel()
         model.chronoEffDurationMilis.value =  model.chronoDurationMilis.value!!- mTimeLeftInMilis
-        setChronoDuration()
-
+        resetChronoDuration()
         Log.d("-------pause----------",model.chronoEffDurationMilis.value.toString())
+        model.currentSerieIndex.value = model.currentSerieIndex.value?.plus(1)
+        Log.d("-------serie index----------",model.currentSerieIndex.value.toString())
     }
 
     fun updateCountDownText()
