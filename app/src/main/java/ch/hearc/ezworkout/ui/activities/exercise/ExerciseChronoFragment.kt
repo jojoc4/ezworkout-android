@@ -26,14 +26,12 @@ import java.util.*
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ChronoFragment.newInstance] factory method to
+ * Use the [ExerciseChronoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ChronoFragment : Fragment() {
+class ExerciseChronoFragment : Fragment() {
 
-
-    private var StartTimeInMilis:Long = 300000
-    private var mTimeLeftInMilis: Long = StartTimeInMilis
+    private var mTimeLeftInMilis: Long = 0
 
     private val model: ExerciseViewModel by activityViewModels()
 
@@ -74,14 +72,22 @@ class ChronoFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        StartTimeInMilis = model.chronoDurationMilis.value!!
-        mTimeLeftInMilis = StartTimeInMilis
+        mTimeLeftInMilis = model.chronoDurationMilis.value!!
+
+        model.chronoDurationReady.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it)
+            {
+                resetChronoDuration()
+            }
+        })
+
 
         val timings = longArrayOf(0, 1000, 500)
         val amplitudes = intArrayOf(0, VibrationEffect.DEFAULT_AMPLITUDE, 0)
         vibrationEffect1 = VibrationEffect.createWaveform(timings,amplitudes,2)
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
+
         vibrator = requireActivity().getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         mButtonStartPause.setOnClickListener(View.OnClickListener {
@@ -104,6 +110,12 @@ class ChronoFragment : Fragment() {
         mAccel = 0.00f;
         mAccelCurrent = SensorManager.GRAVITY_EARTH;
         mAccelLast = SensorManager.GRAVITY_EARTH;
+    }
+
+    fun resetChronoDuration()
+    {
+        mTimeLeftInMilis = model.chronoDurationMilis.value!!
+        updateCountDownText()
     }
 
     fun startTimer()
@@ -146,9 +158,13 @@ class ChronoFragment : Fragment() {
 
     fun stopTimer()
     {
-        mButtonStartPause.visibility = View.INVISIBLE
-        vibrator.cancel();
-
+        mButtonStop.visibility = View.INVISIBLE
+        vibrator.cancel()
+        model.chronoEffDurationMilis.value =  model.chronoDurationMilis.value!!- mTimeLeftInMilis
+        resetChronoDuration()
+        Log.d("-------pause----------",model.chronoEffDurationMilis.value.toString())
+        model.currentSerieIndex.value = model.currentSerieIndex.value?.plus(1)
+        Log.d("-------serie index----------",model.currentSerieIndex.value.toString())
     }
 
     fun updateCountDownText()
