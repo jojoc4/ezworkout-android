@@ -93,6 +93,9 @@ interface EZWorkoutAPI {
     @PUT("exerciseEff/{id}/")
     suspend fun updateExerciseEff(@Header("Authorization") token: String, @Path("id") id: Int, @Query("training_eff") idETr: Int, @Query("pause") pause: Int, @Query("skipped") skipped: Int, @Query("exercise") IdExercise: Int, @Query("rating") rating: Int): ExerciseEff
 
+    @PUT("seriesEff/{id}/")
+    suspend fun updateSeriesEff(@Header("Authorization") token: String, @Path("id") id: Int, @Query("exercise_eff") idEEx: Int, @Query("rep") rep: Int, @Query("weight") wheight: Int, @Query("pause") pause: Int): SeriesEff
+
 
     @DELETE("trainingPlan/{id}")
     suspend fun delTrainingPlan(@Header("Authorization") token: String, @Path("id") id: Int): DeleteResponse

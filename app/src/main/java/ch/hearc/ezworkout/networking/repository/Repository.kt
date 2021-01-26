@@ -126,6 +126,10 @@ class Repository(private val sharedPref: SharedPreferences) {
         return RetrofitInstance.api.updateExerciseEff(token, ex.id, ex.trainingEffId, ex.pause, ex.skipped, ex.exerciseId, ex.rating)
     }
 
+    suspend fun updateSeriesEff(s: SeriesEff): SeriesEff {
+        return RetrofitInstance.api.updateSeriesEff(token, s.id, s.exerciseEffId, s.rep, s.weight, s.pause)
+    }
+
 
     suspend fun deleteTrainingPlan(tp: TrainingPlan): DeleteResponse {
         return RetrofitInstance.api.delTrainingPlan(token, tp.id)
