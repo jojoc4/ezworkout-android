@@ -19,4 +19,7 @@ class ExerciseViewModel : ViewModel() {
     val serieCountEff = MutableLiveData<Int>()
 
     val chronoDurationMilis = MutableLiveData<Long>()
+
+    val currentSeriePos = MutableLiveData<Int>()
+    //val updateCurrentSerie = MutableLiveData<Boolean>()
 }

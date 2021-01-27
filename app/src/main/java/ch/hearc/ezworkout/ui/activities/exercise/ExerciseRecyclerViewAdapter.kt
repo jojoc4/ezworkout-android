@@ -29,15 +29,15 @@ class ExerciseRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = "Serie " + item.id.toString()
+        holder.idView.text = "Serie " + item.pos.toString()
         holder.contentView.text = item.content
         holder.contentView.setOnClickListener(View.OnClickListener { v ->
 
-            if (model.exerciseEffId.value != null) {
+            if (model.exerciseEffId.value != null &&  model.serieCountEff.value != null) {
                 val activity = v.context as AppCompatActivity
                 val newDialog = SerieInputDialogFragment()
                 val params = Bundle()
-                params.putInt("serie", item.id)
+                params.putInt("pos", item.pos)
                 newDialog.arguments = params
                 newDialog.show(activity.supportFragmentManager, "Hey")
                 this.notifyDataSetChanged()

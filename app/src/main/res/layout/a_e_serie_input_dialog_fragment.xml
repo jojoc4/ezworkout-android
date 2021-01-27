@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:contentDescription="@string/app_name" />
     <EditText
-        android:id="@+id/kg"
+        android:id="@+id/reps"
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,9 +22,10 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="kg" />
+        android:fontFamily="sans-serif"
+        android:hint="reps"/>
     <EditText
-        android:id="@+id/reps"
+        android:id="@+id/kg"
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,6 +33,6 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="sans-serif"
-        android:hint="reps"/>
+        android:hint="kg" />
+
 </LinearLayout>
