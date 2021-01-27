@@ -192,13 +192,13 @@ class ExerciseChronoFragment : Fragment() {
             if (mAccel >= 5)
             {
                 pauseTimer()
-                //Log.d("taggle","---------accel---------")
+                pauseTimer()
             }
-            //Log.d("---------bjr---------",mAccel.toString())
         }
-
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int)
-        {}
+        {
+            // must implement a abstract function to be abstract
+        }
     }
 
     override fun onResume() {
