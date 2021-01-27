@@ -3,7 +3,6 @@ package ch.hearc.ezworkout.ui.activities.training
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
 
 class TrainingViewModel : ViewModel() {
 

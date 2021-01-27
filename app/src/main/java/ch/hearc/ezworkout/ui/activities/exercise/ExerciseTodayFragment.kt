@@ -1,13 +1,11 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +16,6 @@ import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.LogbookPage
 import ch.hearc.ezworkout.networking.model.SeriesEff
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -104,6 +101,7 @@ class ExerciseTodayFragment : Fragment() {
             }
         })
 
+        // Observe currentSeriePos to send a request to the database when the user inputs an effective serie
         model.currentSeriePos.observe(viewLifecycleOwner, Observer {
 
             val pos = model.currentSeriePos.value!!
@@ -113,6 +111,7 @@ class ExerciseTodayFragment : Fragment() {
             var kg = currentSerie.kg
             var rep = currentSerie.reps
 
+            // If the effective serie is not yet in the database -> Add
             if (serieId == -1) {
 
                 val seriesEff = SeriesEff()
@@ -123,13 +122,14 @@ class ExerciseTodayFragment : Fragment() {
 
                 mainViewModel.addSeriesEff(seriesEff)
 
+            // Else get it from the database for an update
             } else {
 
                 mainViewModel.getSeriesEff(serieId)
             }
         })
 
-        //handler new seriesEffReponse
+        //handles the response to "addSeriesEff"
         mainViewModel.newSeriesEffResponse.observe(viewLifecycleOwner,
             Observer { response ->
                 val pos = model.currentSeriePos.value!!
@@ -143,10 +143,11 @@ class ExerciseTodayFragment : Fragment() {
                 SerieContent.editItem(response.id, pos, kg, rep)
                 myAdapter.notifyDataSetChanged()
 
+                // Check with the database whether the exercise is finished (every serie input filled)
                 mainViewModel.isFull(model.currentLBPId.value!!)
             })
 
-        //handler oneSeriesEffResponse
+        //handles the response to "getSeriesEff"
         mainViewModel.oneSeriesEffResponse.observe(
             viewLifecycleOwner,
             Observer { response ->
@@ -162,26 +163,28 @@ class ExerciseTodayFragment : Fragment() {
                 response.rep = rep.toInt()
                 response.pause = 0
 
+                // Update effective serie
                 mainViewModel.updateSeriesEff(response)
 
+                // Check with the database whether the training is finished (every serie input in every non-skipped exercise filled)
                 mainViewModel.isFull(model.currentLBPId.value!!)
             })
 
-        //handler isFullResponse
+        //handler isFull response
         mainViewModel.isFullResponse.observe(viewLifecycleOwner,
             { response ->
-
-                Log.d("Brot - responseid", model.currentLBPId.value!!.toString())
-                Log.d("Brot - response", response.delete.toString())
+                // If the training is finished, creates a log entry
                 if (response.delete == "true") {
                     val logBookPage = LogbookPage()
                     logBookPage.trainingPlanId = model.trainingPlanId.value!!
 
+                    // and ends the activity
                     mainViewModel.addLogbookPage(logBookPage)
                     activity?.finish()
                 }
             })
 
+        // Shows input dialog when the "terminer" button from the chrono is clicked
         model.isSerieDone.observe(viewLifecycleOwner,
             {
                 if (it) {
@@ -201,7 +204,6 @@ class ExerciseTodayFragment : Fragment() {
          *
          * @return A new instance of fragment ExerciseTodayFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
             ExerciseTodayFragment().apply {

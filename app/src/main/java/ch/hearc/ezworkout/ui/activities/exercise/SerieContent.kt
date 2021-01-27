@@ -45,11 +45,8 @@ object SerieContent {
             kgTxt = "0"
         if(reps.isNullOrEmpty())
             repsTxt = "1"
-       //Log.d("Bro - edit1 - currentPos", pos.toString())
-       //Log.d("Bro - edit1 - SerieContent", ITEMS.toString())
+
         ITEMS[pos - 1] = SerieItem(id, pos, kgTxt, repsTxt) // id - 1 : because ids go from 1 to serieCount
-       //Log.d("Bro - edit2 - currentPos", pos.toString())
-       //Log.d("Bro - edit2 - SerieContent", ITEMS.toString())
     }
 
     fun createSerieItem(id: Int, pos: Int, kg:String, reps:String): SerieItem {

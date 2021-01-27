@@ -29,8 +29,6 @@ class TrainingPlanListFragment : Fragment() {
 
     private var columnCount = 1
 
-    // Use the 'by activityViewModels()' Kotlin property delegate
-    // from the fragment-ktx artifact
     private val model: TrainingPlanViewModel by activityViewModels()
     private lateinit var myAdapter: TrainingPlanRecyclerViewAdapter
     private lateinit var mainViewModel: MainViewModel

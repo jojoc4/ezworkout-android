@@ -1,7 +1,6 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,8 +11,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
-import ch.hearc.ezworkout.ui.activities.training.TrainingRecyclerViewAdapter
-import ch.hearc.ezworkout.ui.activities.training.TrainingViewModel
 
 /**
  * A fragment representing a list of Items.
@@ -22,8 +19,6 @@ class SerieListFragment : Fragment() {
 
     private var columnCount = 1
 
-    // Use the 'by activityViewModels()' Kotlin property delegate
-    // from the fragment-ktx artifact
     private val model: ExerciseViewModel by activityViewModels()
     private lateinit var mainViewModel: MainViewModel
 
