@@ -11,7 +11,6 @@ import ch.hearc.ezworkout.ui.activities.training.ExerciseContent.ExerciseItem
 
 /**
  * [RecyclerView.Adapter] that can display a [Exercise].
- * TODO: Replace the implementation with code for your data type.
  */
 class TrainingRecyclerViewAdapter(
     private val values: List<ExerciseItem>, private val model: TrainingViewModel

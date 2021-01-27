@@ -10,7 +10,6 @@ import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent.TrainingIte
 
 /**
  * [RecyclerView.Adapter] that can display a [Training].
- * TODO: Replace the implementation with code for your data type.
  */
 class TrainingPlanRecyclerViewAdapter(
     private val values: List<TrainingItem>, private val model: TrainingPlanViewModel
