@@ -70,9 +70,6 @@ class SerieInputDialogFragment : DialogFragment() {
                             SerieContent.editItem(serieId, pos, kg, rep)
                         }
 
-                        //Log.d("Bro - Dialog2 - currentPos", pos.toString())
-                        //Log.d("Bro - Dialog2 - SerieContent", SerieContent.ITEMS.toString())
-
                         (it.supportFragmentManager.findFragmentById(R.id.exercise_today_fragment) as ExerciseTodayFragment)
                             .myAdapter.notifyDataSetChanged()
 
