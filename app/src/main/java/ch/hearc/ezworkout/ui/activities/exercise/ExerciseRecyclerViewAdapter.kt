@@ -1,17 +1,14 @@
 package ch.hearc.ezworkout.ui.activities.exercise
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.ui.activities.exercise.SerieContent.SerieItem
-
 
 /**
  * [RecyclerView.Adapter] that can display a [SerieItem].
@@ -33,6 +30,7 @@ class ExerciseRecyclerViewAdapter(
         holder.contentView.text = item.content
         holder.contentView.setOnClickListener(View.OnClickListener { v ->
 
+            // Shows input dialog when a serie from the list is clicked
             if (model.exerciseEffId.value != null &&  model.serieCountEff.value != null) {
                 val activity = v.context as AppCompatActivity
                 val newDialog = SerieInputDialogFragment()

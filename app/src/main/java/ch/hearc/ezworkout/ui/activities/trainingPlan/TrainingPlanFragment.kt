@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
@@ -20,7 +19,6 @@ import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
 import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
-import kotlinx.android.synthetic.main.a_e_exercise_history_fragment.*
 import java.time.LocalDateTime
 
 class TrainingPlanFragment : Fragment() {

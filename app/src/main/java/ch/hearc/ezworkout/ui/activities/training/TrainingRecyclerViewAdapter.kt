@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import ch.hearc.ezworkout.R
-
 import ch.hearc.ezworkout.ui.activities.training.ExerciseContent.ExerciseItem
-import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
-import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingPlanRecyclerViewAdapter
+
 
 /**
  * [RecyclerView.Adapter] that can display a [Exercise].

@@ -16,7 +16,6 @@ import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
 
 /**
  * A fragment representing a list of exercises.
@@ -25,8 +24,6 @@ class TrainingListFragment : Fragment() {
 
     private var columnCount = 1
 
-    // Use the 'by activityViewModels()' Kotlin property delegate
-    // from the fragment-ktx artifact
     private val model: TrainingViewModel by activityViewModels()
     lateinit var myAdapter: TrainingRecyclerViewAdapter
     private lateinit var mainViewModel: MainViewModel
@@ -107,7 +104,7 @@ class TrainingListFragment : Fragment() {
         // ExerciseEff data handler (=> skipped)
         mainViewModel.ETrAndExExerciseEffResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isNotEmpty()) {
-                ExerciseContent.ITEMS[response.first().exerciseId]!!.skipped = response.first().skipped == 1
+                ExerciseContent.ITEM_MAP[response.first().exerciseId]!!.skipped = response.first().skipped == 1
                 myAdapter.notifyDataSetChanged()
             }
         })

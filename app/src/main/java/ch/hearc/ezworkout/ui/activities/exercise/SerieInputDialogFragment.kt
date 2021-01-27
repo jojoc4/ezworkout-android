@@ -4,18 +4,15 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
-import ch.hearc.ezworkout.networking.model.SeriesEff
 import ch.hearc.ezworkout.networking.repository.Repository
 
 class SerieInputDialogFragment : DialogFragment() {
@@ -25,7 +22,8 @@ class SerieInputDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            // Use the Builder class for convenient dialog construction
+
+            // Construct dialog using a builder class
             val builder = AlertDialog.Builder(it)
 
             val inflater = requireActivity().layoutInflater;
@@ -33,7 +31,7 @@ class SerieInputDialogFragment : DialogFragment() {
             val root = inflater.inflate(R.layout.a_e_serie_input_dialog_fragment, null)
 
             val pos = arguments?.getInt("pos")!!
-            val serieTxt = "Serie" + pos.toString()
+            val serieTxt = "Serie$pos"
             root.findViewById<TextView>(R.id.serieNb).setText(serieTxt)
             val kgEdit = root.findViewById<EditText>(R.id.kg)
             val repsEdit = root.findViewById<EditText>(R.id.reps)
@@ -54,16 +52,12 @@ class SerieInputDialogFragment : DialogFragment() {
                         var rep = "1"
                         if (!kgEdit.text.isNullOrEmpty())
                         {
-                            //Log.d("Brot - not empty kg", "yo")
                             kg = kgEdit.text.toString()
                         }
                         if (!repsEdit.text.isNullOrEmpty())
                         {
-                            //Log.d("Brot - not empty rep", "yo")
                             rep = repsEdit.text.toString()
                         }
-                        //Log.d("Brot -  kg", kg)
-                        //Log.d("Brot -  rep", rep)
 
                         if (serieId == -1) {
 
@@ -75,16 +69,12 @@ class SerieInputDialogFragment : DialogFragment() {
                             SerieContent.editItem(serieId, pos, kg, rep)
                         }
 
-                        //Log.d("Brot -  kg", kg)
-                        //Log.d("Brot -  rep", rep)
-
                         (it.supportFragmentManager.findFragmentById(R.id.exercise_today_fragment) as ExerciseTodayFragment)
                             .myAdapter.notifyDataSetChanged()
 
                         model.currentSeriePos.value = pos
 
-                        Log.d("Brot -  serieIndex", model.currentSerieIndex.value!!.toString())
-                        Log.d("Brot -  serieCount", model.serieCount.value!!.toString())
+                        // Finishes the activity when the exercise is finished
                         if( model.currentSerieIndex.value!! >= model.serieCount.value!!)
                         {
                             it.finish()

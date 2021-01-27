@@ -2,7 +2,6 @@ package ch.hearc.ezworkout.ui.activities.exercise
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,11 +9,7 @@ import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
-import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.activities.training.TrainingViewModel
-import kotlinx.android.synthetic.main.a_e_exercise_history_fragment.*
-
 
 class ExerciseActivity : AppCompatActivity() {
 
