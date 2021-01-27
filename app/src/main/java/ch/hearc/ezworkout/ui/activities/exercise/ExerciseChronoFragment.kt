@@ -166,6 +166,7 @@ class ExerciseChronoFragment : Fragment() {
         Log.d("-------pause----------",model.chronoEffDurationMilis.value.toString())
         model.currentSerieIndex.value = model.currentSerieIndex.value?.plus(1)
         Log.d("-------serie index----------",model.currentSerieIndex.value.toString())
+        model.isSerieDone.value = true
     }
 
     fun updateCountDownText()

@@ -27,5 +27,6 @@ class ExerciseViewModel : ViewModel() {
 
     val chronoEffDurationMilis = MutableLiveData<Long>()
     val chronoDurationReady = MutableLiveData<Boolean>()
+    val isSerieDone = MutableLiveData<Boolean>()
 
 }
