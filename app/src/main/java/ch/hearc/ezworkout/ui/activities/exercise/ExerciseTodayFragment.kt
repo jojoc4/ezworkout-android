@@ -115,8 +115,16 @@ class ExerciseTodayFragment : Fragment() {
             val currentSerie: SerieContent.SerieItem =
                 SerieContent.ITEMS[pos - 1]
             val serieId = currentSerie.id
-            val kg = currentSerie.kg
-            val rep = currentSerie.reps
+            var kg = currentSerie.kg
+            if(kg.isEmpty())
+            {
+                kg = getString(R.string.default_serie_value)
+            }
+            var rep = currentSerie.reps
+            if(rep.isEmpty())
+            {
+                rep = getString(R.string.default_serie_value)
+            }
 
             Log.d("Bro - Fragment - currentSerie", currentSerie.toString())
 
@@ -127,7 +135,7 @@ class ExerciseTodayFragment : Fragment() {
                 seriesEff.exerciseEffId = model.exerciseEffId.value!!
                 seriesEff.rep = rep.toInt()
                 seriesEff.weight = kg.toInt()
-                seriesEff.pause = 0
+                seriesEff.pause = (model.chronoEffDurationMilis.value!! / 1000).toInt()
 
                 mainViewModel.addSeriesEff(seriesEff)
 
