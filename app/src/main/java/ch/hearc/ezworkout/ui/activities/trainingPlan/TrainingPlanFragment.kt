@@ -8,10 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.model.TrainingEff
+import ch.hearc.ezworkout.networking.repository.Repository
 import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
+import kotlinx.android.synthetic.main.a_e_exercise_history_fragment.*
+import java.time.LocalDateTime
 
 class TrainingPlanFragment : Fragment() {
 
@@ -19,66 +29,103 @@ class TrainingPlanFragment : Fragment() {
         fun newInstance() = TrainingPlanFragment()
     }
 
-    private lateinit var viewModel: TrainingPlanViewModel
+    private val model: TrainingPlanViewModel by activityViewModels()
+    private lateinit var mainViewModel: MainViewModel
+    private var skipping: Boolean = false
+    private var checkingTrainingEff: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // METHOD TO PASS VALUES WITHIN THE SAME ACTIVITY
-        /*
-        val activity: MainActivity? = activity as MainActivity
-        val mainMyString: String = activity?.getMyString() ?: "Error"
-        Log.d("Var from activity", mainMyString)
-        */
-
         val root = inflater.inflate(R.layout.a_tp_training_plan_fragment, container, false)
 
-        /*
-        val trainingPlanFragment: TrainingPlanFragment = root.findViewById(R.id.training_plan_fragment)
-        val trainingPlanFragmentManager: FragmentManager = trainingPlanFragment.childFragmentManager
-        // We set the listener on the trainingPlan fragmentManager
-        trainingPlanFragmentManager.setFragmentResultListener("requestKey") { key, bundle ->
-            val result = bundle.getString("bundleKey")
-            // Do something with the result..
-        }
-        */
+        // Get mainViewModel
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
+        mainViewModel = ViewModelProvider(
+            this,
+            MainViewModelFactory(Repository(sharedPref))
+        ).get(MainViewModel::class.java)
 
+        // Observer
+        mainViewModel.LBPAndTrTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
+            if (skipping) {
+                if (response.isNotEmpty()) {
+                    response.first().skipped = 1
+
+                    mainViewModel.updateTrainingEff(response.first())
+                } else {
+                    val trainingEff = TrainingEff()
+                    trainingEff.logbookPageId = model.currentLBPid.value!!
+                    trainingEff.trainingId = model.selected.value!!.id
+                    trainingEff.date = LocalDateTime.now().toString()
+                    trainingEff.skipped = 1
+
+                    mainViewModel.addTrainingEff(trainingEff)
+                }
+            } else {
+                if (response.isNotEmpty()) {
+                    response.first().skipped = 0
+
+                    mainViewModel.updateTrainingEff(response.first())
+                } else {
+                    val trainingEff = TrainingEff()
+                    trainingEff.logbookPageId = model.currentLBPid.value!!
+                    trainingEff.trainingId = model.selected.value!!.id
+                    trainingEff.date = LocalDateTime.now().toString()
+                    trainingEff.skipped = 0
+
+                    mainViewModel.addTrainingEff(trainingEff)
+                }
+
+                // Create a new activity and pass the bundle to it
+                val intent = Intent(activity, TrainingActivity::class.java)
+                val bundle = Bundle()
+
+                bundle.putInt("currentLBPid", model.currentLBPid.value!!)
+                bundle.putInt("trainingId", model.selected.value!!.id)
+                bundle.putString("trainingLabel", model.selected.value!!.label)
+                bundle.putInt("trainingPlanId", model.trainingPlanId.value!!)
+                intent.putExtras(bundle)
+
+                startActivity(intent)
+            }
+
+            checkingTrainingEff = false
+        })
+
+        // Start button handler
         val btnStart: Button = root.findViewById(R.id.start)
         btnStart.setOnClickListener {
-            // Create a new activity and pass the bundle to it
-            val intent = Intent(activity, TrainingActivity::class.java)
-            val bundle = Bundle()
-            // TODO PRINT
-            Log.d(
-                "viewModel : ", (viewModel != null).toString()
-            )
-            Log.d(
-                "Value : ",
-                (viewModel.selected.value != null).toString()
-            )
-            bundle.putString("training_id", viewModel.selected.value?.label)
-            intent.putExtras(bundle)
+            if (!checkingTrainingEff && model.currentLBPid.value != null) {
+                checkingTrainingEff = true
+                skipping = false
+                model.selected.value!!.skipped = false
 
-            startActivity(intent)
+                mainViewModel.getTrainingEff(model.currentLBPid.value!!, model.selected.value!!.id)
+            } else Log.d("Err", "Already busy!")
         }
 
+        // Skip button handler
+        val btnSkip: Button = root.findViewById(R.id.skip)
+        btnSkip.setOnClickListener {
+            if (!checkingTrainingEff && model.currentLBPid.value != null) {
+                checkingTrainingEff = true
+                skipping = true
+                model.selected.value!!.skipped = true
+
+                mainViewModel.getTrainingEff(model.currentLBPid.value!!, model.selected.value!!.id)
+            } else Log.d("Err", "Already busy!")
+        }
+
+        // Settings button handler
         val btnSettings: Button = root.findViewById(R.id.settings)
-        btnSettings.setOnClickListener{
+        btnSettings.setOnClickListener {
             val intent = Intent(activity, SettingsActivity::class.java)
             startActivity(intent)
         }
 
         return root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity()).get(TrainingPlanViewModel::class.java)
-        // requireActivity()
-
-
-        // TODO: Use the ViewModel
     }
 
 }

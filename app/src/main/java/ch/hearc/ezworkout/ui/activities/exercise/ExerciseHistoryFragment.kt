@@ -5,17 +5,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import ch.hearc.ezworkout.networking.MainViewModel
+import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.model.ExerciseEff
+import ch.hearc.ezworkout.networking.model.TrainingEff
+import ch.hearc.ezworkout.networking.repository.Repository
+import kotlinx.android.synthetic.main.a_e_exercise_history_fragment.*
 
 /**
  * A simple [Fragment] subclass.
@@ -23,18 +27,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ExerciseHistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listView: ListView? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val model: ExerciseViewModel by activityViewModels()
+    private lateinit var myAdapter: ArrayAdapter<String>
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var listView: ListView
+    private var loadingData: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,42 +45,155 @@ class ExerciseHistoryFragment : Fragment() {
             false
         )
 
-        // Get ListView object from xml
+        // ListView
         listView = root.findViewById(R.id.list) as ListView
-
-        // Defined Array values to show in ListView
-        val values = arrayOf(
-            "Série 1: 12kg - x8",
-            "Série 2: 15kg - x10",
-            "Série 3: 12kg - x10"
-        )
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+        val values = mutableListOf("")
+        myAdapter = ArrayAdapter<String>(
             requireActivity().applicationContext,
-            android.R.layout.simple_list_item_1, android.R.id.text1, values
+            R.layout.a_e_exercise_history_list_item, R.id.text1, values
         )
+        listView!!.adapter = myAdapter
 
-        // Assign adapter to ListView
-        listView!!.adapter = adapter
+        // Prev button
+        val btnPrev: Button = root.findViewById(R.id.prev_button)
+        btnPrev.setOnClickListener {
+            if (!loadingData && model.logbookPages.value != null && model.currentLBIndex.value != null) {
+                loadingData = true
+                val logbookPages = model.logbookPages.value
 
-        /*
-        // ListView Item Click Listener
-        listView!!.onItemClickListener = OnItemClickListener { parent, view, position, id ->
-            // ListView Clicked item value
-            val itemValue = listView!!.getItemAtPosition(position) as String
+                val previousIndex = model.currentLBIndex.value!! - 1
+                val previousLogbookPage =
+                    if (previousIndex >= 0 && previousIndex < logbookPages!!.size) logbookPages!![previousIndex] else null
 
-            // Show
-            Log.d("Position :", position.toString())
-            Log.d("ListItem :", itemValue)
+                if (previousLogbookPage != null) {
+                    DateTitle.text = "Loading..."
+                    model.currentLBIndex.value = previousIndex
+
+                    mainViewModel.getTrainingEff(Integer(previousLogbookPage.id))
+                } else {
+                    loadingData = false
+                    Log.d("Err", "No previous lastbookpage found")
+                }
+            }
         }
-        */
+
+        // Next button
+        val btnNext: Button = root.findViewById(R.id.next_button)
+        btnNext.setOnClickListener {
+            if (!loadingData && model.logbookPages.value != null && model.currentLBIndex.value != null) {
+                loadingData = true
+                val logbookPages = model.logbookPages.value
+
+                val nextIndex = model.currentLBIndex.value!! + 1
+                val nextLogbookPage =
+                    if (nextIndex >= 0 && nextIndex < logbookPages!!.size - 1) logbookPages!![nextIndex] else null
+
+                if (nextLogbookPage != null) {
+                    DateTitle.text = "Loading..."
+                    model.currentLBIndex.value = nextIndex
+
+                    mainViewModel.getTrainingEff(Integer(nextLogbookPage.id))
+                } else {
+                    loadingData = false
+                    Log.d("Err", "No next lastbookpage found")
+                }
+            }
+        }
 
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
+
+        // Access db data local model
+        mainViewModel = ViewModelProvider(
+            this,
+            MainViewModelFactory(Repository(sharedPref))
+        ).get(MainViewModel::class.java)
+
+        val trainingPlanId = model.trainingPlanId.value
+        val trainingId = model.trainingId.value
+        val exerciseId = model.exerciseId.value
+
+        // Load data
+        mainViewModel.getLogbookPage(Integer(trainingPlanId!!))
+        mainViewModel.logbookPageResponse.observe(viewLifecycleOwner, Observer { response ->
+            model.logbookPages.value = response
+
+            val currentLBIndex = if (response.size < 2) 0 else response.lastIndex - 1
+            val pageBeforeLastLogbookPage =
+                if (response.size < 2) null else response[currentLBIndex]
+
+            if (pageBeforeLastLogbookPage != null) {
+                model.currentLBIndex.value = currentLBIndex
+
+                mainViewModel.getTrainingEff(Integer(pageBeforeLastLogbookPage.id))
+            } else {
+                DateTitle.text = "No data"
+                loadingData = false
+                Log.d("Err", "No lastbookpage found")
+            }
+        })
+
+        // Trainings Eff Observer
+        mainViewModel.trainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
+            var effTraining: TrainingEff? = null
+
+            response.forEach {
+                if (it.trainingId == trainingId) effTraining = it
+            }
+
+            if (effTraining != null) {
+                mainViewModel.getExerciseEff(Integer(effTraining!!.id))
+            } else {
+                DateTitle.text = "No data"
+                loadingData = false
+                Log.d("Err", "No effTraining found")
+            }
+        })
+
+        // Exercises Eff Observer
+        mainViewModel.exerciseEffResponse.observe(
+            viewLifecycleOwner,
+            Observer { response ->
+                var effExercise: ExerciseEff? = null
+
+                response.forEach {
+                    if (it.exerciseId == exerciseId) effExercise = it
+                }
+
+                if (effExercise != null) {
+                    val pattern = Regex("\\d{4}-\\d{2}-\\d{2}")
+                    val formattedDate =
+                        pattern.find(effExercise!!.createdAt!!, 0)
+                    DateTitle.text = formattedDate?.value ?: "Error"
+
+                    mainViewModel.getSeriesEff(Integer(effExercise!!.id))
+                } else {
+                    DateTitle.text = "No data"
+                    loadingData = false
+                    Log.d("Err", "No effExercise found")
+                }
+            })
+
+        // Series Eff Observer
+        mainViewModel.seriesEffResponse.observe(
+            viewLifecycleOwner,
+            Observer { response ->
+                myAdapter.clear()
+                var i = 1
+                response.forEach {
+                    myAdapter.add("Série " + i + " : " + it.rep + "x" + it.weight + "kg")
+                    i++
+                }
+
+                // Notify adapter
+                myAdapter.notifyDataSetChanged()
+                loadingData = false
+            })
     }
 
     companion object {
@@ -90,18 +201,9 @@ class ExerciseHistoryFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment ExerciseHistoryFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ExerciseHistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = ExerciseHistoryFragment().apply { arguments = Bundle().apply { } }
     }
 }

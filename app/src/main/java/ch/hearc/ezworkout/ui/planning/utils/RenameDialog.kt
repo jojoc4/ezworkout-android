@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.utils
+package ch.hearc.ezworkout.ui.planning.utils
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -19,12 +19,12 @@ class RenameDialog : DialogFragment() {
             val customLout = inflater.inflate(R.layout.dialog_rename, null)
             builder.setView(customLout)
 
-            builder.setPositiveButton("Enregistrer",
+            builder.setPositiveButton(getString(R.string.save),
                     DialogInterface.OnClickListener { dialog, id ->
                         name.value = customLout.findViewById<EditText>(R.id.name)?.text.toString()
 
                     })
-                .setNegativeButton("Anuller",
+                .setNegativeButton(getString(R.string.cancel),
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
                     })

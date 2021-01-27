@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="ch.hearc.ezworkout.ui.plannification.fragment_tp"
+    android:name="ch.hearc.ezworkout.ui.activities.exercise.ExerciseTodayFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.planning.trainingPlanList.FragmentTrainingPlanList"
-    tools:listitem="@layout/fragment_tp" />
+    tools:context=".ui.activities.exercise.SerieListFragment"
+    tools:listitem="@layout/a_e_serie_item" />

@@ -2,21 +2,26 @@ package ch.hearc.ezworkout.ui.activities.training
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import ch.hearc.ezworkout.R
 
 class TrainingActivity : AppCompatActivity() {
+
+    private val model: TrainingViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val training_id: String? = intent.getStringExtra("training_id") // String?
-
-        if (training_id == null)
-            Log.d("SALUT", "PAS DE TRAINING ID!!!")
-        else
-            Log.d("SALUT", training_id)
+        val currentLBPid: Int = intent.getIntExtra("currentLBPid", 0)
+        val trainingPlanId: Int = intent.getIntExtra("trainingPlanId", 0)
+        val trainingId: Int = intent.getIntExtra("trainingId", 0)
+        val trainingLabel: String? = intent.getStringExtra("trainingLabel")
 
         setContentView(R.layout.a_t_training_activity)
-        setTitle(training_id)
+        title = "$trainingLabel"
+
+        model.currentLBPid.value = currentLBPid
+        model.trainingPlanId.value = trainingPlanId
+        model.trainingId.value = trainingId
     }
 }

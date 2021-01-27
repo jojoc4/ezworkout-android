@@ -1,11 +1,10 @@
-package ch.hearc.ezworkout.ui.planification.trainingDetails
+package ch.hearc.ezworkout.ui.planning.trainingDetails
 
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -19,8 +18,8 @@ import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.Exercise
 import ch.hearc.ezworkout.networking.model.Training
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.planification.exerciseDetails.ExerciseDetails
-import ch.hearc.ezworkout.ui.planification.utils.RenameDialog
+import ch.hearc.ezworkout.ui.planning.exerciseDetails.ExerciseDetails
+import ch.hearc.ezworkout.ui.planning.utils.RenameDialog
 
 class TrainingDetails : AppCompatActivity() {
     lateinit var training: Training
@@ -43,7 +42,7 @@ class TrainingDetails : AppCompatActivity() {
             val dialog = RenameDialog()
             dialog.name.value = training.name.toString()
 
-            dialog.show(supportFragmentManager, "Renommer")
+            dialog.show(supportFragmentManager, getString(R.string.rename))
             dialog.name.observe(this, {
                 val viewModel = ViewModelProvider(this,
                     MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
@@ -58,17 +57,17 @@ class TrainingDetails : AppCompatActivity() {
 
         findViewById<Button>(R.id.delete).setOnClickListener {
             var db = AlertDialog.Builder(this)
-            db.setPositiveButton("Supprimer", DialogInterface.OnClickListener { _, _ ->
+            db.setPositiveButton(getString(R.string.delete), DialogInterface.OnClickListener { _, _ ->
                 val viewModel = ViewModelProvider(this,
                     MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
                 ).get(MainViewModel::class.java)
                 viewModel.delTraining(training, TPid)
                 finish()
             })
-            db.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, _ ->
+            db.setNegativeButton(getString(R.string.cancel), DialogInterface.OnClickListener { dialog, _ ->
                 dialog.cancel()
             })
-            db.setMessage("Êtes-vous sûr de voiloir supprimer cet entraînement?")
+            db.setMessage(getString(R.string.training_delete_confirmation))
             var ad = db.create()
             ad.show()
         }
@@ -77,7 +76,7 @@ class TrainingDetails : AppCompatActivity() {
             val dialog = RenameDialog()
             dialog.name.value = ""
 
-            dialog.show( supportFragmentManager, "Ajouter")
+            dialog.show( supportFragmentManager, getString(R.string.add))
             dialog.name.observe(this, {
                 if(it != "") {
                     val viewModel = ViewModelProvider(this, MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this) ))).get(MainViewModel::class.java)

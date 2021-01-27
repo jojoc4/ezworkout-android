@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.planification.trainingPlanList
+package ch.hearc.ezworkout.ui.planning.trainingPlanList
 
 import android.content.Context
 import android.content.Intent
@@ -10,11 +10,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.planification.trainingPlanDetails.TrainingPlanDetails
+import ch.hearc.ezworkout.ui.planning.trainingPlanDetails.TrainingPlanDetails
 
 /**
  * [RecyclerView.Adapter] that can display a TPList.
- * TODO: Replace the implementation with code for your data type.
  */
 class TrainingPlanRecyclerViewAdapter(
     private val values: List<FragmentTrainingPlanList.TP>,

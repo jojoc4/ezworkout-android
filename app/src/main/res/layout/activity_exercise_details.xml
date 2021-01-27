@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.planification.exerciseDetails.ExerciseDetails">
+    tools:context=".ui.planning.exerciseDetails.ExerciseDetails">
 
     <EditText
         android:id="@+id/comment"
@@ -35,7 +35,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Nombre de Séries :"
+        android:text="Nombre de séries :"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/comment" />
 
@@ -167,7 +167,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Pause en les séries (s) :"
+        android:text="Pause entre les séries (s) :"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/repMax" />
 
@@ -211,7 +211,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Pause en les exercices (s) :"
+        android:text="Pause entre les exercices (s) :"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pauseSerie" />
 

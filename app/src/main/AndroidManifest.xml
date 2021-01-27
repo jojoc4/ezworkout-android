@@ -2,36 +2,51 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ch.hearc.ezworkout">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.planification.exerciseDetails.ExerciseDetails"></activity>
-        <activity android:name=".ui.planification.trainingDetails.TrainingDetails" />
+        <activity android:name=".ui.sync.NetworkErrorActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.planning.exerciseDetails.ExerciseDetails"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.planning.trainingDetails.TrainingDetails"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.planification.trainingPlanDetails.TrainingPlanDetails"
+            android:name=".ui.planning.trainingPlanDetails.TrainingPlanDetails"
             android:label="@string/title_activity_tp_details"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.sync.ConnectActivity" />
-        <activity android:name=".ui.activities.exercise.ExerciseActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.sync.ConnectActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activities.exercise.ExerciseActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.training.TrainingActivity"
-            android:label="@string/title_activity_training" />
+            android:label="@string/title_activity_training"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.settings.SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity android:name=".ui.sync.QRReader" />
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.sync.QRReader"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

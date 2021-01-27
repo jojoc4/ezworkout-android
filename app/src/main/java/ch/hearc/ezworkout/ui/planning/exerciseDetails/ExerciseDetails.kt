@@ -1,11 +1,10 @@
-package ch.hearc.ezworkout.ui.planification.exerciseDetails
+package ch.hearc.ezworkout.ui.planning.exerciseDetails
 
 import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -16,7 +15,7 @@ import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.Exercise
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.planification.utils.RenameDialog
+import ch.hearc.ezworkout.ui.planning.utils.RenameDialog
 
 
 class ExerciseDetails : AppCompatActivity() {
@@ -38,7 +37,7 @@ class ExerciseDetails : AppCompatActivity() {
         findViewById<Button>(R.id.rename).setOnClickListener {
             val dialog = RenameDialog()
             dialog.name.value = exercise.name.toString()
-            dialog.show(supportFragmentManager, "Renommer")
+            dialog.show(supportFragmentManager, getString(R.string.rename))
             dialog.name.observe(this, {
                 exercise.name = it
                 viewModel.updateExercise(exercise)
@@ -48,17 +47,17 @@ class ExerciseDetails : AppCompatActivity() {
 
         findViewById<Button>(R.id.delete).setOnClickListener {
             var db = AlertDialog.Builder(this)
-            db.setPositiveButton("Supprimer", DialogInterface.OnClickListener { _, _ ->
+            db.setPositiveButton(getString(R.string.delete), DialogInterface.OnClickListener { _, _ ->
                 val viewModel = ViewModelProvider(this,
                     MainViewModelFactory(Repository(PreferenceManager.getDefaultSharedPreferences(this)))
                 ).get(MainViewModel::class.java)
                 viewModel.delExercise(exercise, trid)
                 finish()
             })
-            db.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, _ ->
+            db.setNegativeButton(getString(R.string.cancel), DialogInterface.OnClickListener { dialog, _ ->
                 dialog.cancel()
             })
-            db.setMessage("Êtes-vous sûr de voiloir supprimer cet exercice?")
+            db.setMessage(getString(R.string.exercise_delete_confirmation))
             var ad = db.create()
             ad.show()
         }

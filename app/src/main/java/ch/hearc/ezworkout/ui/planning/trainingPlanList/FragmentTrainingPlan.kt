@@ -1,15 +1,13 @@
-package ch.hearc.ezworkout.ui.planification.trainingPlanList
+package ch.hearc.ezworkout.ui.planning.trainingPlanList
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
@@ -17,9 +15,8 @@ import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.TrainingPlan
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.planification.trainingPlanDetails.FragmentTraining
-import ch.hearc.ezworkout.ui.planification.trainingPlanDetails.TrainingPlanDetails
-import ch.hearc.ezworkout.ui.planification.utils.RenameDialog
+import ch.hearc.ezworkout.ui.planning.trainingPlanDetails.TrainingPlanDetails
+import ch.hearc.ezworkout.ui.planning.utils.RenameDialog
 
 /**
  * A simple [Fragment] subclass.
@@ -46,7 +43,7 @@ class FragmentTrainingPlan : Fragment() {
             val dialog = RenameDialog()
             dialog.name.value = ""
 
-            dialog.show( parentFragmentManager, "Ajouter")
+            dialog.show( parentFragmentManager, getString(R.string.add))
             dialog.name.observe(viewLifecycleOwner, {
                 if(it != "") {
                     val viewModel = ViewModelProvider(
