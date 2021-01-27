@@ -83,6 +83,8 @@ class SerieInputDialogFragment : DialogFragment() {
 
                         model.currentSeriePos.value = pos
 
+                        Log.d("Brot -  serieIndex", model.currentSerieIndex.value!!.toString())
+                        Log.d("Brot -  serieCount", model.serieCount.value!!.toString())
                         if( model.currentSerieIndex.value!! >= model.serieCount.value!!)
                         {
                             it.finish()

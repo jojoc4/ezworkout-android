@@ -159,7 +159,6 @@ class ExerciseTodayFragment : Fragment() {
 
                 var rep = currentSerie.reps
 
-
                 response.weight = kg.toInt()
                 response.rep = rep.toInt()
                 response.pause = 0
@@ -172,6 +171,7 @@ class ExerciseTodayFragment : Fragment() {
         mainViewModel.isFullResponse.observe(viewLifecycleOwner,
             { response ->
 
+                Log.d("Brot - responseid", model.currentLBPId.value!!.toString())
                 Log.d("Brot - response", response.delete.toString())
                 if(response.delete == "true")
                 {
