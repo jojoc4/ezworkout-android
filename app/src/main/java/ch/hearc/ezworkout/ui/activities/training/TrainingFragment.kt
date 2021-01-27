@@ -119,13 +119,6 @@ class TrainingFragment : Fragment() {
             } else Log.d("Err", "Already busy!")
         }
 
-        // Settings button handler
-        val btnSettings: Button = root.findViewById(R.id.settings)
-        btnSettings.setOnClickListener {
-            val intent = Intent(activity, SettingsActivity::class.java)
-            startActivity(intent)
-        }
-
         return root
     }
 

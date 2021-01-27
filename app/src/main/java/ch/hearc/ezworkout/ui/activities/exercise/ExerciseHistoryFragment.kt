@@ -50,7 +50,7 @@ class ExerciseHistoryFragment : Fragment() {
         val values = mutableListOf("")
         myAdapter = ArrayAdapter<String>(
             requireActivity().applicationContext,
-            android.R.layout.simple_list_item_1, android.R.id.text1, values
+            R.layout.a_e_exercise_history_list_item, R.id.text1, values
         )
         listView!!.adapter = myAdapter
 

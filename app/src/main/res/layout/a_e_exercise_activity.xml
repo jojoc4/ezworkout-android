@@ -22,20 +22,9 @@
 
     <fragment
         android:id="@+id/exercise_chrono_fragment"
-        android:name="ch.hearc.ezworkout.ui.activities.exercise.ChronoFragment"
+        android:name="ch.hearc.ezworkout.ui.activities.exercise.ExerciseChronoFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
-
-
-    <Button
-        android:id="@+id/exercise_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginHorizontal="80dp"
-        android:layout_marginVertical="8dp"
-        android:text="Start Exercise" />
 
 </LinearLayout>
