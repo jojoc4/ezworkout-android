@@ -78,6 +78,7 @@ class ExerciseChronoFragment : Fragment() {
             if (it)
             {
                 resetChronoDuration()
+                model.chronoEffDurationMilis.value = model.chronoDurationMilis.value
             }
         })
 
