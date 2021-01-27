@@ -42,9 +42,9 @@ object SerieContent {
         var repsTxt = reps
 
         if(kg.isNullOrEmpty())
-            kgTxt = "__"
+            kgTxt = "1"
         if(reps.isNullOrEmpty())
-            repsTxt = "__"
+            repsTxt = "1"
        //Log.d("Bro - edit1 - currentPos", pos.toString())
        Log.d("Bro - edit1 - SerieContent", ITEMS.toString())
         ITEMS[pos - 1] = SerieItem(id, pos, kgTxt, repsTxt) // id - 1 : because ids go from 1 to serieCount

@@ -96,8 +96,8 @@ class ExerciseTodayFragment : Fragment() {
                                     SerieContent.createSerieItem(
                                         -1,
                                         i,
-                                        "__",
-                                        "__"
+                                        "1",
+                                        "1"
                                     )
                                 )
                             }
@@ -116,20 +116,15 @@ class ExerciseTodayFragment : Fragment() {
                 SerieContent.ITEMS[pos - 1]
             val serieId = currentSerie.id
             var kg = currentSerie.kg
-            if(kg.isEmpty())
-            {
-                kg = getString(R.string.default_serie_value)
-            }
-            var rep = currentSerie.reps
-            if(rep.isEmpty())
-            {
-                rep = getString(R.string.default_serie_value)
-            }
 
-            Log.d("Bro - Fragment - currentSerie", currentSerie.toString())
+            var rep = currentSerie.reps
+
+
+            Log.d("Bro - Fragment - currentSerie1", currentSerie.toString())
 
             if (serieId == -1) {
-                //Log.d("Bro - Today - add - pos", pos.toString())
+                Log.d("Bro - Today - add - kg", kg)
+                Log.d("Bro - Today - add - rep", rep)
 
                 val seriesEff = SeriesEff()
                 seriesEff.exerciseEffId = model.exerciseEffId.value!!
@@ -140,7 +135,8 @@ class ExerciseTodayFragment : Fragment() {
                 mainViewModel.addSeriesEff(seriesEff)
 
             } else {
-                //Log.d("Bro - Today - update - pos", pos.toString())
+                Log.d("Bro - Today - add - kg", kg)
+                Log.d("Bro - Today - add - rep", rep)
 
                 Log.d("Bro - Today - update id", serieId.toString())
                 mainViewModel.getSeriesEff(serieId)
@@ -153,8 +149,10 @@ class ExerciseTodayFragment : Fragment() {
                 val pos = model.currentSeriePos.value!!
                 val currentSerie: SerieContent.SerieItem =
                     SerieContent.ITEMS[pos - 1]
-                val kg = currentSerie.kg
-                val rep = currentSerie.reps
+                var kg = currentSerie.kg
+
+                var rep = currentSerie.reps
+
 
                 Log.d("Bro - Today - add", "yo")
                 model.serieCountEff.value = model.serieCountEff.value!! + 1
@@ -172,8 +170,10 @@ class ExerciseTodayFragment : Fragment() {
                 val pos = model.currentSeriePos.value!!
                 val currentSerie: SerieContent.SerieItem =
                     SerieContent.ITEMS[pos - 1]
-                val kg = currentSerie.kg
-                val rep = currentSerie.reps
+                var kg = currentSerie.kg
+
+                var rep = currentSerie.reps
+
 
                 response.weight = kg.toInt()
                 response.rep = rep.toInt()
