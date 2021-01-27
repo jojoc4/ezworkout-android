@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -49,8 +50,6 @@ class ExerciseTodayFragment : Fragment() {
             MainViewModelFactory(Repository(sharedPref))
         ).get(MainViewModel::class.java)
 
-        Log.d("Bro - serieCount ", model.serieCount.value!!.toString())
-
         myAdapter = ExerciseRecyclerViewAdapter(SerieContent.ITEMS, model)
 
         mainViewModel.getExerciseEff(Integer(model.trainingEffId.value!!))
@@ -61,7 +60,6 @@ class ExerciseTodayFragment : Fragment() {
                 response.forEach {
                     if (it.exerciseId == model.exerciseId.value) {
                         model.exerciseEffId.value = it.id
-                        Log.d("Bro - exerciseEffId", model.exerciseEffId.value.toString())
                     }
                 }
 
@@ -71,7 +69,6 @@ class ExerciseTodayFragment : Fragment() {
 
                     mainViewModel.seriesEffResponse.observe(viewLifecycleOwner, { response ->
 
-                        Log.d("Bro - serieCountEff", response.count().toString())
                         model.serieCountEff.value = response.count()
 
                         SerieContent.ITEMS.clear()
@@ -79,8 +76,6 @@ class ExerciseTodayFragment : Fragment() {
 
                         for (i in 1..model.serieCount.value!!) {
                             if (i <= model.serieCountEff.value!!) {
-
-                                Log.d("Bro - Fragment - response1", response[i - 1].id.toString())
 
                                 val currentSerie = response[i - 1]
                                 SerieContent.addItem(
@@ -96,13 +91,12 @@ class ExerciseTodayFragment : Fragment() {
                                     SerieContent.createSerieItem(
                                         -1,
                                         i,
-                                        "1",
-                                        "1"
+                                        "0",
+                                        "0"
                                     )
                                 )
                             }
                         }
-                        Log.d("Bro - Fragment - SerieContent", SerieContent.ITEMS.toString())
                         myAdapter.notifyDataSetChanged()
                     })
                 }
@@ -120,11 +114,7 @@ class ExerciseTodayFragment : Fragment() {
             var rep = currentSerie.reps
 
 
-            Log.d("Bro - Fragment - currentSerie1", currentSerie.toString())
-
             if (serieId == -1) {
-                Log.d("Bro - Today - add - kg", kg)
-                Log.d("Bro - Today - add - rep", rep)
 
                 val seriesEff = SeriesEff()
                 seriesEff.exerciseEffId = model.exerciseEffId.value!!
@@ -135,10 +125,7 @@ class ExerciseTodayFragment : Fragment() {
                 mainViewModel.addSeriesEff(seriesEff)
 
             } else {
-                Log.d("Bro - Today - add - kg", kg)
-                Log.d("Bro - Today - add - rep", rep)
 
-                Log.d("Bro - Today - update id", serieId.toString())
                 mainViewModel.getSeriesEff(serieId)
             }
         })
@@ -153,8 +140,6 @@ class ExerciseTodayFragment : Fragment() {
 
                 var rep = currentSerie.reps
 
-
-                Log.d("Bro - Today - add", "yo")
                 model.serieCountEff.value = model.serieCountEff.value!! + 1
                 SerieContent.editItem(response.id, pos, kg, rep)
                 myAdapter.notifyDataSetChanged()
@@ -187,14 +172,27 @@ class ExerciseTodayFragment : Fragment() {
         mainViewModel.isFullResponse.observe(viewLifecycleOwner,
             { response ->
 
-                Log.d("Bro - response delete", response.delete!!)
-                Log.d("Bro - currentLBPId", model.currentLBPId.value!!.toString())
+                Log.d("Brot - response", response.delete.toString())
                 if(response.delete == "true")
                 {
                     val logBookPage = LogbookPage()
                     logBookPage.trainingPlanId = model.trainingPlanId.value!!
 
                     mainViewModel.addLogbookPage(logBookPage)
+                }
+            })
+
+
+        model.isSerieDone.observe(viewLifecycleOwner,
+            {
+                //Log.d("Brot - isSerieDone", it.toString())
+                if(it){
+                    val newDialog = SerieInputDialogFragment()
+                    //Log.d("Brot - weGood", "1")
+                    val params = Bundle()
+                    params.putInt("pos", model.currentSerieIndex.value!!)
+                    newDialog.arguments = params
+                    activity?.let { a -> newDialog.show(a.supportFragmentManager, "Dialog") }
                 }
             })
     }

@@ -50,20 +50,20 @@ class SerieInputDialogFragment : DialogFragment() {
                     DialogInterface.OnClickListener { dialog, id ->
 
                         val serieId = SerieContent.ITEMS[pos - 1].id
-                        var kg = "1"
+                        var kg = "0"
                         var rep = "1"
                         if (!kgEdit.text.isNullOrEmpty())
                         {
-                            Log.d("Brot - not empty kg", "yo")
+                            //Log.d("Brot - not empty kg", "yo")
                             kg = kgEdit.text.toString()
                         }
                         if (!repsEdit.text.isNullOrEmpty())
                         {
-                            Log.d("Brot - not empty rep", "yo")
+                            //Log.d("Brot - not empty rep", "yo")
                             rep = repsEdit.text.toString()
                         }
-                        Log.d("Brot -  kg", kg)
-                        Log.d("Brot -  rep", rep)
+                        //Log.d("Brot -  kg", kg)
+                        //Log.d("Brot -  rep", rep)
 
                         if (serieId == -1) {
 
@@ -75,13 +75,18 @@ class SerieInputDialogFragment : DialogFragment() {
                             SerieContent.editItem(serieId, pos, kg, rep)
                         }
 
-                        Log.d("Brot -  kg", kg)
-                        Log.d("Brot -  rep", rep)
+                        //Log.d("Brot -  kg", kg)
+                        //Log.d("Brot -  rep", rep)
 
                         (it.supportFragmentManager.findFragmentById(R.id.exercise_today_fragment) as ExerciseTodayFragment)
                             .myAdapter.notifyDataSetChanged()
 
                         model.currentSeriePos.value = pos
+
+                        if( model.currentSerieIndex.value!! >= model.serieCount.value!!)
+                        {
+                            it.finish()
+                        }
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, id ->

@@ -36,20 +36,20 @@ object SerieContent {
         ITEM_MAP.put(item.pos, item)
     }
 
-   fun editItem(id: Int, pos: Int, kg:String, reps:String) {
+    fun editItem(id: Int, pos: Int, kg:String, reps:String) {
 
         var kgTxt = kg
         var repsTxt = reps
 
         if(kg.isNullOrEmpty())
-            kgTxt = "1"
+            kgTxt = "0"
         if(reps.isNullOrEmpty())
             repsTxt = "1"
        //Log.d("Bro - edit1 - currentPos", pos.toString())
-       Log.d("Bro - edit1 - SerieContent", ITEMS.toString())
+       //Log.d("Bro - edit1 - SerieContent", ITEMS.toString())
         ITEMS[pos - 1] = SerieItem(id, pos, kgTxt, repsTxt) // id - 1 : because ids go from 1 to serieCount
        //Log.d("Bro - edit2 - currentPos", pos.toString())
-       Log.d("Bro - edit2 - SerieContent", ITEMS.toString())
+       //Log.d("Bro - edit2 - SerieContent", ITEMS.toString())
     }
 
     fun createSerieItem(id: Int, pos: Int, kg:String, reps:String): SerieItem {
