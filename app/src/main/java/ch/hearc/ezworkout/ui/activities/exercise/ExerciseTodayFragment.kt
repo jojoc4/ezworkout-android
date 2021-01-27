@@ -18,6 +18,7 @@ import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.LogbookPage
 import ch.hearc.ezworkout.networking.model.SeriesEff
 import ch.hearc.ezworkout.networking.repository.Repository
+import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -110,9 +111,7 @@ class ExerciseTodayFragment : Fragment() {
                 SerieContent.ITEMS[pos - 1]
             val serieId = currentSerie.id
             var kg = currentSerie.kg
-
             var rep = currentSerie.reps
-
 
             if (serieId == -1) {
 
@@ -168,13 +167,13 @@ class ExerciseTodayFragment : Fragment() {
                 mainViewModel.isFull(model.currentLBPId.value!!)
             })
 
+        //handler isFullResponse
         mainViewModel.isFullResponse.observe(viewLifecycleOwner,
             { response ->
 
                 Log.d("Brot - responseid", model.currentLBPId.value!!.toString())
                 Log.d("Brot - response", response.delete.toString())
-                if(response.delete == "true")
-                {
+                if (response.delete == "true") {
                     val logBookPage = LogbookPage()
                     logBookPage.trainingPlanId = model.trainingPlanId.value!!
 
@@ -183,13 +182,10 @@ class ExerciseTodayFragment : Fragment() {
                 }
             })
 
-
         model.isSerieDone.observe(viewLifecycleOwner,
             {
-                //Log.d("Brot - isSerieDone", it.toString())
-                if(it){
+                if (it) {
                     val newDialog = SerieInputDialogFragment()
-                    //Log.d("Brot - weGood", "1")
                     val params = Bundle()
                     params.putInt("pos", model.currentSerieIndex.value!!)
                     newDialog.arguments = params
