@@ -88,7 +88,7 @@ class TrainingListFragment : Fragment() {
         mainViewModel.exerciseResponse.observe(viewLifecycleOwner, Observer { response ->
             // Add new data
             response.forEach {
-                ExerciseContent.addItem(ExerciseContent.createExerciseItem(it.id, it.name!!, false))
+                ExerciseContent.addItem(ExerciseContent.createExerciseItem(it.id, it.name!!, false, it.nbSerie))
             }
 
             // Select the first element by default

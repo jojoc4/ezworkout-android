@@ -26,8 +26,10 @@ class ExerciseActivity : AppCompatActivity() {
 
         val trainingPlanId: Int = intent.getIntExtra("trainingPlanId", 0)
         val trainingId: Int = intent.getIntExtra("trainingId", 0)
+        val trainingEffId: Int = intent.getIntExtra("trainingEffId", 0)
         val exerciseId: Int = intent.getIntExtra("exerciseId", 0)
         val exerciseLabel: String? = intent.getStringExtra("exerciseLabel")
+        val serieCount: Int? = intent.getIntExtra("serieCount", 0)
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
@@ -36,11 +38,13 @@ class ExerciseActivity : AppCompatActivity() {
 
         model.trainingPlanId.value = trainingPlanId
         model.trainingId.value = trainingId
+        model.trainingEffId.value = trainingEffId
         model.exerciseId.value = exerciseId
+        
+        model.serieCount.value = serieCount
+        
         model.chronoDurationReady.value = false
         model.currentSerieIndex.value = 0
-        //setContentView(R.layout.a_e_exercise_activity)
-        //setTitle(exercise_id)
 
         // Access db data local model
         mainViewModel = ViewModelProvider(

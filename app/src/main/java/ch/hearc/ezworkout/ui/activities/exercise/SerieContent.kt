@@ -3,6 +3,7 @@ package ch.hearc.ezworkout.ui.activities.exercise
 import android.text.Editable
 import android.util.Log
 import android.widget.EditText
+import androidx.activity.viewModels
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -24,21 +25,18 @@ object SerieContent {
      */
     val ITEM_MAP: MutableMap<Int, SerieItem> = HashMap()
 
-    val COUNT = 5
+    val COUNT = 25
 
     init {
-        // Add some sample items.
-        for (i in 1..COUNT) {
-            addItem(createSerieItem(i, "__", "__"))
-        }
+
     }
 
-    private fun addItem(item: SerieItem) {
+    fun addItem(item: SerieItem) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
+        ITEM_MAP.put(item.pos, item)
     }
 
-   fun editItem(id: Int, kg:String, reps:String) {
+   fun editItem(id: Int, pos: Int, kg:String, reps:String) {
 
         var kgTxt = kg
         var repsTxt = reps
@@ -47,22 +45,28 @@ object SerieContent {
             kgTxt = "__"
         if(reps.isNullOrEmpty())
             repsTxt = "__"
-        ITEMS[id - 1] = SerieItem(id, kgTxt, repsTxt) // id - 1 : because ids go from 1 to serieCount
+       //Log.d("Bro - edit1 - currentPos", pos.toString())
+       Log.d("Bro - edit1 - SerieContent", ITEMS.toString())
+        ITEMS[pos - 1] = SerieItem(id, pos, kgTxt, repsTxt) // id - 1 : because ids go from 1 to serieCount
+       //Log.d("Bro - edit2 - currentPos", pos.toString())
+       Log.d("Bro - edit2 - SerieContent", ITEMS.toString())
     }
 
-    private fun createSerieItem(id: Int, kg:String, reps:String): SerieItem {
-        return SerieItem(id, kg, reps)
+    fun createSerieItem(id: Int, pos: Int, kg:String, reps:String): SerieItem {
+        return SerieItem(id, pos, kg, reps)
     }
 
     /**
      * A serie item representing a piece of content.
      */
-    data class SerieItem(val id: Int, var kg: String, var reps: String) {
-        val label = "kg            x"
+    data class SerieItem(val id: Int, var pos: Int, var kg: String, var reps: String) {
+        val labelKg = "kg"
+        val labelReps = "x"
         var content = StringBuilder()
+            .append(reps)
+            .append(labelReps)
             .append(kg)
-            .append(label)
-            .append(reps).toString()
-        override fun toString(): String = content
+            .append(labelKg)
+            .toString()
     }
 }
