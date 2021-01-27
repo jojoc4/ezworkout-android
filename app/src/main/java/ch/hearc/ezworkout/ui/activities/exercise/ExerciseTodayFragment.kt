@@ -14,6 +14,7 @@ import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
+import ch.hearc.ezworkout.networking.model.LogbookPage
 import ch.hearc.ezworkout.networking.model.SeriesEff
 import ch.hearc.ezworkout.networking.repository.Repository
 
@@ -79,7 +80,7 @@ class ExerciseTodayFragment : Fragment() {
                         for (i in 1..model.serieCount.value!!) {
                             if (i <= model.serieCountEff.value!!) {
 
-                                Log.d("Bro - Fragment - response1", response[i-1].id.toString())
+                                Log.d("Bro - Fragment - response1", response[i - 1].id.toString())
 
                                 val currentSerie = response[i - 1]
                                 SerieContent.addItem(
@@ -112,7 +113,7 @@ class ExerciseTodayFragment : Fragment() {
 
             val pos = model.currentSeriePos.value!!
             val currentSerie: SerieContent.SerieItem =
-                SerieContent.ITEMS[pos-1]
+                SerieContent.ITEMS[pos - 1]
             val serieId = currentSerie.id
             val kg = currentSerie.kg
             val rep = currentSerie.reps
@@ -143,7 +144,7 @@ class ExerciseTodayFragment : Fragment() {
             Observer { response ->
                 val pos = model.currentSeriePos.value!!
                 val currentSerie: SerieContent.SerieItem =
-                    SerieContent.ITEMS[pos-1]
+                    SerieContent.ITEMS[pos - 1]
                 val kg = currentSerie.kg
                 val rep = currentSerie.reps
 
@@ -151,6 +152,8 @@ class ExerciseTodayFragment : Fragment() {
                 model.serieCountEff.value = model.serieCountEff.value!! + 1
                 SerieContent.editItem(response.id, pos, kg, rep)
                 myAdapter.notifyDataSetChanged()
+
+                mainViewModel.isFull(model.currentLBPId.value!!)
             })
 
         //handler oneSeriesEffResponse
@@ -160,7 +163,7 @@ class ExerciseTodayFragment : Fragment() {
 
                 val pos = model.currentSeriePos.value!!
                 val currentSerie: SerieContent.SerieItem =
-                    SerieContent.ITEMS[pos-1]
+                    SerieContent.ITEMS[pos - 1]
                 val kg = currentSerie.kg
                 val rep = currentSerie.reps
 
@@ -169,6 +172,22 @@ class ExerciseTodayFragment : Fragment() {
                 response.pause = 0
 
                 mainViewModel.updateSeriesEff(response)
+
+                mainViewModel.isFull(model.currentLBPId.value!!)
+            })
+
+        mainViewModel.isFullResponse.observe(viewLifecycleOwner,
+            { response ->
+
+                Log.d("Bro - response delete", response.delete!!)
+                Log.d("Bro - currentLBPId", model.currentLBPId.value!!.toString())
+                if(response.delete == "true")
+                {
+                    val logBookPage = LogbookPage()
+                    logBookPage.trainingPlanId = model.trainingPlanId.value!!
+
+                    mainViewModel.addLogbookPage(logBookPage)
+                }
             })
     }
 

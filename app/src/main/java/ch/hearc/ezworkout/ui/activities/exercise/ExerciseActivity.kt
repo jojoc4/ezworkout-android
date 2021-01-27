@@ -30,6 +30,7 @@ class ExerciseActivity : AppCompatActivity() {
         val exerciseId: Int = intent.getIntExtra("exerciseId", 0)
         val exerciseLabel: String? = intent.getStringExtra("exerciseLabel")
         val serieCount: Int? = intent.getIntExtra("serieCount", 0)
+        val currentLBPId: Int? = intent.getIntExtra("currentLBPId", 0)
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
@@ -40,6 +41,7 @@ class ExerciseActivity : AppCompatActivity() {
         model.trainingId.value = trainingId
         model.trainingEffId.value = trainingEffId
         model.exerciseId.value = exerciseId
+        model.currentLBPId.value = currentLBPId
         
         model.serieCount.value = serieCount
         
