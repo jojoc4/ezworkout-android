@@ -58,6 +58,7 @@ class ExerciseActivity : AppCompatActivity() {
 
         model.chronoDurationMilis.value = 60000
         model.chronoEffDurationMilis.value = model.chronoDurationMilis.value
+        model.isSerieDone.value = false;
 
         mainViewModel.oneExerciseResponse.observe(this, Observer { response ->
             model.chronoDurationMilis.value = response.pauseExercise.toLong() * 1000
