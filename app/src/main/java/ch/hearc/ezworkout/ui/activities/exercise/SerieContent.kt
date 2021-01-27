@@ -7,12 +7,6 @@ import androidx.activity.viewModels
 import java.util.ArrayList
 import java.util.HashMap
 
-/**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
- *
- * TODO: Replace all uses of this class before publishing your app.
- */
 object SerieContent {
 
     /**
@@ -25,19 +19,12 @@ object SerieContent {
      */
     val ITEM_MAP: MutableMap<Int, SerieItem> = HashMap()
 
-    val COUNT = 25
-
-    init {
-
-    }
-
     fun addItem(item: SerieItem) {
         ITEMS.add(item)
         ITEM_MAP.put(item.pos, item)
     }
 
     fun editItem(id: Int, pos: Int, kg:String, reps:String) {
-
         var kgTxt = kg
         var repsTxt = reps
 
