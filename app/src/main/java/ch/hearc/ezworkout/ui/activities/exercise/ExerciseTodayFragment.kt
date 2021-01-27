@@ -179,6 +179,7 @@ class ExerciseTodayFragment : Fragment() {
                     logBookPage.trainingPlanId = model.trainingPlanId.value!!
 
                     mainViewModel.addLogbookPage(logBookPage)
+                    activity?.finish()
                 }
             })
 

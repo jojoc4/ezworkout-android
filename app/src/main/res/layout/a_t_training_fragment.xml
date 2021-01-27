@@ -7,7 +7,7 @@
     tools:context=".ui.activities.training.TrainingFragment">
 
     <fragment
-        android:id="@+id/training_plan_fragment"
+        android:id="@+id/training_list_fragment"
         android:name="ch.hearc.ezworkout.ui.activities.training.TrainingListFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
