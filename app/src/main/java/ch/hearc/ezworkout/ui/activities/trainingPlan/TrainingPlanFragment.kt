@@ -125,5 +125,4 @@ class TrainingPlanFragment : Fragment() {
 
         return root
     }
-
 }

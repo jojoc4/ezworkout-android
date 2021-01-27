@@ -173,7 +173,6 @@ class ExerciseTodayFragment : Fragment() {
         //handler isFull response
         mainViewModel.isFullResponse.observe(viewLifecycleOwner,
             { response ->
-
                 // If the training is finished, creates a log entry
                 if (response.delete == "true") {
                     val logBookPage = LogbookPage()
@@ -205,7 +204,6 @@ class ExerciseTodayFragment : Fragment() {
          *
          * @return A new instance of fragment ExerciseTodayFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
             ExerciseTodayFragment().apply {
