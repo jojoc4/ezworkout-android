@@ -100,6 +100,7 @@ class TrainingPlanFragment : Fragment() {
             if (!checkingTrainingEff && model.currentLBPid.value != null) {
                 checkingTrainingEff = true
                 skipping = false
+                model.selected.value!!.skipped = false
 
                 mainViewModel.getTrainingEff(model.currentLBPid.value!!, model.selected.value!!.id)
             } else Log.d("Err", "Already busy!")
@@ -111,6 +112,7 @@ class TrainingPlanFragment : Fragment() {
             if (!checkingTrainingEff && model.currentLBPid.value != null) {
                 checkingTrainingEff = true
                 skipping = true
+                model.selected.value!!.skipped = true
 
                 mainViewModel.getTrainingEff(model.currentLBPid.value!!, model.selected.value!!.id)
             } else Log.d("Err", "Already busy!")

@@ -39,7 +39,7 @@ class ExerciseRecyclerViewAdapter(
                 val params = Bundle()
                 params.putInt("pos", item.pos)
                 newDialog.arguments = params
-                newDialog.show(activity.supportFragmentManager, "Hey")
+                newDialog.show(activity.supportFragmentManager, "Dialog")
                 this.notifyDataSetChanged()
             }
         })

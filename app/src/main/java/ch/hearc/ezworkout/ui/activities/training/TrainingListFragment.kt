@@ -28,7 +28,7 @@ class TrainingListFragment : Fragment() {
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
     private val model: TrainingViewModel by activityViewModels()
-    private lateinit var myAdapter: TrainingRecyclerViewAdapter
+    lateinit var myAdapter: TrainingRecyclerViewAdapter
     private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate( savedInstanceState: Bundle?) {
@@ -107,7 +107,7 @@ class TrainingListFragment : Fragment() {
         // ExerciseEff data handler (=> skipped)
         mainViewModel.ETrAndExExerciseEffResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isNotEmpty()) {
-                ExerciseContent.ITEM_MAP[response.first().exerciseId]!!.skipped = response.first().skipped == 1
+                ExerciseContent.ITEMS[response.first().exerciseId]!!.skipped = response.first().skipped == 1
                 myAdapter.notifyDataSetChanged()
             }
         })

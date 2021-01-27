@@ -49,31 +49,46 @@ class SerieInputDialogFragment : DialogFragment() {
                 .setPositiveButton("Validate",
                     DialogInterface.OnClickListener { dialog, id ->
 
-                        //Log.d("Bro - Dialog1 - currentPos", pos.toString())
-                        //Log.d("Bro - Dialog1 - SerieContent", SerieContent.ITEMS.toString())
-
-                        val serieId = SerieContent.ITEMS[pos-1].id
-                        val kg = kgEdit.text.toString()
-                        val rep = repsEdit.text.toString()
+                        val serieId = SerieContent.ITEMS[pos - 1].id
+                        var kg = "0"
+                        var rep = "1"
+                        if (!kgEdit.text.isNullOrEmpty())
+                        {
+                            //Log.d("Brot - not empty kg", "yo")
+                            kg = kgEdit.text.toString()
+                        }
+                        if (!repsEdit.text.isNullOrEmpty())
+                        {
+                            //Log.d("Brot - not empty rep", "yo")
+                            rep = repsEdit.text.toString()
+                        }
+                        //Log.d("Brot -  kg", kg)
+                        //Log.d("Brot -  rep", rep)
 
                         if (serieId == -1) {
-                            //Log.d("Bro - serieCountEff - add", model.serieCountEff.value.toString())
 
                             model.serieCountEff.value = model.serieCountEff.value!! + 1
                             SerieContent.editItem(serieId, pos, kg, rep)
-                            //Log.d("Bro - dialog - add", model.updateCurrentSerie.value.toString())
-                            //mainViewModel.newSeriesEffResponse.removeObservers(this)  }
 
                         } else {
-                            //Log.d("Bro - serieCountEff - update", model.serieCountEff.value.toString())
 
                             SerieContent.editItem(serieId, pos, kg, rep)
                         }
+
+                        //Log.d("Brot -  kg", kg)
+                        //Log.d("Brot -  rep", rep)
 
                         (it.supportFragmentManager.findFragmentById(R.id.exercise_today_fragment) as ExerciseTodayFragment)
                             .myAdapter.notifyDataSetChanged()
 
                         model.currentSeriePos.value = pos
+
+                        Log.d("Brot -  serieIndex", model.currentSerieIndex.value!!.toString())
+                        Log.d("Brot -  serieCount", model.serieCount.value!!.toString())
+                        if( model.currentSerieIndex.value!! >= model.serieCount.value!!)
+                        {
+                            it.finish()
+                        }
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, id ->
