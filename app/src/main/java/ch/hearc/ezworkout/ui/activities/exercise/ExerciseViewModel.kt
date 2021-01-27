@@ -15,6 +15,8 @@ class ExerciseViewModel : ViewModel() {
     val logbookPages = MutableLiveData<List<LogbookPage>>()
     val currentLBIndex = MutableLiveData<Int>()
 
+    val currentLBPId = MutableLiveData<Int>()
+
     val serieCount = MutableLiveData<Int>()
     val serieCountEff = MutableLiveData<Int>()
 

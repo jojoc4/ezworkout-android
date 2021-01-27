@@ -89,6 +89,7 @@ class TrainingFragment : Fragment() {
                 bundle.putInt("trainingEffId", model.trainingEffId.value!!)
                 bundle.putInt("trainingPlanId", model.trainingPlanId.value!!)
                 bundle.putInt("serieCount", model.selected.value!!.serieCount)
+                bundle.putInt("currentLBPId", model.currentLBPid.value!!)
                 intent.putExtras(bundle)
 
                 startActivity(intent)
