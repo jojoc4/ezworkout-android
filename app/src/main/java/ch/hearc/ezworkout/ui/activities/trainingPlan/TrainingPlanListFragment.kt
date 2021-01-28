@@ -81,7 +81,7 @@ class TrainingPlanListFragment : Fragment() {
 
         // TODO: if no currentTPid found => ask user to choose one
 
-        val currentTPid = sharedPref.getInt("currentTPid", 1)
+        val currentTPid = sharedPref.getInt("currentTPid", 8)
         model.trainingPlanId.value = currentTPid
 
         // Get current LBPageId
@@ -100,7 +100,13 @@ class TrainingPlanListFragment : Fragment() {
         mainViewModel.trainingResponse.observe(viewLifecycleOwner, Observer { response ->
             // Add new data
             response.forEach {
-                TrainingContent.addItem(TrainingContent.createTrainingItem(it.id, it.name!!, false))
+                TrainingContent.addItem(
+                    TrainingContent.createTrainingItem(
+                        it.id,
+                        it.name!!,
+                        false
+                    )
+                )
             }
 
             // Select the first element by default
@@ -117,12 +123,16 @@ class TrainingPlanListFragment : Fragment() {
         })
 
         // TrainingEff data handler (=> skipped)
-        mainViewModel.LBPAndTrTrainingEffResponse.observe(viewLifecycleOwner, Observer { response ->
-            if (response.isNotEmpty()) {
-                TrainingContent.ITEM_MAP[response.first().trainingId]!!.skipped = response.first().skipped == 1
-                myAdapter.notifyDataSetChanged()
-            }
-        })
+        mainViewModel.LBPAndTrTrainingEffResponse.observe(
+            viewLifecycleOwner,
+            Observer { response ->
+                if (response.isNotEmpty()) {
+                    TrainingContent.ITEM_MAP[response.first().trainingId]!!.skipped =
+                        response.first().skipped == 1
+                    myAdapter.notifyDataSetChanged()
+                }
+            })
+
     }
 
 

@@ -12,7 +12,6 @@ import ch.hearc.ezworkout.ui.activities.exercise.SerieContent.SerieItem
 
 /**
  * [RecyclerView.Adapter] that can display a [SerieItem].
- * TODO: Replace the implementation with code for your data type.
  */
 class ExerciseRecyclerViewAdapter(
     private val values: List<SerieItem>, private val model: ExerciseViewModel
