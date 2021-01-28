@@ -1,7 +1,6 @@
 package ch.hearc.ezworkout.ui.tracking.exercise
 
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
 object SerieContent {
 

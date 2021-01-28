@@ -1,9 +1,9 @@
 package ch.hearc.ezworkout.ui.sync
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import ch.hearc.ezworkout.MainActivity
 import ch.hearc.ezworkout.R
 

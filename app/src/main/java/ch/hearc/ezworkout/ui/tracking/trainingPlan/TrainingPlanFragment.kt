@@ -17,8 +17,8 @@ import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.tracking.training.TrainingActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
+import ch.hearc.ezworkout.ui.tracking.training.TrainingActivity
 import java.time.LocalDateTime
 
 class TrainingPlanFragment : Fragment() {
