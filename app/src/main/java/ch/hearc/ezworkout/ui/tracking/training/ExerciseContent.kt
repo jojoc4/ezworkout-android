@@ -1,14 +1,7 @@
-package ch.hearc.ezworkout.ui.activities.training
+package ch.hearc.ezworkout.ui.tracking.training
 
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
-/**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
- *
- * TODO: Replace all uses of this class before publishing your app.
- */
 object ExerciseContent {
 
     /**
@@ -20,14 +13,6 @@ object ExerciseContent {
      * A map of exercise items, by ID.
      */
     val ITEM_MAP: MutableMap<Int, ExerciseItem> = HashMap()
-
-    private val COUNT = 25
-
-    init {
-        // Add some sample items.
-        //addItem(createExerciseItem(1, "Developpe couche"))
-        //addItem(createExerciseItem(2, "Biceps curl"))
-    }
 
     fun addItem(item: ExerciseItem) {
         ITEMS.add(item)

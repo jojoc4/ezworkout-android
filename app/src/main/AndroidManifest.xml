@@ -31,10 +31,10 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ui.sync.ConnectActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activities.exercise.ExerciseActivity"
+        <activity android:name=".ui.tracking.exercise.ExerciseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.training.TrainingActivity"
+            android:name=".ui.tracking.training.TrainingActivity"
             android:label="@string/title_activity_training"
             android:screenOrientation="portrait" />
         <activity

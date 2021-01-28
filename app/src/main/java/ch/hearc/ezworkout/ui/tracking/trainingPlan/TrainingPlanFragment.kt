@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.trainingPlan
+package ch.hearc.ezworkout.ui.tracking.trainingPlan
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,16 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
-import kotlinx.android.synthetic.main.a_e_exercise_history_fragment.*
+import ch.hearc.ezworkout.ui.tracking.training.TrainingActivity
 import java.time.LocalDateTime
 
 class TrainingPlanFragment : Fragment() {
@@ -127,5 +125,4 @@ class TrainingPlanFragment : Fragment() {
 
         return root
     }
-
 }

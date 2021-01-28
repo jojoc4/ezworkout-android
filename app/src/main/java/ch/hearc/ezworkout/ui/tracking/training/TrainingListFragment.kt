@@ -1,22 +1,21 @@
-package ch.hearc.ezworkout.ui.activities.training
+package ch.hearc.ezworkout.ui.tracking.training
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent
 
 /**
  * A fragment representing a list of exercises.
@@ -25,8 +24,6 @@ class TrainingListFragment : Fragment() {
 
     private var columnCount = 1
 
-    // Use the 'by activityViewModels()' Kotlin property delegate
-    // from the fragment-ktx artifact
     private val model: TrainingViewModel by activityViewModels()
     lateinit var myAdapter: TrainingRecyclerViewAdapter
     private lateinit var mainViewModel: MainViewModel
@@ -107,7 +104,7 @@ class TrainingListFragment : Fragment() {
         // ExerciseEff data handler (=> skipped)
         mainViewModel.ETrAndExExerciseEffResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isNotEmpty()) {
-                ExerciseContent.ITEMS[response.first().exerciseId]!!.skipped = response.first().skipped == 1
+                ExerciseContent.ITEM_MAP[response.first().exerciseId]!!.skipped = response.first().skipped == 1
                 myAdapter.notifyDataSetChanged()
             }
         })
@@ -127,10 +124,8 @@ class TrainingListFragment : Fragment() {
 
     companion object {
 
-        // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
 
-        // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
             TrainingListFragment().apply {

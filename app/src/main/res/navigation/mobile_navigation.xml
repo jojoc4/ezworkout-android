@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_trainings"
-        android:name="ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingPlanFragment"
+        android:name="ch.hearc.ezworkout.ui.tracking.trainingPlan.TrainingPlanFragment"
         android:label="@string/title_training_plan"
         tools:layout="@layout/a_tp_training_plan_fragment" />
 

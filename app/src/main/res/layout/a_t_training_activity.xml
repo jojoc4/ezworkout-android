@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.training.TrainingActivity">
+    tools:context=".ui.tracking.training.TrainingActivity">
 
     <fragment
         android:id="@+id/exercises_fragment"
-        class="ch.hearc.ezworkout.ui.activities.training.TrainingFragment"
+        class="ch.hearc.ezworkout.ui.tracking.training.TrainingFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

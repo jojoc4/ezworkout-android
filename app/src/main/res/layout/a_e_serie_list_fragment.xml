@@ -9,5 +9,5 @@
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.activities.exercise.SerieListFragment"
+    tools:context=".ui.tracking.exercise.SerieListFragment"
     tools:listitem="@layout/a_e_serie_item" />

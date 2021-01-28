@@ -1,22 +1,20 @@
-package ch.hearc.ezworkout.ui.activities.trainingPlan
+package ch.hearc.ezworkout.ui.tracking.training
 
-import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.ezworkout.R
+import ch.hearc.ezworkout.ui.tracking.training.ExerciseContent.ExerciseItem
 
-import ch.hearc.ezworkout.ui.activities.trainingPlan.TrainingContent.TrainingItem
 
 /**
- * [RecyclerView.Adapter] that can display a [Training].
- * TODO: Replace the implementation with code for your data type.
+ * [RecyclerView.Adapter] that can display a [Exercise].
  */
-class TrainingPlanRecyclerViewAdapter(
-    private val values: List<TrainingItem>, private val model: TrainingPlanViewModel
-) : RecyclerView.Adapter<TrainingPlanRecyclerViewAdapter.ViewHolder>() {
+class TrainingRecyclerViewAdapter(
+    private val values: List<ExerciseItem>, private val model: TrainingViewModel
+) : RecyclerView.Adapter<TrainingRecyclerViewAdapter.ViewHolder>() {
 
     private var selectedPos: Int = RecyclerView.NO_POSITION
 
