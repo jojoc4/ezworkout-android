@@ -1,9 +1,5 @@
-package ch.hearc.ezworkout.ui.activities.exercise
+package ch.hearc.ezworkout.ui.tracking.exercise
 
-import android.text.Editable
-import android.util.Log
-import android.widget.EditText
-import androidx.activity.viewModels
 import java.util.ArrayList
 import java.util.HashMap
 

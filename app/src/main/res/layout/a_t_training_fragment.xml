@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activities.training.TrainingFragment">
+    tools:context=".ui.tracking.training.TrainingFragment">
 
     <fragment
         android:id="@+id/training_list_fragment"
-        android:name="ch.hearc.ezworkout.ui.activities.training.TrainingListFragment"
+        android:name="ch.hearc.ezworkout.ui.tracking.training.TrainingListFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0" />

@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.training
+package ch.hearc.ezworkout.ui.tracking.training
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,7 +17,7 @@ import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.ExerciseEff
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.activities.exercise.ExerciseActivity
+import ch.hearc.ezworkout.ui.tracking.exercise.ExerciseActivity
 
 class TrainingFragment : Fragment() {
 

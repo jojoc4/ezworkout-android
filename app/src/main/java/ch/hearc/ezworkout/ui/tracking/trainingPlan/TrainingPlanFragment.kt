@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.trainingPlan
+package ch.hearc.ezworkout.ui.tracking.trainingPlan
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,7 +17,7 @@ import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
 import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
+import ch.hearc.ezworkout.ui.tracking.training.TrainingActivity
 import ch.hearc.ezworkout.ui.settings.SettingsActivity
 import java.time.LocalDateTime
 

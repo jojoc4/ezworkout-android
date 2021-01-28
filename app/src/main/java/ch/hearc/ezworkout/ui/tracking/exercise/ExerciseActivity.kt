@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.exercise
+package ch.hearc.ezworkout.ui.tracking.exercise
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

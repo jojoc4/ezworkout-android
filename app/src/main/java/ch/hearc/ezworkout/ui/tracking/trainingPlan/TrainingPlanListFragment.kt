@@ -1,8 +1,6 @@
-package ch.hearc.ezworkout.ui.activities.trainingPlan
+package ch.hearc.ezworkout.ui.tracking.trainingPlan
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.ezworkout.R
 import ch.hearc.ezworkout.networking.MainViewModel
 import ch.hearc.ezworkout.networking.MainViewModelFactory
-import ch.hearc.ezworkout.networking.model.TrainingEff
 import ch.hearc.ezworkout.networking.repository.Repository
-import ch.hearc.ezworkout.ui.activities.training.TrainingActivity
-import java.time.LocalDateTime
 
 /**
  * A fragment representing a list of trainings.

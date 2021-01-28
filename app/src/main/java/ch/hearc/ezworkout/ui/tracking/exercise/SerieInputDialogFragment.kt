@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.exercise
+package ch.hearc.ezworkout.ui.tracking.exercise
 
 import android.app.AlertDialog
 import android.app.Dialog

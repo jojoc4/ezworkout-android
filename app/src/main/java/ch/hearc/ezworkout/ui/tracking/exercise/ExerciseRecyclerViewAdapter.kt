@@ -1,4 +1,4 @@
-package ch.hearc.ezworkout.ui.activities.exercise
+package ch.hearc.ezworkout.ui.tracking.exercise
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.ezworkout.R
-import ch.hearc.ezworkout.ui.activities.exercise.SerieContent.SerieItem
+import ch.hearc.ezworkout.ui.tracking.exercise.SerieContent.SerieItem
 
 /**
  * [RecyclerView.Adapter] that can display a [SerieItem].
